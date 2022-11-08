@@ -2,22 +2,19 @@ import "./login.css";
 import Header from "../header/Header";
 import { useContext } from "react";
 import { Context } from "../../context/Context";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
 
-  const { mode } = useContext(Context);
+  const navigate = useNavigate();
 
-    const style = document.documentElement.style;
+  function create() {
+    navigate("/create-user");
+  };
 
-    if(mode == "dark") {
-      style.setProperty("--colorRoot", "rgb(34, 34, 34)");
-      style.setProperty("--colorBorder", "rgb(104, 104, 104)");
-      style.setProperty("--colorBotton", "rgb(255, 255, 255)");
-    } else {
-      style.setProperty("--colorRoot", "rgb(230, 230, 230)");
-      style.setProperty("--colorBorder", "rgb(104, 104, 104)");
-      style.setProperty("--colorBotton", "rgb(0, 0, 0)");
-    };
+  function error() {
+    document.getElementById("error").textContent = "EL usuario ya existe"
+  };
 
   return (
     <>
@@ -27,17 +24,19 @@ export default function Login() {
         <div id="login">
           <input type={"email"} placeholder="Email" />
           <input type={"password"} placeholder="Contraseña" />
-          <button className="button">Iniciar sesión</button>
+          <button className="button" onClick={error}>Iniciar sesión</button>
           <span id="error"></span>
         </div>
 
-        <a id="recovery-password" href="">
+        <Link id="recovery-password" to="">
           ¿Olvidaste tu contraseña?
-        </a>
+        </Link>
 
         <div id="create-user">
           <h3>¿Aún no tienes un usuario?</h3>
-          <button className="button">Crear usuario</button>
+          <button className="button" onClick={create}>
+            Crear usuario
+          </button>
         </div>
       </div>
     </>

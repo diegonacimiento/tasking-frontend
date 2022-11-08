@@ -1,0 +1,25 @@
+:root {
+    --colorRoot: rgb(17, 17, 17);
+    --colorBorder: rgb(104, 104, 104);
+    --colorBotton: rgb(255, 255, 255);
+}
+
+html {
+    font-size: 6.25%;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 15rem;
+    font-family: 'Poppins', sans-serif;;
+}
+
+#root {
+    height: 100vh;
+    width: 100vw;
+    background: var(--colorRoot);
+    display: flex;
+    transition: background-color 0.5s;
+}

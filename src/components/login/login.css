@@ -1,29 +1,3 @@
-:root {
-    --colorRoot: rgb(17, 17, 17);
-    --colorBorder: rgb(104, 104, 104);
-    --colorBotton: rgb(255, 255, 255);
-}
-
-html {
-    font-size: 6.25%;
-}
-
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-size: 15rem;
-    font-family: 'Poppins', sans-serif;;
-}
-
-#root {
-    height: 100vh;
-    width: 100vw;
-    background: var(--colorRoot);
-    display: flex;
-    transition: background-color 0.5s;
-}
-
 #contain-login {
     height: 75%;
     width: 75%;
@@ -72,7 +46,6 @@ input:focus {
 .button {
     height: 50rem;
     background: none;
-    background: none;
     color: var(--colorBotton);
     font-weight: 600;
     border: none;
@@ -84,8 +57,10 @@ input:focus {
 }
 
 #error {
+    height: 18rem;
     color: rgb(238, 16, 16);
     font-weight: 600;
+    text-align: center;
 }
 
 a {
@@ -104,7 +79,7 @@ a:hover {
 
 @media only screen and (max-height: 500px) {
     #contain-login {
-        height: 85%;
+        height: 90%;
         width: 55%;
     }
 
