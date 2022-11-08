@@ -1,0 +1,134 @@
+:root {
+    --colorRoot: rgb(235, 235, 235);
+    --colorBorder: rgb(104, 104, 104);
+    --colorBorderInput: rgb(0, 0, 0);
+    --colorBotonBK: rgb(80, 80, 80);
+    --colorBotton: rgb(255, 255, 255)
+}
+
+html {
+    font-size: 6.25%;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 15rem;
+    font-family: 'Poppins', sans-serif;;
+}
+
+#root {
+    height: 100vh;
+    width: 100vw;
+    background: var(--colorRoot);
+    display: flex;
+}
+
+#contain-login {
+    height: 75%;
+    width: 75%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 3rem solid var(--colorBorder);
+}
+
+#contain-login div, a {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 15rem;
+}
+
+#contain-login div input, button, h3 {
+    margin: 5rem;
+}
+
+#login, #create-user {
+    width: 85%;
+}
+
+input {
+    height: 50rem;
+    text-align: center;
+    border: none;
+    outline: none;
+    background: none;
+    border: 2rem solid var(--colorBorderInput);
+}
+
+input::placeholder {
+    text-align: center;
+}
+
+input:focus {
+    border: 2rem solid rgb(136, 136, 136);
+}
+
+.button {
+    height: 50rem;
+    background: none;
+    background: var(--colorBotonBK);
+    color: var(--colorBotton);
+    border: none;
+    border: 2rem solid var(--colorBorderInput);
+}
+
+.button:hover {
+    box-shadow: 0 0 5rem 0 rgb(80, 80, 80) ;
+    opacity: 0.7;
+}
+
+#error {
+    color: rgb(238, 16, 16);
+    font-weight: 600;
+}
+
+a {
+    color: var(--colorBorderInput);
+    text-decoration: none;
+    font-weight: 200;
+}
+
+@media only screen and (max-height: 500px) {
+    #contain-login {
+        height: 85%;
+        width: 55%;
+    }
+
+    #login, #create-user {
+        display: flex;
+        align-items: center;
+    }
+
+    input, button {
+        height: 35rem;
+        width: 55%;
+    }
+
+}
+
+@media only screen and (max-height: 342px) {
+    #contain-login {
+        height: 90%;
+        width: 55%;
+    }
+
+    #login, #create-user {
+        display: flex;
+        align-items: center;
+    }
+
+    #contain-login div, a {
+        margin: 5rem;
+    }
+
+    input, button {
+        height: 25rem;
+        width: 55%;
+    }
+
+}

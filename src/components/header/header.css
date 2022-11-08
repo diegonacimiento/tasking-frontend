@@ -1,0 +1,54 @@
+html {
+    font-size: 6.25%;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 15rem;
+    font-family: 'Poppins', sans-serif;;
+}
+
+#header {
+    position: absolute;
+    height: 50rem;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+#contain-logo {
+    display: flex;
+    align-items: center;
+    padding: 5rem;
+}
+
+#logo {
+    background-image: url(https://i.pinimg.com/originals/48/32/62/483262d8d8eff3ebf7d5fed917e25700.png);
+    background-size: cover;
+    height: 50rem;
+    width: 50rem;
+}
+
+#letra {
+    font-weight: 1200;
+    text-shadow: 0 0 1rem black;
+    user-select: none;
+}
+
+#mode {
+    background: none;
+    border: none;
+    color: rgb(0, 0, 0);
+    padding-right: 25rem;
+    font-size: 10rem;
+}
+
+#mode svg {
+    font-size: 25rem;
+}
+
+#mode:hover {
+    opacity: 0.5;
+}
