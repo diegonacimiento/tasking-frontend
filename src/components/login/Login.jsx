@@ -1,15 +1,22 @@
 import "./login.css";
 import Header from "../header/Header";
+import { useContext } from "react";
+import { Context } from "../../context/Context";
 
 export default function Login() {
 
-    const mode = localStorage.getItem("mode");
+  const { mode } = useContext(Context);
+
+    const style = document.documentElement.style;
 
     if(mode == "dark") {
-      const style = document.documentElement.style;
-      //style.setProperty("--colorRoot", "");
+      style.setProperty("--colorRoot", "rgb(34, 34, 34)");
+      style.setProperty("--colorBorder", "rgb(104, 104, 104)");
+      style.setProperty("--colorBotton", "rgb(255, 255, 255)");
     } else {
-        
+      style.setProperty("--colorRoot", "rgb(230, 230, 230)");
+      style.setProperty("--colorBorder", "rgb(104, 104, 104)");
+      style.setProperty("--colorBotton", "rgb(0, 0, 0)");
     };
 
   return (

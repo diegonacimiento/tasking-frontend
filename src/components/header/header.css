@@ -1,3 +1,8 @@
+:root {
+    --image: url("https://i.ibb.co/h89BLcF/tasking.png");
+    --colorLetra: rgb(150, 150, 150);
+}
+
 html {
     font-size: 6.25%;
 }
@@ -21,26 +26,29 @@ html {
 #contain-logo {
     display: flex;
     align-items: center;
-    padding: 5rem;
+    padding-top: 15rem;
+    padding-left: 10rem;
 }
 
 #logo {
-    background-image: url(https://i.pinimg.com/originals/48/32/62/483262d8d8eff3ebf7d5fed917e25700.png);
+    background-image: var(--image);
     background-size: cover;
     height: 50rem;
     width: 50rem;
 }
 
 #letra {
+    color: var(--colorLetra);
     font-weight: 1200;
-    text-shadow: 0 0 1rem black;
+    text-shadow: 0 0 1rem var(--colorLetra);
     user-select: none;
 }
 
 #mode {
     background: none;
     border: none;
-    color: rgb(0, 0, 0);
+    color: var(--colorLetra);
+    padding-top: 15rem;
     padding-right: 25rem;
     font-size: 10rem;
 }

@@ -1,19 +1,23 @@
 import { MdDarkMode, MdLightMode } from "react-icons/md";
-import { useState } from "react";
+import { useContext } from "react";
+import { Context } from "../../context/Context";
 import "./header.css";
 
 export default function Header() {
 
-    const [mode, setMode] = useState(localStorage.getItem("mode"));
-
+    const { mode, changeMode } = useContext(Context);
 
     if(!mode) localStorage.setItem("mode", "light");
 
-    function changeMode() {
-        mode == "light" 
-            ? (localStorage.setItem("mode", "dark"), setMode("dark")) 
-            : (localStorage.setItem("mode", "light"), setMode("light"))
-    };
+    const style = document.documentElement.style;
+
+    mode == "light" 
+      ? (style.setProperty("--image", 'url("https://i.ibb.co/h89BLcF/tasking.png")'),
+         style.setProperty("--colorLetra", "rgb(0, 0, 0)"))
+      : (style.setProperty("--image", 'url("https://i.ibb.co/3kXpCk5/image.png")'),
+         style.setProperty("--colorLetra", "rgb(150, 150, 150)"))
+
+    
 
   return (
     <div id="header">
