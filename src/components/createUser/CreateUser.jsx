@@ -1,4 +1,5 @@
 import Header from "../header/Header";
+import Footer from "../footer/Footer";
 import { Link } from "react-router-dom";
 import "./createUser.css";
 
@@ -48,6 +49,7 @@ export default function CreateUser() {
           Iniciar sesión
         </Link>
       </div>
+      <Footer />
     </>
   );
 }

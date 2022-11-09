@@ -1,4 +1,5 @@
 import Header from "../header/Header";
+import Footer from "../footer/Footer";
 import { Link, useNavigate } from "react-router-dom";
 import "./recoveryPassword.css";
 
@@ -40,6 +41,7 @@ export default function RecoveryPassword() {
           <button onClick={send} className="button">Crear un usuario</button>
         </div>
       </div>
+      <Footer />
     </>
   );
 }
