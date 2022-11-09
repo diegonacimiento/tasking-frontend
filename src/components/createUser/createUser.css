@@ -9,7 +9,7 @@
     border: 3rem solid var(--colorBorder);
 }
 
-#contain-create h3 {
+h3 {
     color: var(--colorBotton);
     text-align: center;
 }
@@ -92,6 +92,9 @@ span {
     }
 
     #login-create {
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
         bottom: 5rem;
     }
 
@@ -112,6 +115,12 @@ span {
     
     #form-create label {
         height: 50rem;
+    }
+
+    #login-create {
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
     }
 
 }

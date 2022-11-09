@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import CreateUserPage from "./pages/CreateUserPage";
+import RecoveryPassPage from "./pages/RecoveryPassPage";
 import "./App.css";
 
 export default function App() {
@@ -9,6 +10,7 @@ export default function App() {
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/create-user" element={<CreateUserPage />} />
+        <Route path="/recovery-password" element={<RecoveryPassPage />} />
       </Routes>
     </BrowserRouter>
   );

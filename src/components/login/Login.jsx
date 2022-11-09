@@ -1,7 +1,5 @@
 import "./login.css";
 import Header from "../header/Header";
-import { useContext } from "react";
-import { Context } from "../../context/Context";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -28,7 +26,7 @@ export default function Login() {
           <span id="error"></span>
         </div>
 
-        <Link id="recovery-password" to="">
+        <Link id="recovery-password" to="/recovery-password">
           ¿Olvidaste tu contraseña?
         </Link>
 
