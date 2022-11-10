@@ -35,6 +35,12 @@
 }
 
 @media only screen and (max-height: 650px) {
+    #contain-edit {
+        margin-top: 70rem;
+    }
+}
+
+@media only screen and (max-height: 550px) {
 
     #contain-edit {
         height: 87%;
@@ -43,6 +49,7 @@
     }
 
     #form-edit {
+        width: 100%;
         display: flex;
         flex-wrap: wrap;
     }
@@ -51,6 +58,7 @@
         width: 48%;
         display: flex;
         justify-content: center;
+        margin: 1%;
     }
 
     #form-edit label input {
@@ -79,7 +87,61 @@
 
 }
 
-@media only screen and (max-height: 342px) {
+@media only screen and (max-width: 330px) {
+    #form-edit label span, #form-edit label input  {
+        font-size: 11rem;
+    }
+    #bt-update {
+        font-size: 11rem;
+    }
+    #h1-edit {
+        font-size: 11rem;
+    }
+
+    #header-edit #mode {
+        padding-right: 7rem;
+    }
+
+    #footer-h6, #footer a svg {
+        font-size: 10rem;
+    }
+
+}
+@media only screen and (max-height: 370px) {
+    #h1-edit {
+        font-size: 16rem;
+    }
+
+
+    #form-edit label span, #form-edit label input, #bt-update, #contain-edit #error {
+        font-size: 12rem;
+    }
+
+}
+
+@media only screen and (max-height: 350px) {
+    #form-edit label {
+        height: 45rem;
+    }
+
+    #footer-h6 {
+        font-size: 10rem;
+    }
+
+    #footer a svg {
+        font-size: 12rem;
+        margin-bottom: 2rem;
+    }
+
+    #header-edit #header #contain-logo {
+        height: 50rem;
+        flex-direction: row;
+        padding: 0;
+    }
+
+}
+
+@media only screen and (max-height: 300px) {
 
     #header-edit #header #contain-logo {
         height: 50rem;
@@ -112,7 +174,8 @@
     }
 
     #form-edit label {
-        height: 35rem;
+        height: 40rem;
+        margin: 2rem;
     }
 
     #form-edit label span, #form-edit label input {
@@ -121,10 +184,20 @@
 
     #contain-edit #error {
         height: 20rem;
+        padding-top: 5rem;
     }
 
     #bt-update {
         margin-top: 5rem;
+    }
+
+    #footer-h6 {
+        font-size: 10rem;
+    }
+
+    #footer a svg {
+        font-size: 12rem;
+        margin-bottom: 2rem;
     }
 
 }

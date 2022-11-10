@@ -3,7 +3,7 @@ import LoginPage from "./pages/LoginPage";
 import CreateUserPage from "./pages/CreateUserPage";
 import RecoveryPassPage from "./pages/RecoveryPassPage";
 import UpdateUserPage from "./pages/UpdateUserPage";
-
+import TaskPage from "./pages/TaskPage";
 import "./App.css";
 
 export default function App() {
@@ -11,6 +11,7 @@ export default function App() {
     <BrowserRouter>
 
       <Routes>
+        <Route path="/" element={<TaskPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/create-user" element={<CreateUserPage />} />
         <Route path="/recovery-password" element={<RecoveryPassPage />} />
