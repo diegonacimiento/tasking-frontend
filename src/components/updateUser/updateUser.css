@@ -1,0 +1,130 @@
+
+
+#contain-edit {
+    margin: auto;
+    height: 80%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#h1-edit {
+    font-size: 20rem;
+    color: var(--colorBotton);
+    margin-bottom: 10rem;
+    text-align: center;
+}
+
+#form-edit {
+    width: 90%;
+}
+
+#form-edit label {
+    margin: 5rem;
+}
+
+#form-edit label input {
+    border: none;
+    border-bottom: 2rem solid var(--colorBotton)
+}
+
+#bt-update {
+    margin: 0;
+}
+
+@media only screen and (max-height: 650px) {
+
+    #contain-edit {
+        height: 87%;
+        justify-content: center;
+        margin-top: 40rem;
+    }
+
+    #form-edit {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    #form-edit label {
+        width: 48%;
+        display: flex;
+        justify-content: center;
+    }
+
+    #form-edit label input {
+        width: 100%;
+    }
+
+    #h1-edit {
+        margin: 0;
+    }
+
+    #header-edit #header {
+        height: 40rem;
+    }
+
+    #header-edit #header #contain-logo {
+        padding-top: 20rem;
+    }
+
+    #header-edit #header #menu  svg {
+        height: 40rem;
+    }
+
+    #header-edit #header #mode {
+        padding-top: 10rem;
+    }
+
+}
+
+@media only screen and (max-height: 342px) {
+
+    #header-edit #header #contain-logo {
+        height: 50rem;
+        flex-direction: row;
+        padding: 0;
+    }
+
+    #header-edit #header #mode {
+        padding-top: 0;
+    }
+
+   
+
+    #header-edit #menu {
+        height: 50rem;
+        margin: 0;
+    }
+
+    #header-edit #header {
+        height: 50rem;
+    }
+
+    #contain-edit {
+        height: 85%;
+        margin-top: 37rem;
+    }
+
+    #h1-edit {
+        font-size: 16rem;
+    }
+
+    #form-edit label {
+        height: 35rem;
+    }
+
+    #form-edit label span, #form-edit label input {
+        font-size: 12rem;
+    }
+
+    #contain-edit #error {
+        height: 20rem;
+    }
+
+    #bt-update {
+        margin-top: 5rem;
+    }
+
+}

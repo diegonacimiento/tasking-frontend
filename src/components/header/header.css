@@ -35,7 +35,7 @@
 #mode {
     background: none;
     border: none;
-    color: var(--colorLetra);
+    color: var(--colorBotton);
     padding-top: 15rem;
     padding-right: 25rem;
     font-size: 10rem;
@@ -47,4 +47,17 @@
 
 #mode:hover {
     opacity: 0.5;
+}
+
+#menu {
+    color: var(--colorBotton);
+    background: none;
+    border: none;
+
+}
+
+#menu svg {
+    height: 50rem;
+    font-size: 30rem;
+    margin-left: 2rem;
 }

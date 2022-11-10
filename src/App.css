@@ -2,6 +2,7 @@
     --colorRoot: rgb(17, 17, 17);
     --colorBorder: rgb(104, 104, 104);
     --colorBotton: rgb(255, 255, 255);
+    --left: -500rem;
 }
 
 html {
