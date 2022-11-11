@@ -141,7 +141,7 @@
 
 }
 
-@media only screen and (max-height: 300px) {
+@media only screen and (max-height: 315px) {
 
     #header-edit #header #contain-logo {
         height: 50rem;

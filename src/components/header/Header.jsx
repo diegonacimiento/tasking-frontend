@@ -49,7 +49,12 @@ export default function Header({ ban }) {
         )}
 
         <div id="contain-logo">
-          <span id="logo"></span>
+          <span id="logo">
+            {mode == "light" 
+            ? <img src="https://i.ibb.co/h89BLcF/tasking.png" />
+            : <img src="https://i.ibb.co/3kXpCk5/image.png" />
+            }
+          </span>
           <span id="letra">Tasking</span>
         </div>
 

@@ -1,9 +1,9 @@
 #footer {
-    height: 3%;
-    width: max-content;
-    position: absolute;
+    height: 4%;
+    width: 100%;
+    position: relative;
     bottom: 0;
-    left: 0;
+    padding-left: 5rem;
 }
 
 #ig, #footer a {
@@ -24,8 +24,7 @@
 }
 
 @media only screen and (max-height: 500px) {
-   #footer {
-    bottom: 5rem;
-   }
-
+    #footer {
+        bottom: 3rem;
+    }
 }

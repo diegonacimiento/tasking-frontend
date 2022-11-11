@@ -1,28 +1,27 @@
-:root {
-    --image: url("https://i.ibb.co/h89BLcF/tasking.png");
-    --colorLetra: rgb(150, 150, 150);
-}
-
 #header {
-    position: absolute;
-    height: 50rem;
+    height: 10%;
     width: 100vw;
     display: flex;
     justify-content: space-between;
 }
 
 #contain-logo {
+    height: 100%;
+    width: 100%;
     display: flex;
     align-items: center;
-    padding-top: 15rem;
-    padding-left: 10rem;
+    
 }
 
 #logo {
-    background-image: var(--image);
-    background-size: cover;
-    height: 50rem;
-    width: 50rem;
+    height: 100%;
+}
+
+#logo img {
+    height: 90%;
+    width: 90%;
+    object-fit: contain;
+    padding-top: 2rem;
 }
 
 #letra {
@@ -36,7 +35,7 @@
     background: none;
     border: none;
     color: var(--colorBotton);
-    padding-top: 15rem;
+    padding-top: 5rem;
     padding-right: 25rem;
     font-size: 10rem;
 }
@@ -60,4 +59,31 @@
     height: 50rem;
     font-size: 30rem;
     margin-left: 2rem;
+}
+
+@media only screen and (max-height: 550px) {
+    #letra, input, button, h3, a {
+        font-size: 16rem;
+    }
+
+    #logo img {
+        height: 100%;
+        width: 100%;
+        padding-left: 5rem;
+        margin-top: 2rem;
+    }
+
+    #mode {
+        padding-top: 6rem;
+        padding-right: 20rem;
+    }
+
+    #contain-login {
+        height: 80%;
+    }
+
+    #login {
+        height: 52%;
+    }
+    
 }

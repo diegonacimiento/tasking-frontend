@@ -4,7 +4,7 @@ import { BsInstagram } from "react-icons/bs";
 export default function Footer() {
   return (
     <>
-      <span id="footer">
+      <div id="footer">
         <a
           target={"_blank"}
           className="ig"
@@ -12,7 +12,7 @@ export default function Footer() {
         >
           {<BsInstagram id="ig-svg" />} <h6 id="footer-h6">Diego Nacimiento</h6>
         </a>
-      </span>
+      </div>
     </>
   );
 }

@@ -1,118 +1,27 @@
 #contain-login {
-    height: 75%;
-    width: 75%;
-    margin: auto;
+    height: 85%;
+    width: 90%;
+    border: 3rem solid var(--colorBorder);
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    border: 3rem solid var(--colorBorder);
+    
 }
 
-#contain-login div, a {
+#login {
+    height: 45%;
+    width: 85%;
     display: flex;
     flex-direction: column;
-    text-align: center;
-    margin: 15rem;
+    justify-content: space-around;
 }
 
-#contain-login div input, button, h3 {
-    margin: 5rem;
-}
-
-#login, #create-user {
+#create-user {
     width: 85%;
+    height: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
-input {
-    height: 50rem;
-    text-align: center;
-    border: none;
-    color: var(--colorBotton);
-    outline: none;
-    background: none;
-    border: 1rem solid var(--colorBorder);
-}
-
-input::placeholder {
-    text-align: center;
-    color: var(--colorBorderInput);
-}
-
-input:focus {
-    border: 1rem solid var(--colorBotton);
-}
-
-.button {
-    height: 50rem;
-    background: none;
-    color: var(--colorBotton);
-    font-weight: 600;
-    border: none;
-    border-bottom: 2rem solid var(--colorBorder);
-}
-
-.button:hover {
-    opacity: 0.7;
-}
-
-#error {
-    height: 18rem;
-    color: rgb(238, 16, 16);
-    font-weight: 600;
-    text-align: center;
-}
-
-a {
-    color: var(--colorBotton);
-    text-decoration: none;
-    font-weight: 600;
-}
-
-a:hover {
-    opacity: 0.5;
-}
-
-#create-user h3 {
-    color: var(--colorBotton);
-}
-
-@media only screen and (max-height: 500px) {
-    #contain-login {
-        height: 90%;
-        width: 55%;
-    }
-
-    #login, #create-user {
-        display: flex;
-        align-items: center;
-    }
-
-    input, .button {
-        height: 35rem;
-        width: 55%;
-    }
-
-}
-
-@media only screen and (max-height: 342px) {
-    #contain-login {
-        height: 90%;
-        width: 55%;
-    }
-
-    #login, #create-user {
-        display: flex;
-        align-items: center;
-    }
-
-    #contain-login div, a {
-        margin: 5rem;
-    }
-
-    input, .button {
-        height: 25rem;
-        width: 55%;
-    }
-
-}

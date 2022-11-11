@@ -3,6 +3,8 @@
     --colorBorder: rgb(104, 104, 104);
     --colorBotton: rgb(255, 255, 255);
     --left: -500rem;
+    --image: url("https://i.ibb.co/h89BLcF/tasking.png");
+    --colorLetra: rgb(150, 150, 150);
 }
 
 html {
@@ -13,8 +15,9 @@ html {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-size: 15rem;
-    font-family: 'Poppins', sans-serif;;
+    font-size: 20rem;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
 }
 
 #root {
@@ -22,5 +25,56 @@ html {
     width: 100vw;
     background: var(--colorRoot);
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     transition: background-color 0.5s;
+}
+
+input {
+    text-align: center;
+    border: none;
+    color: var(--colorBotton);
+    outline: none;
+    background: none;
+    border: 1rem solid var(--colorBorder);
+}
+
+input::placeholder {
+    text-align: center;
+    color: var(--colorBorderInput);
+}
+
+input:focus {
+    border: 1rem solid var(--colorBotton);
+}
+
+.button {
+    background: none;
+    color: var(--colorBotton);
+    font-weight: 600;
+    border: none;
+    border-bottom: 2rem solid var(--colorBorder);
+}
+
+.button:hover {
+    opacity: 0.7;
+}
+
+#error {
+    height: 18rem;
+    font-size: 16rem;
+    color: rgb(238, 16, 16);
+    font-weight: 600;
+    text-align: center;
+}
+
+a, h3 {
+    color: var(--colorBotton);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+a:hover {
+    opacity: 0.5;
 }
