@@ -1,9 +1,10 @@
 #menu-bar {
-    height: calc(100% - 55rem);
+    height: calc(100% - 55px);
+    min-height: calc(620px - 55px);
     width: 100%;
     background: var(--colorRoot);
     position: absolute;
-    top: 57rem;
+    top: 55px;
     left: var(--left);
     transition: background-color 0.5s, left 1s;
 }
@@ -22,25 +23,10 @@
 }
 
 #contain-menu a {
-    height: 50rem;
-    margin: 0;
     display: flex;
     justify-content: center;
+    margin: 0;
+    height: 50px;
+    line-height: 50px;
 }
 
-@media only screen and (max-height: 650px) {
-    #contain-menu {
-        height: 100%;
-    }
-
-    #bt-menu {
-        height: 50rem;
-    }
-    
-}
-
-@media only screen and (max-height: 342px) {
-    #menu-bar {
-        top: 56rem;
-    }
-}

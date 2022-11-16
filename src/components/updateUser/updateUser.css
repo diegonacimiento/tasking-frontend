@@ -1,203 +1,26 @@
-
-
-#contain-edit {
-    margin: auto;
-    height: 80%;
-    width: 90%;
+.main-update form {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    height: 100%;
+    padding-top: 10px;
 }
 
-#h1-edit {
-    font-size: 20rem;
-    color: var(--colorBotton);
-    margin-bottom: 10rem;
-    text-align: center;
+.main-update form label{
+    display: flex;
+    flex-direction: column;
+    width: 75%;
 }
 
-#form-edit {
-    width: 90%;
+.main-update form h2 {
+    font-size: 18rem;
 }
 
-#form-edit label {
-    margin: 5rem;
+.main-update form span {
+    text-align: left;
 }
 
-#form-edit label input {
-    border: none;
-    border-bottom: 2rem solid var(--colorBotton)
-}
-
-#bt-update {
-    margin: 0;
-}
-
-@media only screen and (max-height: 650px) {
-    #contain-edit {
-        margin-top: 70rem;
-    }
-}
-
-@media only screen and (max-height: 550px) {
-
-    #contain-edit {
-        height: 87%;
-        justify-content: center;
-        margin-top: 40rem;
-    }
-
-    #form-edit {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    #form-edit label {
-        width: 48%;
-        display: flex;
-        justify-content: center;
-        margin: 1%;
-    }
-
-    #form-edit label input {
-        width: 100%;
-    }
-
-    #h1-edit {
-        margin: 0;
-    }
-
-    #header-edit #header {
-        height: 40rem;
-    }
-
-    #header-edit #header #contain-logo {
-        padding-top: 20rem;
-    }
-
-    #header-edit #header #menu  svg {
-        height: 40rem;
-    }
-
-    #header-edit #header #mode {
-        padding-top: 10rem;
-    }
-
-}
-
-@media only screen and (max-width: 330px) {
-    #form-edit label span, #form-edit label input  {
-        font-size: 11rem;
-    }
-    #bt-update {
-        font-size: 11rem;
-    }
-    #h1-edit {
-        font-size: 11rem;
-    }
-
-    #header-edit #mode {
-        padding-right: 7rem;
-    }
-
-    #footer-h6, #footer a svg {
-        font-size: 10rem;
-    }
-
-}
-@media only screen and (max-height: 370px) {
-    #h1-edit {
-        font-size: 16rem;
-    }
-
-
-    #form-edit label span, #form-edit label input, #bt-update, #contain-edit #error {
-        font-size: 12rem;
-    }
-
-}
-
-@media only screen and (max-height: 350px) {
-    #form-edit label {
-        height: 45rem;
-    }
-
-    #footer-h6 {
-        font-size: 10rem;
-    }
-
-    #footer a svg {
-        font-size: 12rem;
-        margin-bottom: 2rem;
-    }
-
-    #header-edit #header #contain-logo {
-        height: 50rem;
-        flex-direction: row;
-        padding: 0;
-    }
-
-}
-
-@media only screen and (max-height: 315px) {
-
-    #header-edit #header #contain-logo {
-        height: 50rem;
-        flex-direction: row;
-        padding: 0;
-    }
-
-    #header-edit #header #mode {
-        padding-top: 0;
-    }
-
-   
-
-    #header-edit #menu {
-        height: 50rem;
-        margin: 0;
-    }
-
-    #header-edit #header {
-        height: 50rem;
-    }
-
-    #contain-edit {
-        height: 85%;
-        margin-top: 37rem;
-    }
-
-    #h1-edit {
-        font-size: 16rem;
-    }
-
-    #form-edit label {
-        height: 40rem;
-        margin: 2rem;
-    }
-
-    #form-edit label span, #form-edit label input {
-        font-size: 12rem;
-    }
-
-    #contain-edit #error {
-        height: 20rem;
-        padding-top: 5rem;
-    }
-
-    #bt-update {
-        margin-top: 5rem;
-    }
-
-    #footer-h6 {
-        font-size: 10rem;
-    }
-
-    #footer a svg {
-        font-size: 12rem;
-        margin-bottom: 2rem;
-    }
-
+.main-update form button {
+    width: 75%;
 }

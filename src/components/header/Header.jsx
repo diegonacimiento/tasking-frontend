@@ -21,7 +21,7 @@ export default function Header({ ban }) {
       style.setProperty("--colorLetra", "rgb(0, 0, 0)"))
     : (style.setProperty(
         "--image",
-        'url("https://i.ibb.co/3kXpCk5/image.png")'
+        'url("https://i.ibb.co/kQZ260V/tasking-Blanco.png")'
       ),
       style.setProperty("--colorLetra", "rgb(150, 150, 150)"));
 
@@ -30,7 +30,7 @@ export default function Header({ ban }) {
     : (style.setProperty("--left", "-2000rem"));
 
   return (
-    <>
+    <header>
       {ban ? (
         <Menu>
           <MenuBar />{" "}
@@ -39,29 +39,22 @@ export default function Header({ ban }) {
         (ban = false)
       )}
 
-      <div id="header">
         {ban ? (
-          <button onClick={menuNone} id="menu">
+          <button onClick={menuNone} className="menu">
             {<HiOutlineMenu />}
           </button>
         ) : (
           (ban = false)
         )}
 
-        <div id="contain-logo">
-          <span id="logo">
-            {mode == "light" 
-            ? <img src="https://i.ibb.co/h89BLcF/tasking.png" />
-            : <img src="https://i.ibb.co/3kXpCk5/image.png" />
-            }
-          </span>
-          <span id="letra">Tasking</span>
+        <div className="logo-contain">
+          <span className="image"></span>
+          <p className="letra">Tasking</p>
         </div>
 
-        <button id="mode" onClick={changeMode}>
+        <button className="mode" onClick={changeMode}>
           {mode == "dark" ? <MdDarkMode /> : <MdLightMode />}
         </button>
-      </div>
-    </>
+    </header>
   );
 }

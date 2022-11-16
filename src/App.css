@@ -15,14 +15,16 @@ html {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-size: 20rem;
+    font-size: 16rem;
     font-family: 'Poppins', sans-serif;
     text-align: center;
 }
 
 #root {
     height: 100vh;
-    width: 100vw;
+    min-height: 620px;
+    width: 100%;
+    min-width: 275px;
     background: var(--colorRoot);
     display: flex;
     flex-direction: column;
@@ -31,13 +33,19 @@ html {
     transition: background-color 0.5s;
 }
 
+main {
+    height: 100%;
+    width: 100%;
+}
+
 input {
-    text-align: center;
-    border: none;
-    color: var(--colorBotton);
     outline: none;
     background: none;
     border: 1rem solid var(--colorBorder);
+    border-radius: 5rem;
+    line-height: 50rem;
+    color: var(--colorBotton);
+    text-align: center;
 }
 
 input::placeholder {
@@ -51,10 +59,12 @@ input:focus {
 
 .button {
     background: none;
-    color: var(--colorBotton);
-    font-weight: 600;
     border: none;
     border-bottom: 2rem solid var(--colorBorder);
+    line-height: 50rem;
+    color: var(--colorBotton);
+    font-weight: 600;
+
 }
 
 .button:hover {
@@ -62,17 +72,23 @@ input:focus {
 }
 
 #error {
-    height: 18rem;
-    font-size: 16rem;
+    height: 30px;
+    width: 100%;
+    line-height: 30px;
     color: rgb(238, 16, 16);
+    font-size: 14rem;
     font-weight: 600;
     text-align: center;
 }
 
-a, h3 {
+a, h3, h2 {
     color: var(--colorBotton);
     text-decoration: none;
     font-weight: 600;
+}
+
+span {
+    color: var(--colorBotton);
 }
 
 a:hover {

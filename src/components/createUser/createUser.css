@@ -1,0 +1,31 @@
+.main-create-user {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.main-create-user form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 80%;
+}
+
+.main-create-user label span, 
+.main-create-user label input, 
+.main-create-user label button,
+.main-create-user__login h3, 
+.main-create-user__login .link-login {
+    display: inline-block;
+    width: 75%;
+    margin-top: 5px;
+}
+
+.main-create-user form p {
+    margin-top: 10px;
+}
+
+.main-create-user label span {
+    text-align: left;
+    font-size: 14rem;
+}

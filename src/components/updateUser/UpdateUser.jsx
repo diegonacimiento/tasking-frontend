@@ -3,47 +3,49 @@ import Footer from "../footer/Footer";
 import "./updateUser.css";
 
 export default function UpdateUser() {
-
-    function error() {
-        document.getElementById("error").textContent = "EL usuario ya existe"
-    };
+  function error(e) {
+    e.preventDefault();
+    document.getElementById("error").textContent = "EL usuario ya existe";
+  }
 
   return (
     <>
-      <div id="header-edit">
-        <Header ban={true} />
-      </div>
+      <Header ban={true} />
 
-      <div id="contain-edit">
-        <h1 id="h1-edit">Actualizar usuario</h1>
+      <main className="main-update">
 
-        <div id="form-edit">
+        <form onSubmit={error}>
+
+        <h2>Actualizar usuario</h2>
+
           <label>
             <span>Usuario</span>
             <input type={"text"} />
           </label>
           <label>
             <span>Correo electrónico</span>
-            <input type={"text"} />
+            <input type={"email"} />
           </label>
           <label>
             <span>Contraseña actual</span>
-            <input type={"text"} />
+            <input type={"password"} />
           </label>
           <label>
             <span>Nueva contraseña</span>
-            <input type={"text"} />
+            <input type={"password"} />
           </label>
           <label>
             <span>Confirmar nueva contraseña</span>
-            <input type={"text"} />
+            <input type={"password"} />
           </label>
-        </div>
 
-        <span id="error"></span>
+          <button className="button">Guardar cambios</button>
 
-        <button onClick={error} className="button" id="bt-update">Guardar cambios</button>
-      </div>
+          <p id="error"></p>
+
+        </form>
+
+      </main>
 
       <Footer />
     </>

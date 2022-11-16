@@ -19,25 +19,26 @@ export default function Login() {
     <>
       <Header />
 
-      <div id="contain-login">
-        <div id="login">
+      <main className="main-login">
+        <div className="main-login__login">
           <input type={"email"} placeholder="Email" />
           <input type={"password"} placeholder="Contraseña" />
           <button className="button" onClick={error}>Iniciar sesión</button>
-          <span id="error"></span>
+          <p id="error"></p>
         </div>
 
-        <Link id="recovery-password" to="/recovery-password">
+        <Link className="main-login__link-rp" to="/recovery-password">
           ¿Olvidaste tu contraseña?
         </Link>
 
-        <div id="create-user">
+        <div className="main-login__create-user">
           <h3>¿Aún no tienes un usuario?</h3>
           <button className="button" onClick={create}>
             Crear usuario
           </button>
         </div>
-      </div>
+      </main>
+
       <Footer />
     </>
   );

@@ -1,30 +1,21 @@
-#footer {
-    height: 4%;
+footer {
+    height: 20px;
     width: 100%;
-    position: relative;
-    bottom: 0;
-    padding-left: 5rem;
 }
 
-#ig, #footer a {
-    height: 100%;
-    margin: 0;
+footer .link-ig {
     display: flex;
-    flex-direction: row;
+    height: 20px;
     align-items: center;
 }
 
-#footer-h6 {
-    font-size: 12rem;
+footer .link-ig .logo {
+    margin-left: 10px;
+    font-size: 10px;
 }
 
-#ig-svg {
-    font-size: 12rem;
-    margin: 0 3rem;
-}
-
-@media only screen and (max-height: 500px) {
-    #footer {
-        bottom: 3rem;
-    }
+footer .link-ig .texto {
+    margin-left: 2px;
+    font-size: 10px;
+    line-height: 15px;
 }

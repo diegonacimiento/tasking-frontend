@@ -1,89 +1,50 @@
-#header {
-    height: 10%;
-    width: 100vw;
+header {
+    height: 60px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
 }
 
-#contain-logo {
-    height: 100%;
-    width: 100%;
+.logo-contain {
     display: flex;
-    align-items: center;
-    
+    padding-top: 5px;
+    padding-left: 5px;
 }
 
-#logo {
-    height: 100%;
+.logo-contain .image {
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    background-image: var(--image);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-#logo img {
-    height: 90%;
-    width: 90%;
-    object-fit: contain;
-    padding-top: 2rem;
+.logo-contain .letra {
+    color: var(--colorBotton);
+    line-height: 50px;
+    font-weight: 700;
+    letter-spacing: 2px;
 }
 
-#letra {
-    color: var(--colorLetra);
-    font-weight: 1200;
-    text-shadow: 0 0 1rem var(--colorLetra);
-    user-select: none;
-}
-
-#mode {
+header .mode {
+    padding-top: 10px;
+    padding-right: 15px;
     background: none;
     border: none;
     color: var(--colorBotton);
-    padding-top: 5rem;
-    padding-right: 25rem;
-    font-size: 10rem;
 }
 
-#mode svg {
-    font-size: 25rem;
+header .mode svg, 
+header .menu svg {
+    font-size: 20rem;
 }
 
-#mode:hover {
-    opacity: 0.5;
-}
-
-#menu {
-    color: var(--colorBotton);
+header .menu {
+    padding-top: 10px;
+    padding-left: 10px;
     background: none;
     border: none;
-
-}
-
-#menu svg {
-    height: 50rem;
-    font-size: 30rem;
-    margin-left: 2rem;
-}
-
-@media only screen and (max-height: 550px) {
-    #letra, input, button, h3, a {
-        font-size: 16rem;
-    }
-
-    #logo img {
-        height: 100%;
-        width: 100%;
-        padding-left: 5rem;
-        margin-top: 2rem;
-    }
-
-    #mode {
-        padding-top: 6rem;
-        padding-right: 20rem;
-    }
-
-    #contain-login {
-        height: 80%;
-    }
-
-    #login {
-        height: 52%;
-    }
-    
+    color: var(--colorBotton);
 }

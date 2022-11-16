@@ -4,15 +4,15 @@ import { BsInstagram } from "react-icons/bs";
 export default function Footer() {
   return (
     <>
-      <div id="footer">
+      <footer>
         <a
           target={"_blank"}
-          className="ig"
+          className="link-ig"
           href="https://www.instagram.com/diegonacimiento/?hl=es"
         >
-          {<BsInstagram id="ig-svg" />} <h6 id="footer-h6">Diego Nacimiento</h6>
+          {<BsInstagram className="logo" />} <p className="texto">Diego Nacimiento</p>
         </a>
-      </div>
+      </footer>
     </>
   );
 }
