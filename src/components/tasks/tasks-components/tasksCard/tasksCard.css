@@ -1,0 +1,35 @@
+.task-card-div {
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    min-height: 50px;
+}
+
+.task-card-div p {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+    color: var(--colorBotton);
+    text-align: justify;
+    word-break: break-word;
+}
+
+.task-card-div button {
+    display: flex;
+    align-items: center;
+    border: none;
+    background: none;
+    padding: 0 5px;
+}
+
+.task-card-div button svg {
+    font-size: 23px;
+}
+
+.task-card-div button:first-child {
+    color: darkred;
+}
+
+.task-card-div button:nth-child(3) {
+    color: darkgreen;
+}

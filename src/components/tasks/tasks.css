@@ -1,0 +1,9 @@
+.main-tasks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#root .root-tasks {
+    height: max-content;
+}

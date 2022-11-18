@@ -1,4 +1,5 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
+import axios from "axios";
 
 export const Context = createContext();
 
@@ -8,6 +9,22 @@ export function ContextProvider(props) {
   const [mode, setMode] = useState(localStorage.getItem("mode"));
 
   const [stateMenu, setStateMenu] = useState(localStorage.getItem("stateMenu"));
+
+  const realTasks = axios("https://tasking-app.herokuapp.com/api/v1/tareas", {
+    headers: {"Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWVnb25hY2ltaWVudG8iLCJpYXQiOjE2Njc2MDE1OTN9.pynqIRFMpApcM164802buTqxUaQMF4R6WLWZzmpZqM0"}
+  });
+
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(function () {
+    realTasks.then(res => setTasks([...res.data]));
+  }, []);
+
+  function createTask(task) {
+    axios.post("https://tasking-app.herokuapp.com/api/v1/tareas/create", {
+      task
+    })
+  };
 
 
   const style = document.documentElement.style;
@@ -48,6 +65,7 @@ export function ContextProvider(props) {
   return (
     <Context.Provider
       value={{
+        tasks,
         mode,
         stateMenu,
         changeMode,

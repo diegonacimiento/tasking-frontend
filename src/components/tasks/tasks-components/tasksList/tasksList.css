@@ -1,0 +1,6 @@
+.task-list-div {
+    width: 80%;
+    border: 1px solid var(--colorBorder);
+    margin: 20px 0;
+}
+

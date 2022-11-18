@@ -1,4 +1,6 @@
 :root {
+    --heightRoot: 100vh;
+    --minHeightRoot: 620px;
     --colorRoot: rgb(17, 17, 17);
     --colorBorder: rgb(104, 104, 104);
     --colorBotton: rgb(255, 255, 255);
@@ -21,8 +23,8 @@ html {
 }
 
 #root {
-    height: 100vh;
-    min-height: 620px;
+    height: var(--heightRoot);
+    min-height: var(--minHeightRoot);
     width: 100%;
     min-width: 275px;
     background: var(--colorRoot);
@@ -38,29 +40,29 @@ main {
     width: 100%;
 }
 
-input {
+input, textarea {
     outline: none;
     background: none;
-    border: 1rem solid var(--colorBorder);
-    border-radius: 5rem;
+    border: 1px solid var(--colorBorder);
+    border-radius: 5px;
     line-height: 50rem;
     color: var(--colorBotton);
     text-align: center;
 }
 
-input::placeholder {
+input::placeholder, textarea::placeholder {
     text-align: center;
     color: var(--colorBorderInput);
 }
 
-input:focus {
-    border: 1rem solid var(--colorBotton);
+input:focus, textarea:focus {
+    border: 1px solid var(--colorBotton);
 }
 
 .button {
     background: none;
     border: none;
-    border-bottom: 2rem solid var(--colorBorder);
+    border-bottom: 2px solid var(--colorBorder);
     line-height: 50rem;
     color: var(--colorBotton);
     font-weight: 600;
@@ -93,4 +95,18 @@ span {
 
 a:hover {
     opacity: 0.5;
+}
+
+.button-add-task {
+    height: 30px;
+    width: 30px;
+    margin: 20px 0;
+    border: 2px dashed var(--colorBotton);
+    border-radius: 100%;
+    background: none;
+}
+
+.button-add-task svg {
+    color: var(--colorBotton);
+    font-size: 25px;
 }

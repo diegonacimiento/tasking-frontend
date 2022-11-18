@@ -1,0 +1,12 @@
+.search-tasks-div {
+    margin-bottom: 20px;
+    height: 55px;
+    width: 90%;
+}
+
+.search-tasks-div input {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid var(--colorBorder);
+    line-height: 50rem;
+}

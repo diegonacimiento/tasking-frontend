@@ -1,16 +1,32 @@
 #menu-bar {
-    height: calc(100% - 55px);
-    min-height: calc(620px - 55px);
+    position: fixed;
+    top: 0;
+    left: var(--left);
+    overflow: auto;
+    height: 100%;
     width: 100%;
     background: var(--colorRoot);
-    position: absolute;
-    top: 55px;
-    left: var(--left);
     transition: background-color 0.5s, left 1s;
 }
 
-#contain-menu {
+.menu-bar__button {
+    display: block;
+    height: 60px;
+    width: 30px;
+    padding-top: 10px;
+    padding-left: 10px;
+    background: none;
+    border: none;
+    color: var(--colorBotton);
+}
+
+.menu-bar__button svg {
+    font-size: 20rem;
+}
+
+.contain-menu {
     height: 50%;
+    min-height: 200px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -22,7 +38,7 @@
     margin: 0;
 }
 
-#contain-menu a {
+.contain-menu a {
     display: flex;
     justify-content: center;
     margin: 0;

@@ -1,7 +1,7 @@
-import Task from "../components/tasks/Task";
+import Tasks from "../components/tasks/Tasks";
 
 export default function TaskPage() {
     return(
-        <Task />
+        <Tasks />
     );
 };

@@ -12,6 +12,11 @@ export default function CreateUser() {
     document.getElementById("error").textContent = "EL usuario ya existe";
   }
 
+  const style = document.documentElement.style;
+
+  style.setProperty("--heightRoot", "100vh");
+  style.setProperty("--minHeightRoot", "620px");
+
   return (
     <>
       <Header />
