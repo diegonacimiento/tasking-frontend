@@ -15,3 +15,8 @@
     width: 75%;
 }
 
+.main-login__login #error {
+    margin: auto;
+    margin-top: 25px;
+}
+

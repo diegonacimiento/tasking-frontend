@@ -7,6 +7,7 @@
     --left: -500rem;
     --image: url("https://i.ibb.co/h89BLcF/tasking.png");
     --colorLetra: rgb(150, 150, 150);
+    --bkModal: rgba(0, 0, 0, 0.8);
 }
 
 html {
@@ -40,7 +41,7 @@ main {
     width: 100%;
 }
 
-input, textarea {
+input {
     outline: none;
     background: none;
     border: 1px solid var(--colorBorder);
@@ -50,12 +51,12 @@ input, textarea {
     text-align: center;
 }
 
-input::placeholder, textarea::placeholder {
+input::placeholder {
     text-align: center;
     color: var(--colorBorderInput);
 }
 
-input:focus, textarea:focus {
+input:focus {
     border: 1px solid var(--colorBotton);
 }
 
@@ -74,13 +75,14 @@ input:focus, textarea:focus {
 }
 
 #error {
-    height: 30px;
-    width: 100%;
+    min-height: 30px;
+    width: 90%;
     line-height: 30px;
     color: rgb(238, 16, 16);
     font-size: 14rem;
     font-weight: 600;
     text-align: center;
+    word-break: break-word;
 }
 
 a, h3, h2 {

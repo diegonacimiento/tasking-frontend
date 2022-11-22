@@ -49,10 +49,10 @@ export default function CreateUser() {
             </button>
           </label>
 
-          <p id="error"></p>
 
         </form>
 
+        <p id="error"></p>
 
         <div className="main-create-user__login">
           <h3>¿Ya estás registrado?</h3>

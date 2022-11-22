@@ -29,3 +29,7 @@
     text-align: left;
     font-size: 14rem;
 }
+
+.main-create-user #error {
+    margin: 0 auto;
+}

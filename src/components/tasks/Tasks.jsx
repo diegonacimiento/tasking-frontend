@@ -1,4 +1,4 @@
-import TasksList from "./tasks-components/tasksList/TasksList";
+import TasksList from "../tasks/tasks-components/tasksList/TasksList";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
 import Modal from "../../../Modal";
@@ -7,10 +7,11 @@ import SearchTasks from "./tasks-components/searchTasks/SearchTasks";
 import { TiPlus } from "react-icons/ti";
 import "./tasks.css";
 
-export default function Task() {
+export default function Tasks() {
+  
   const modal = document.getElementById("modal");
 
-  const modalOn = () => modal.setAttribute("style", "display:flex");
+  const modalOn = () => {modal.setAttribute("style", "display:flex")};
 
   const style = document.documentElement.style;
 
@@ -21,16 +22,16 @@ export default function Task() {
     <>
       <Header ban={true} />
 
-      <SearchTasks />
-
-
       <main className="main-tasks">
         <Modal>
           <NewTask />
         </Modal>
 
+        <SearchTasks />
 
         <TasksList />
+
+        <p id="error"></p>
 
         <button className="button-add-task" onClick={modalOn}>
           {" "}

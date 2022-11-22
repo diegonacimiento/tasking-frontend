@@ -1,5 +1,7 @@
 import { createContext, useState, useEffect } from "react";
-import axios from "axios";
+import tasksService from "../services/tasks.service";
+
+const service = new tasksService();
 
 export const Context = createContext();
 
@@ -10,22 +12,35 @@ export function ContextProvider(props) {
 
   const [stateMenu, setStateMenu] = useState(localStorage.getItem("stateMenu"));
 
-  const realTasks = axios("https://tasking-app.herokuapp.com/api/v1/tareas", {
-    headers: {"Authorization" : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWVnb25hY2ltaWVudG8iLCJpYXQiOjE2Njc2MDE1OTN9.pynqIRFMpApcM164802buTqxUaQMF4R6WLWZzmpZqM0"}
-  });
+  const [token, setToken] = useState(localStorage.getItem("token"));
 
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState();
 
-  useEffect(function () {
-    realTasks.then(res => setTasks([...res.data]));
+  const [realTasks, setRealTasks] = useState();
+
+  const [taskId, setTaskId] = useState(0);
+
+  const [search, setSearch] = useState();
+
+  useEffect(() => {
+    const taskId = service.searchUser(token);
+    const tasks = service.searchAll(token);
+    taskId.then(res => setTaskId(res.data.taskId)).catch(e => console.log(e));
+    tasks.then(res => setTasks([...res.data])).catch((e) => console.log(e));
+    tasks.then(res => setRealTasks([...res.data])).catch((e) => console.log(e));
   }, []);
 
-  function createTask(task) {
-    axios.post("https://tasking-app.herokuapp.com/api/v1/tareas/create", {
-      task
-    })
+  function searchTask(text) {
+    const response = tasks.filter(task => {
+      setSearch(null);
+      return task.description.includes(text);
+    });
+    (response.length > 0) ? setTasks([...response]) : setSearch("NF");
+    if(text == "") {
+      setTasks([...realTasks]);
+      setSearch(null);
+    };
   };
-
 
   const style = document.documentElement.style;
 
@@ -55,11 +70,8 @@ export function ContextProvider(props) {
 
   function menuNone() {
     stateMenu == "false"
-      ? (localStorage.setItem("stateMenu", "true"),
-        setStateMenu("true"))
-      : (localStorage.setItem("stateMenu", "false"),
-        setStateMenu("false")
-        );
+      ? (localStorage.setItem("stateMenu", "true"), setStateMenu("true"))
+      : (localStorage.setItem("stateMenu", "false"), setStateMenu("false"));
   }
 
   return (
@@ -68,8 +80,18 @@ export function ContextProvider(props) {
         tasks,
         mode,
         stateMenu,
+        token,
+        taskId,
+        search,
+        realTasks,
+        setRealTasks,
+        setSearch,
+        setTaskId,
+        setTasks,
+        setToken,
         changeMode,
         menuNone,
+        searchTask,
       }}
     >
       {props.children}

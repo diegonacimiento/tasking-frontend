@@ -6,11 +6,13 @@ import { VscClose } from "react-icons/vsc";
 
 export default function MenuBar() {
 
-    const { menuNone } = useContext(Context);
+    const { menuNone, setToken } = useContext(Context);
 
     const navigate = useNavigate();
 
     function logout() {
+        localStorage.removeItem("token");
+        setToken(null);
         navigate("/login");
         menuNone();
     };

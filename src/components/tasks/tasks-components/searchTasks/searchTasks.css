@@ -10,3 +10,8 @@
     border-bottom: 2px solid var(--colorBorder);
     line-height: 50rem;
 }
+
+.search-tasks-div input:focus {
+    border: none;
+    border-bottom: 2px solid var(--colorBotton);
+}

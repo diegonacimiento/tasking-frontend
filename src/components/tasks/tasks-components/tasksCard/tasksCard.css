@@ -3,6 +3,7 @@
     justify-content: space-between;
     height: auto;
     min-height: 50px;
+    border: 1px solid var(--colorBorder);
 }
 
 .task-card-div p {
@@ -32,4 +33,16 @@
 
 .task-card-div button:nth-child(3) {
     color: darkgreen;
+}
+
+.completado {
+    opacity: 0.4;
+    text-decoration: line-through;
+    transition: opacity 1s, text-decoration 1s;
+}
+
+.pendiente {
+    opacity: 1;
+    text-decoration: none;
+    transition: opacity 0.5s, text-decoration 0.5s;
 }

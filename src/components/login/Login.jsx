@@ -2,23 +2,56 @@ import "./login.css";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useContext } from "react";
+import { Context } from "../../context/Context";
+
+
 
 export default function Login() {
+ 
+ const navigate = useNavigate();
 
-  const navigate = useNavigate();
+ const { setToken } = useContext(Context);
 
   function create() {
     navigate("/create-user");
-  };
-
-  function error() {
-    document.getElementById("error").textContent = "EL usuario ya existe"
-  };
+  }
 
   const style = document.documentElement.style;
 
   style.setProperty("--heightRoot", "100vh");
   style.setProperty("--minHeightRoot", "620px");
+
+  function login() {
+    const email = document.getElementById("input-email").value;
+    const password = document.getElementById("input-password").value;
+    const error = document.getElementById("error");
+    const user = axios.post(
+      "https://tasking-app.herokuapp.com/api/v1/auth/login",
+      {
+        username: `${email}`,
+        password: `${password}`,
+      }
+    );
+    user
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.token) {
+          localStorage.setItem("token", `${res.data.token}`);
+          setToken(res.data.token);
+          return navigate("/");
+        }
+      })
+      .catch((e) => {
+        console.log(e.response);
+        if (e.response.status == 400) {
+          error.textContent = `Ingrese su email y contraseña`;
+        } else if (e.response.status == 401 || 404) {
+          error.textContent = `Contraseña incorrecta`;
+        }
+      });
+  }
 
   return (
     <>
@@ -26,9 +59,15 @@ export default function Login() {
 
       <main className="main-login">
         <div className="main-login__login">
-          <input type={"email"} placeholder="Email" />
-          <input type={"password"} placeholder="Contraseña" />
-          <button className="button" onClick={error}>Iniciar sesión</button>
+          <input id="input-email" type={"email"} placeholder="Email" />
+          <input
+            id="input-password"
+            type={"password"}
+            placeholder="Contraseña"
+          />
+          <button className="button" onClick={login}>
+            Iniciar sesión
+          </button>
           <p id="error"></p>
         </div>
 
