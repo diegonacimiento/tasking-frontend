@@ -15,16 +15,16 @@ export default function App() {
 
       <Routes>
         <Route element={<ProtectedRouteUnLogged />}>
-          <Route path="/" element={<TasksPage />} />
-          <Route path="/update-user" element={<UpdateUserPage />} />
+          <Route path="/tasking-frontend/" element={<TasksPage />} />
+          <Route path="/tasking-frontend/update-user" element={<UpdateUserPage />} />
           
         </Route>
 
         <Route element={<ProtectedRouteLogged />}>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/create-user" element={<CreateUserPage />} />
-          <Route path="/recovery-password" element={<RecoveryPassPage />} />
-          <Route path="/recovery-change-password" element={<ChangePasswordPage />} />
+          <Route path="/tasking-frontend/login" element={<LoginPage />} />
+          <Route path="/tasking-frontend/create-user" element={<CreateUserPage />} />
+          <Route path="/tasking-frontend/recovery-password" element={<RecoveryPassPage />} />
+          <Route path="/tasking-frontend/recovery-change-password" element={<ChangePasswordPage />} />
 
         </Route>
      
