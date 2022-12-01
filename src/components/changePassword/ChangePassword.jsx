@@ -53,7 +53,7 @@ export default function ChangePassword() {
     changePass.then(() => {
       document.getElementById("error").setAttribute("style", "color: green");
       document.getElementById("error").textContent = "Cambio de contraseña exitoso.";
-      navigate("/");
+      navigate("/tasking-frontend/");
     }).catch(() => error("Ha ocurrido un error, envíe nuevamente el mail."));
 
   };

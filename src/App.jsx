@@ -5,6 +5,7 @@ import RecoveryPassPage from "./pages/RecoveryPassPage";
 import UpdateUserPage from "./pages/UpdateUserPage";
 import ChangePasswordPage from "./pages/ChangePasswordPage";
 import TasksPage from "./pages/TasksPage";
+import NotFoundPage from "./pages/NotFoundPage";
 import "./App.css";
 import { ProtectedRouteLogged, ProtectedRouteUnLogged } from "./components/ProtectedRoute";
 
@@ -27,6 +28,8 @@ export default function App() {
           <Route path="/tasking-frontend/recovery-change-password" element={<ChangePasswordPage />} />
 
         </Route>
+
+        <Route path="*" element={<NotFoundPage />} />
      
       </Routes>
 

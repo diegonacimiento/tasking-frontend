@@ -5,9 +5,12 @@ import { HiOutlineMenu } from "react-icons/hi";
 import MenuBar from "../menuBar/MenuBar";
 import Menu from "../../../Menu";
 import "./header.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Header({ ban }) {
   const { mode, changeMode, menuNone, stateMenu } = useContext(Context);
+
+  const navigate = useNavigate();
 
   if (!mode) localStorage.setItem("mode", "light");
 
@@ -47,7 +50,7 @@ export default function Header({ ban }) {
           (ban = false)
         )}
 
-        <div className="logo-contain">
+        <div onClick={() => navigate("/tasking-frontend/")} className="logo-contain">
           <span className="image"></span>
           <p className="letra">Tasking</p>
         </div>

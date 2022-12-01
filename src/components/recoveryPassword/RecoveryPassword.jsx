@@ -14,7 +14,7 @@ export default function RecoveryPassword() {
   const { emailValidation } = useContext(Context);
 
   function createUser() {
-    navigate("/create-user");
+    navigate("/tasking-frontend/create-user");
   };
 
   function send() {
@@ -75,7 +75,7 @@ export default function RecoveryPassword() {
           <p id="error"></p>
         </form>
 
-        <Link to={"/login"}>Regresar al inicio de sesión</Link>
+        <Link to={"/tasking-frontend/login"}>Regresar al inicio de sesión</Link>
 
         <div className="main-rp__login">
             <h3>¿Aún no tienes un usuario?</h3>
