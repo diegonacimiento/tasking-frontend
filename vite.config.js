@@ -5,5 +5,5 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   // Agregamos la propiedad base y como valor ponemos el nombre de nuestro repositorio:
-  base: "/"
+  base: "/tasking-frontend/"
 })
