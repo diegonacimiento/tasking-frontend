@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Context } from "../context/Context";
 import { Navigate, Outlet } from "react-router-dom";
 
-export function ProtectedRouteUnLogged({ children, redirectTo="/login" }) {
+export function ProtectedRouteUnLogged({ children, redirectTo="/tasking-frontend/login" }) {
 
     const { token } = useContext(Context);
 
@@ -12,7 +12,7 @@ export function ProtectedRouteUnLogged({ children, redirectTo="/login" }) {
 
 };
 
-export function ProtectedRouteLogged({ children, redirectTo="/" }) {
+export function ProtectedRouteLogged({ children, redirectTo="/tasking-frontend/" }) {
 
     const { token } = useContext(Context);
 
