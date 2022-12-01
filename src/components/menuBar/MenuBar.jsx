@@ -12,6 +12,7 @@ export default function MenuBar() {
 
     function logout() {
         localStorage.removeItem("token");
+        localStorage.removeItem("user");
         setToken(null);
         navigate("/login");
         menuNone();

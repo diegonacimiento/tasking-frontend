@@ -7,7 +7,7 @@ import tasksService from "../../../../services/tasks.service";
 const service = new tasksService();
 
 export default function TasksCard({ task }) {
-  const { token, tasks, setTasks, setRealTasks } = useContext(Context);
+  const { token, tasks, setTasks } = useContext(Context);
 
   function statusTask() {
     if (task.status == "pendiente") {
@@ -17,7 +17,6 @@ export default function TasksCard({ task }) {
       const taskUpdate = tasksAll.filter(taskUpdate => {return taskUpdate.id == task.id});
       taskUpdate[0].status = "completado";
       setTasks([...tasksAll]);
-      setRealTasks([...tasksAll]);
     } else if(task.status == "completado") {
       const body = { status: "pendiente" };
       service.update(body, task.id, token);
@@ -25,7 +24,6 @@ export default function TasksCard({ task }) {
       const taskUpdate = tasksAll.filter(taskUpdate => {return taskUpdate.id == task.id});
       taskUpdate[0].status = "pendiente";
       setTasks([...tasksAll]);
-      setRealTasks([...tasksAll]);
     }
   }
 
@@ -34,7 +32,6 @@ export default function TasksCard({ task }) {
     service.delete(task.id, token);
     const newTasksList = tasks.filter(taskOld => taskOld.id != task.id);
     setTasks([...newTasksList]);
-    setRealTasks([...newTasksList]);
   };
 
   let status = task.status == "completado" ? "completado" : "pendiente"

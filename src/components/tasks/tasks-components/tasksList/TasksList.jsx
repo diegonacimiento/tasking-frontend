@@ -8,13 +8,18 @@ export default function TasksList() {
 
   const sortTasks = (a, b) => a.id - b.id;
 
+  let tasksList = [];
+
+  if(search != null && search != "NF") { tasksList = search}
+  else { tasksList = tasks};
+
   if(search == "NF") return <h2>No hubo resultados en su búsqueda.</h2>
 
-  if(!tasks) return <h2>Cargando...</h2>
+  if(!tasksList) return <h2>Cargando...</h2>
 
-  if(tasks.length == 0) return <h2>No hay tareas.</h2>
+  if(tasksList.length == 0) return <h2>No hay tareas.</h2>
 
-  return [...tasks].sort(sortTasks).map((task, i) => (
+  return [...tasksList].sort(sortTasks).map((task, i) => (
     <div className="task-list-div" key={i}>
       <TasksCard task={task} />
     </div>

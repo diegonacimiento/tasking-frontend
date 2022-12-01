@@ -33,3 +33,24 @@
 .main-create-user #error {
     margin: 0 auto;
 }
+
+.main-create-user form .label-pass , .main-create-user form .label-confirm-pass {
+    position: relative;
+}
+
+.main-create-user form .label-pass input, .main-create-user form .label-confirm-pass input {
+    padding-right: 30px;
+}
+
+.main-create-user .view-password {
+    position: absolute;
+    background: none;
+    border: none;
+    top: calc(51%);
+    right: 60px;
+    width: max-content;
+}
+
+.main-create-user .view-password svg{
+    color: var(--colorBotton);
+}

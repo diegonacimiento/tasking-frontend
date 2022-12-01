@@ -2,11 +2,11 @@ import "./login.css";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useContext } from "react";
 import { Context } from "../../context/Context";
+import usersService from "../../services/user.service";
 
-
+const service = new usersService();
 
 export default function Login() {
  
@@ -27,16 +27,15 @@ export default function Login() {
     const email = document.getElementById("input-email").value;
     const password = document.getElementById("input-password").value;
     const error = document.getElementById("error");
-    const user = axios.post(
-      "https://tasking-app.herokuapp.com/api/v1/auth/login",
-      {
-        username: `${email}`,
-        password: `${password}`,
-      }
-    );
+    const body = {
+      username: `${email}`,
+      password: `${password}`,
+    };
+    const user = service.loginUser(body);
     user
       .then((res) => {
-        console.log(res.data);
+        localStorage.setItem("user", `${res.data.user.id}`);
+        localStorage.setItem("email", `${res.data.user.email}`);
         if (res.data.token) {
           localStorage.setItem("token", `${res.data.token}`);
           setToken(res.data.token);

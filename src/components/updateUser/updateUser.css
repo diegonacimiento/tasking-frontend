@@ -24,3 +24,25 @@
 .main-update form button {
     width: 75%;
 }
+
+.main-update form label:nth-child(4) , .main-update form label:nth-child(5), .main-update form label:nth-child(6) {
+    position: relative;
+}
+
+.main-update form label:nth-child(4) input , .main-update form label:nth-child(5) input, .main-update form label:nth-child(6) input {
+    padding-right: 30px;
+}
+
+.main-update .view-password {
+    position: absolute;
+    background: none;
+    border: none;
+    top: calc(51%);
+    right: 10px;
+    width: max-content;
+}
+
+.main-update .view-password svg{
+    color: var(--colorBotton);
+}
+
