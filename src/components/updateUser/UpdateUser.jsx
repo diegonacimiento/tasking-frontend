@@ -21,23 +21,27 @@ export default function UpdateUser() {
     passwordValidation,
   } = useContext(Context);
 
-  const email = document.querySelector(".main-update__input-email");
-
-    const password = document.querySelector(".password");
-    const newPassword = document.querySelector(".newPassword");
-    const confirmNewPassword = document.querySelector(".confirmNewPassword");
+  
 
   function validationNewPassword() {
+    const newPassword = document.querySelector(".newPassword");
     passwordValidation();
     if (newPassword.value.length == 0) emailValidation();
   };
 
   function validationConfirmNewPassword() {
+    const confirmNewPassword = document.querySelector(".confirmNewPassword");
     passwordValidation();
     if (confirmNewPassword.value.length == 0) emailValidation();
   };
 
   function sendForm() {
+
+    const email = document.querySelector(".main-update__input-email");
+
+    const password = document.querySelector(".password");
+    const newPassword = document.querySelector(".newPassword");
+    const confirmNewPassword = document.querySelector(".confirmNewPassword");
 
     if (email.value !== localStorage.getItem("email")) {
       const emailUpdate = service.update({ email: email.value }, token);
@@ -156,6 +160,7 @@ export default function UpdateUser() {
           </label>
           <label>
             <span>Contraseña actual</span>
+            <div className="contain-input-button-pass">
             <input className="password" type={"password"} />
             <button onClick={viewPassword} className="view-password">
               {modeViewPass == "invisible" ? (
@@ -164,9 +169,12 @@ export default function UpdateUser() {
                 <AiOutlineEye />
               )}
             </button>
+            </div>
+            
           </label>
           <label>
             <span>Nueva contraseña</span>
+            <div className="contain-input-button-pass">
             <input
               onChange={validationNewPassword}
               className="newPassword"
@@ -180,9 +188,13 @@ export default function UpdateUser() {
                 <AiOutlineEye />
               )}
             </button>
+            </div>
+
+            
           </label>
           <label>
             <span>Confirmar nueva contraseña</span>
+            <div className="contain-input-button-pass">
             <input
               onChange={validationConfirmNewPassword}
               className="confirmNewPassword"
@@ -196,6 +208,9 @@ export default function UpdateUser() {
                 <AiOutlineEye />
               )}
             </button>
+            </div>
+
+            
           </label>
 
           <button onClick={sendForm} className="button">

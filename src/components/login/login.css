@@ -4,10 +4,18 @@
     justify-content: space-around;
 }
 
+.main-login__login {
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
 .main-login__login input, .main-login__login button, .main-login__login p {
-    margin-top: 25px;
     width: 75%;
 }
+
 
 .main-login__create-user h3, .main-login__create-user button {
     display: inline-block;
@@ -15,8 +23,30 @@
     width: 75%;
 }
 
-.main-login__login #error {
-    margin: auto;
-    margin-top: 25px;
+.main-login .main-login__login .password-contain input {
+    padding-right: 30px;
+    width: 100%;
 }
 
+.main-login .main-login__login .password-contain input::placeholder {
+    padding-left: 20px;
+}
+
+.main-login .main-login__login .password-contain {
+    position: relative;
+    width: 75%;
+}
+
+.main-login .view-password {
+    display: flex;
+    position: absolute;
+    background: none;
+    border: none;
+    top: calc(50% - 8px);
+    right: 10px;
+    width: max-content;
+}
+
+.main-login .view-password svg{
+    color: var(--colorBotton);
+}

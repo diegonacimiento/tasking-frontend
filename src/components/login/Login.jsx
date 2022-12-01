@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { Context } from "../../context/Context";
 import usersService from "../../services/user.service";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+
 
 const service = new usersService();
 
@@ -12,7 +14,7 @@ export default function Login() {
  
  const navigate = useNavigate();
 
- const { setToken } = useContext(Context);
+ const { setToken, modeViewPass, viewPassword } = useContext(Context);
 
   function create() {
     navigate("/tasking-frontend/create-user");
@@ -25,7 +27,7 @@ export default function Login() {
 
   function login() {
     const email = document.getElementById("input-email").value;
-    const password = document.getElementById("input-password").value;
+    const password = document.querySelector(".password").value;
     const error = document.getElementById("error");
     const body = {
       username: `${email}`,
@@ -43,7 +45,6 @@ export default function Login() {
         }
       })
       .catch((e) => {
-        console.log(e.response);
         if (e.response.status == 400) {
           error.textContent = `Ingrese su email y contraseña`;
         } else if (e.response.status == 401 || 404) {
@@ -59,11 +60,21 @@ export default function Login() {
       <main className="main-login">
         <div className="main-login__login">
           <input id="input-email" type={"email"} placeholder="Email" />
+          <div className="password-contain">
           <input
-            id="input-password"
+            className="password"
             type={"password"}
             placeholder="Contraseña"
           />
+          <button onClick={viewPassword} className="view-password">
+              {modeViewPass == "invisible" ? (
+                <AiOutlineEyeInvisible />
+              ) : (
+                <AiOutlineEye />
+              )}
+            </button>
+          </div>
+          
           <button className="button" onClick={login}>
             Iniciar sesión
           </button>

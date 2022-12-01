@@ -77,7 +77,10 @@ export default function CreateUser() {
       password: `${password}`,
     };
 
+
     if (username && email && password && confirmPassword) {
+      console.log(body)
+
       const newUser = service.create(body);
 
       newUser
@@ -98,6 +101,7 @@ export default function CreateUser() {
           });
         })
         .catch((e) => {
+          console.log(e)
           const containId = e.response.data.errors[0].message.includes("id");
           const containEmail =
             e.response.data.errors[0].message.includes("email");
@@ -139,6 +143,7 @@ export default function CreateUser() {
           </label>
           <label className="label-pass">
             <span>Contraseña</span>
+            <div className="contain-input-button-pass">
             <input
               onChange={passwordValidation}
               className="newPassword"
@@ -151,9 +156,13 @@ export default function CreateUser() {
                 <AiOutlineEye />
               )}
             </button>
+            </div>
+
+            
           </label>
           <label className="label-confirm-pass">
             <span>Confirmar contraseña</span>
+            <div className="contain-input-button-pass">
             <input
               onChange={passwordValidation}
               className="confirmNewPassword"
@@ -166,6 +175,9 @@ export default function CreateUser() {
                 <AiOutlineEye />
               )}
             </button>
+            </div>
+
+           
           </label>
           <label id="label-button">
             <button onClick={createUser} className="button">

@@ -25,19 +25,21 @@
     width: 75%;
 }
 
-.main-update form label:nth-child(4) , .main-update form label:nth-child(5), .main-update form label:nth-child(6) {
+.main-update form label .contain-input-button-pass {
     position: relative;
 }
 
-.main-update form label:nth-child(4) input , .main-update form label:nth-child(5) input, .main-update form label:nth-child(6) input {
+.main-update form label .contain-input-button-pass input  {
     padding-right: 30px;
+    width: 100%;
 }
 
 .main-update .view-password {
     position: absolute;
+    display: flex;
     background: none;
     border: none;
-    top: calc(51%);
+    top: calc(50% - 8px);
     right: 10px;
     width: max-content;
 }
@@ -45,4 +47,3 @@
 .main-update .view-password svg{
     color: var(--colorBotton);
 }
-

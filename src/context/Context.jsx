@@ -130,7 +130,7 @@ export function ContextProvider(props) {
       );
 
       document.getElementById("error").textContent =
-        "Debe contener al menos 6 carácteres.";
+        "Mínimo 6 carácteres.";
     } else {
       document.getElementById("error").textContent = "";
       newPassword.removeAttribute("style");

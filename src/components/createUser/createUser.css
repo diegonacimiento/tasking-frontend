@@ -8,7 +8,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
     height: 80%;
+}
+
+.main-create-user label {
+    width: 75%;
 }
 
 .main-create-user label span, 
@@ -17,9 +22,14 @@
 .main-create-user__login h3, 
 .main-create-user__login .link-login {
     display: inline-block;
-    width: 75%;
+    width: 100%;
     margin-top: 5px;
 }
+
+.main-create-user label input {
+    margin: 0;
+}
+
 
 .main-create-user form p {
     margin-top: 10px;
@@ -34,7 +44,7 @@
     margin: 0 auto;
 }
 
-.main-create-user form .label-pass , .main-create-user form .label-confirm-pass {
+.main-create-user form .contain-input-button-pass {
     position: relative;
 }
 
@@ -44,10 +54,12 @@
 
 .main-create-user .view-password {
     position: absolute;
+    display: flex;
+    margin: 0;
     background: none;
     border: none;
-    top: calc(51%);
-    right: 60px;
+    top: calc(50% - 8px);
+    right: 10px;
     width: max-content;
 }
 
