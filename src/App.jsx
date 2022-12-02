@@ -7,32 +7,33 @@ import ChangePasswordPage from "./pages/ChangePasswordPage";
 import TasksPage from "./pages/TasksPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import "./App.css";
-import { ProtectedRouteLogged, ProtectedRouteUnLogged } from "./components/ProtectedRoute";
+import {
+  ProtectedRouteLogged,
+  ProtectedRouteUnLogged,
+  ProtectedRecoveryPass,
+} from "./components/ProtectedRoute";
 
 export default function App() {
-  return(
-    
+  return (
     <BrowserRouter>
-
       <Routes>
         <Route element={<ProtectedRouteUnLogged />}>
           <Route path="/" element={<TasksPage />} />
           <Route path="/update-user" element={<UpdateUserPage />} />
-          
         </Route>
 
         <Route element={<ProtectedRouteLogged />}>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/create-user" element={<CreateUserPage />} />
           <Route path="/recovery-password" element={<RecoveryPassPage />} />
-          <Route path="/recovery-change-password" element={<ChangePasswordPage />} />
+        </Route>
 
+        <Route element={<ProtectedRecoveryPass />}>
+          <Route path="/recovery-change-password" element={<ChangePasswordPage />} />
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />
-     
       </Routes>
-
     </BrowserRouter>
   );
-};
+}
