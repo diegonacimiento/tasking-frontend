@@ -14,7 +14,7 @@ export default function MenuBar() {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
         setToken(null);
-        navigate("/tasking-frontend/login");
+        navigate("/login");
         menuNone();
     };
 
@@ -22,8 +22,8 @@ export default function MenuBar() {
     return(<>
         <button onClick={menuNone} className="menu-bar__button"><VscClose /></button>
         <div className="contain-menu">
-            <Link onClick={menuNone} className="links-menu" to={"/tasking-frontend/"}>Tareas</Link>
-            <Link onClick={menuNone} className="links-menu" to={"/tasking-frontend/update-user"}>Editar usuario</Link>
+            <Link onClick={menuNone} className="links-menu" to={"/"}>Tareas</Link>
+            <Link onClick={menuNone} className="links-menu" to={"/update-user"}>Editar usuario</Link>
             <button onClick={logout} id="bt-menu" className="button">Cerrar sesión</button>
         </div>
     </>

@@ -107,7 +107,7 @@ export default function CreateUser() {
             if (res.data.token) {
               localStorage.setItem("token", `${res.data.token}`);
               setToken(res.data.token);
-              return navigate("/tasking-frontend/");
+              return navigate("/");
             }
           });
         })
@@ -198,7 +198,7 @@ export default function CreateUser() {
 
         <div className="main-create-user__login">
           <h3>¿Ya estás registrado?</h3>
-          <Link className="link-login" to={"/tasking-frontend/login"}>
+          <Link className="link-login" to={"/login"}>
             Iniciar sesión
           </Link>
         </div>

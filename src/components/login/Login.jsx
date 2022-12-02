@@ -17,7 +17,7 @@ export default function Login() {
  const { setToken, modeViewPass, viewPassword } = useContext(Context);
 
   function create() {
-    navigate("/tasking-frontend/create-user");
+    navigate("/create-user");
   }
 
   const style = document.documentElement.style;
@@ -41,7 +41,7 @@ export default function Login() {
         if (res.data.token) {
           localStorage.setItem("token", `${res.data.token}`);
           setToken(res.data.token);
-          return navigate("/tasking-frontend/");
+          return navigate("/");
         }
       })
       .catch((e) => {
@@ -81,7 +81,7 @@ export default function Login() {
           <p id="error"></p>
         </div>
 
-        <Link className="main-login__link-rp" to="/tasking-frontend/recovery-password">
+        <Link className="main-login__link-rp" to="/recovery-password">
           ¿Olvidaste tu contraseña?
         </Link>
 

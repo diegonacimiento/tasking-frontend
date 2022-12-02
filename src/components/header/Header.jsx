@@ -12,8 +12,6 @@ export default function Header({ ban }) {
 
   const navigate = useNavigate();
 
-  if (!mode) localStorage.setItem("mode", "light");
-
   const style = document.documentElement.style;
 
   mode == "light"
@@ -50,7 +48,7 @@ export default function Header({ ban }) {
           (ban = false)
         )}
 
-        <div onClick={() => navigate("/tasking-frontend/")} className="logo-contain">
+        <div onClick={() => navigate("/")} className="logo-contain">
           <span className="image"></span>
           <p className="letra">Tasking</p>
         </div>
