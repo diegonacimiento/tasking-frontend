@@ -10,7 +10,10 @@ localStorage.setItem("stateMenu", "true");
 export function ContextProvider(props) {
   const [mode, setMode] = useState(localStorage.getItem("mode"));
 
-  if (!mode) localStorage.setItem("mode", "light");
+  if (!mode) {
+    localStorage.setItem("mode", "light");
+    setMode(localStorage.getItem("mode"));
+  };
 
   const [stateMenu, setStateMenu] = useState(localStorage.getItem("stateMenu"));
 
