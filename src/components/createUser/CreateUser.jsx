@@ -33,46 +33,50 @@ export default function CreateUser() {
 
   function inputDefault(input) {
     document.querySelector(`.${input}`).removeAttribute("style");
-
-  };
+  }
 
   function verifyInputs() {
     const username = document.querySelector(".user").value;
     const email = document.querySelector(".email").value;
     const password = document.querySelector(".newPassword").value;
     const confirmPassword = document.querySelector(".confirmNewPassword").value;
-    
-      if(!username) {
-        document.querySelector(".user").setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
-        error("Debe completar todos los campos.");
-      };
-      if(!email) {
-        document.querySelector(".email").setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
-        error("Debe completar todos los campos.");
-      };
-      if(!password) {
-        document.querySelector(".newPassword").setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
-        error("Debe completar todos los campos.");
-      };
-      if(!confirmPassword) {
-        document.querySelector(".confirmNewPassword").setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
-        error("Debe completar todos los campos.");
-      };
-      
-  };
+
+    if (!username) {
+      document
+        .querySelector(".user")
+        .setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
+      error("Debe completar todos los campos.");
+    }
+    if (!email) {
+      document
+        .querySelector(".email")
+        .setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
+      error("Debe completar todos los campos.");
+    }
+    if (!password) {
+      document
+        .querySelector(".newPassword")
+        .setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
+      error("Debe completar todos los campos.");
+    }
+    if (!confirmPassword) {
+      document
+        .querySelector(".confirmNewPassword")
+        .setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
+      error("Debe completar todos los campos.");
+    }
+  }
 
   function arreglo() {
     const password = document.querySelector(".newPassword").value;
     const confirmPassword = document.querySelector(".confirmNewPassword").value;
 
     const valideMail = emailValidation();
-    if(valideMail == "valido" && (password || confirmPassword)) {
+    if (valideMail == "valido" && (password || confirmPassword)) {
       passwordValidation();
       verifyInputs();
-    };
-
-
-  };
+    }
+  }
 
   function createUser() {
     verifyInputs();
@@ -87,7 +91,6 @@ export default function CreateUser() {
       email: `${email}`,
       password: `${password}`,
     };
-
 
     if (username && email && password && confirmPassword) {
       const newUser = service.create(body);
@@ -110,17 +113,24 @@ export default function CreateUser() {
           });
         })
         .catch((e) => {
-          console.log(e)
+          console.log(e);
           const containId = e.response.data.errors[0].message.includes("id");
           const containEmail =
             e.response.data.errors[0].message.includes("email");
-          if (containId) error("El usuario ya está en uso, elige otro.");
-          else if (containEmail) error("Mail en uso, elige otro.");
-        });
+          if (containId) {
+            document
+              .querySelector(".user")
+              .setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
+            error("El usuario ya está en uso, elige otro.");
+          } else if (containEmail) {
+            document
+            .querySelector(".email")
+            .setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
+            error("Mail en uso, elige otro.");
+          };
+          });
+    } else {
     }
-    else {
-      
-    };
   }
   const style = document.documentElement.style;
 
@@ -137,53 +147,49 @@ export default function CreateUser() {
 
           <label>
             <span>Usuario</span>
-            <input onChange={() => inputDefault("user")} className="user" type={"text"} />
+            <input
+              onChange={() => inputDefault("user")}
+              className="user"
+              type={"text"}
+            />
           </label>
           <label>
             <span>Correo electrónico</span>
-            <input
-              onChange={arreglo}
-              className="email"
-              type={"email"}
-            />
+            <input onChange={arreglo} className="email" type={"email"} />
           </label>
           <label className="label-pass">
             <span>Contraseña</span>
             <div className="contain-input-button-pass">
-            <input
-              onChange={passwordValidation}
-              className="newPassword"
-              type={"password"}
-            />
-            <button onClick={viewPasswordNP} className="view-password">
-              {modeViewNP == "invisible" ? (
-                <AiOutlineEyeInvisible />
-              ) : (
-                <AiOutlineEye />
-              )}
-            </button>
+              <input
+                onChange={passwordValidation}
+                className="newPassword"
+                type={"password"}
+              />
+              <button onClick={viewPasswordNP} className="view-password">
+                {modeViewNP == "invisible" ? (
+                  <AiOutlineEyeInvisible />
+                ) : (
+                  <AiOutlineEye />
+                )}
+              </button>
             </div>
-
-            
           </label>
           <label className="label-confirm-pass">
             <span>Confirmar contraseña</span>
             <div className="contain-input-button-pass">
-            <input
-              onChange={passwordValidation}
-              className="confirmNewPassword"
-              type={"password"}
-            />
-            <button onClick={viewPasswordCNP} className="view-password">
-              {modeViewCNP == "invisible" ? (
-                <AiOutlineEyeInvisible />
-              ) : (
-                <AiOutlineEye />
-              )}
-            </button>
+              <input
+                onChange={passwordValidation}
+                className="confirmNewPassword"
+                type={"password"}
+              />
+              <button onClick={viewPasswordCNP} className="view-password">
+                {modeViewCNP == "invisible" ? (
+                  <AiOutlineEyeInvisible />
+                ) : (
+                  <AiOutlineEye />
+                )}
+              </button>
             </div>
-
-           
           </label>
           <label id="label-button">
             <button onClick={createUser} className="button">
