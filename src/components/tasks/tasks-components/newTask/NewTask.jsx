@@ -38,8 +38,8 @@ export default function NewTask() {
   };
 
   const style = document.documentElement.style;
-  if(mode == "light") { style.setProperty("--bkModal", "rgba(0, 0, 0, 0.8)") }
-  else style.setProperty("--bkModal", "rgba(0, 0, 0, 0.6)");
+  if(mode == "light") { style.setProperty("--bkModal", "rgba(0, 0, 0, 0.93)") }
+  else style.setProperty("--bkModal", "rgba(0, 0, 0, 0.93)");
 
   return (
     <form onSubmit={submitOff} className="new-task">
