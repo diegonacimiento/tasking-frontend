@@ -14,15 +14,15 @@ export default function Header({ ban }) {
 
   const style = document.documentElement.style;
 
-  mode == "light"
+  mode == "dark"
     ? (style.setProperty(
         "--image",
-        'url("https://i.ibb.co/h89BLcF/tasking.png")'
+        'url("https://i.ibb.co/kQZ260V/tasking-Blanco.png")'
       ),
       style.setProperty("--colorLetra", "rgb(0, 0, 0)"))
     : (style.setProperty(
         "--image",
-        'url("https://i.ibb.co/kQZ260V/tasking-Blanco.png")'
+        'url("https://i.ibb.co/h89BLcF/tasking.png")'
       ),
       style.setProperty("--colorLetra", "rgb(150, 150, 150)"));
 
