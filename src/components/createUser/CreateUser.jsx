@@ -61,7 +61,18 @@ export default function CreateUser() {
       
   };
 
- 
+  function arreglo() {
+    const password = document.querySelector(".newPassword").value;
+    const confirmPassword = document.querySelector(".confirmNewPassword").value;
+
+    const valideMail = emailValidation();
+    if(valideMail == "valido" && (password || confirmPassword)) {
+      passwordValidation();
+      verifyInputs();
+    };
+
+
+  };
 
   function createUser() {
     verifyInputs();
@@ -133,10 +144,7 @@ export default function CreateUser() {
           <label>
             <span>Correo electrónico</span>
             <input
-              onChange={() => {
-                const valideMail = emailValidation();
-                if(valideMail == "valido") verifyInputs();
-              }}
+              onChange={arreglo}
               className="email"
               type={"email"}
             />

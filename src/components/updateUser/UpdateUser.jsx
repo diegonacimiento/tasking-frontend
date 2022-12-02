@@ -94,10 +94,10 @@ export default function UpdateUser() {
             .getElementById("error")
             .setAttribute("style", "color: green");
           document.getElementById("error").textContent =
-            "Información actualizada con éxito.";
+            "Datos actualizados.";
         })
         .catch((e) => {
-          if (e.response.status == 401) {
+          if (e.response.status == 401 || e.response.data.message.includes("length")) {
             document
               .getElementById("error")
               .setAttribute("style", "color: rgb(238, 16, 16)");
