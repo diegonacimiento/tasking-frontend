@@ -51,7 +51,7 @@ export default function UpdateUser() {
             .getElementById("error")
             .setAttribute("style", "color: green");
           document.getElementById("error").textContent =
-            "Información actualizada con éxito.";
+            "Datos actualizados.";
           email.removeAttribute("style");
           localStorage.setItem("email", email.value);
         })

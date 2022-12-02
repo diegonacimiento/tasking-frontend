@@ -90,8 +90,6 @@ export default function CreateUser() {
 
 
     if (username && email && password && confirmPassword) {
-      console.log(body)
-
       const newUser = service.create(body);
 
       newUser
