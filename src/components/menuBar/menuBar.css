@@ -10,6 +10,7 @@
 }
 
 .menu-bar__button {
+    position: absolute;
     display: block;
     height: 60px;
     width: 30px;
