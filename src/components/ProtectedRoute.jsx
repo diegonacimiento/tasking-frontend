@@ -10,7 +10,7 @@ export function ProtectedRouteUnLogged({ children, redirectTo="/login" }) {
 
     const timeNow = Date.now();
 
-    if(timeNow - timeToken == 259200000 ) {
+    if(timeNow - timeToken == 60000 ) {
         localStorage.removeItem("timeToken");
         localStorage.removeItem("token");
         setToken(localStorage.getItem("token"));
