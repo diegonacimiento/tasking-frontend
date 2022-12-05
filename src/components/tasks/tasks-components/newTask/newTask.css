@@ -39,3 +39,8 @@
 .new-task input:focus {
     border: 1px solid white;
 }
+
+.task-input-create::placeholder {
+    opacity: 0.35;
+    letter-spacing: 1px;
+}

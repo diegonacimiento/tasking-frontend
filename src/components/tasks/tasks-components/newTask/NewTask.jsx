@@ -43,7 +43,7 @@ export default function NewTask() {
 
   return (
     <form onSubmit={submitOff} className="new-task">
-      <input placeholder="Tarea" type={"text"} className={"task-input-create"} />
+      <input placeholder="Escribe una tarea" type={"text"} className={"task-input-create"} />
       <div className="button-contain">
         <button onClick={modalNone} className={`button`}>Cancelar</button>
         <button onClick={postTask} className={`button`}>Crear</button>

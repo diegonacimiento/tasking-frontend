@@ -4,7 +4,17 @@ import { Navigate, Outlet } from "react-router-dom";
 
 export function ProtectedRouteUnLogged({ children, redirectTo="/login" }) {
 
-    const { token } = useContext(Context);
+    const { token, setToken } = useContext(Context);
+
+    const timeToken = localStorage.getItem("timeToken");
+
+    const timeNow = Date.now();
+
+    if(timeNow - timeToken == 259200000 ) {
+        localStorage.removeItem("timeToken");
+        localStorage.removeItem("token");
+        setToken(localStorage.getItem("token"));
+    };
 
     if(!token) return <Navigate to={redirectTo} />
 

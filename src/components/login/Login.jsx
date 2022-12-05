@@ -40,6 +40,7 @@ export default function Login() {
         localStorage.setItem("email", `${res.data.user.email}`);
         if (res.data.token) {
           localStorage.setItem("token", `${res.data.token}`);
+          localStorage.setItem("timeToken", `${Date.now()}`);
           setToken(res.data.token);
           return navigate("/");
         }
