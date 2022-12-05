@@ -13,7 +13,7 @@ export function ContextProvider(props) {
   if (!mode) {
     localStorage.setItem("mode", "light");
     setMode(localStorage.getItem("mode"));
-  };
+  }
 
   const [stateMenu, setStateMenu] = useState(localStorage.getItem("stateMenu"));
 
@@ -134,13 +134,11 @@ export function ContextProvider(props) {
         "border: 1px solid rgb(238, 16, 16)"
       );
 
-      document.getElementById("error").textContent =
-        "Mínimo 6 carácteres.";
+      document.getElementById("error").textContent = "Mínimo 6 carácteres.";
     } else {
       document.getElementById("error").textContent = "";
       newPassword.removeAttribute("style");
       confirmNewPassword.removeAttribute("style");
-    
     }
   }
 

@@ -5,27 +5,34 @@ import "./menuBar.css";
 import { VscClose } from "react-icons/vsc";
 
 export default function MenuBar() {
+  const { menuNone, setToken } = useContext(Context);
 
-    const { menuNone, setToken } = useContext(Context);
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  function logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setToken(null);
+    navigate("/login");
+    menuNone();
+  }
 
-    function logout() {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-        setToken(null);
-        navigate("/login");
-        menuNone();
-    };
-
-
-    return(<>
-        <button onClick={menuNone} className="menu-bar__button"><VscClose /></button>
-        <div className="contain-menu">
-            <Link onClick={menuNone} className="links-menu" to={"/"}>Tareas</Link>
-            <Link onClick={menuNone} className="links-menu" to={"/update-user"}>Editar usuario</Link>
-            <button onClick={logout} id="bt-menu" className="button">Cerrar sesión</button>
-        </div>
+  return (
+    <>
+      <button onClick={menuNone} className="menu-bar__button">
+        <VscClose />
+      </button>
+      <div className="contain-menu">
+        <Link onClick={menuNone} className="links-menu" to={"/"}>
+          Tareas
+        </Link>
+        <Link onClick={menuNone} className="links-menu" to={"/update-user"}>
+          Editar usuario
+        </Link>
+        <button onClick={logout} id="bt-menu" className="button">
+          Cerrar sesión
+        </button>
+      </div>
     </>
-    );
-};
+  );
+}

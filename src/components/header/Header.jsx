@@ -14,6 +14,8 @@ export default function Header({ ban }) {
 
   const style = document.documentElement.style;
 
+  const root = document.getElementById("root");
+
   mode == "dark"
     ? (style.setProperty(
         "--image",
@@ -27,8 +29,14 @@ export default function Header({ ban }) {
       style.setProperty("--colorLetra", "rgb(150, 150, 150)"));
 
   stateMenu == "false"
-    ? (style.setProperty("--left", "0"))
-    : (style.setProperty("--left", "-2000rem"));
+    ? (
+        style.setProperty("--left", "0"),
+        setTimeout(() => {root.setAttribute("style", "display:none")}, 1000)
+      )
+    : (
+        style.setProperty("--left", "-2000rem"),
+        root.removeAttribute("style")
+      );
 
   return (
     <header>
@@ -40,22 +48,22 @@ export default function Header({ ban }) {
         (ban = false)
       )}
 
-        {ban ? (
-          <button onClick={menuNone} className="menu">
-            {<HiOutlineMenu />}
-          </button>
-        ) : (
-          (ban = false)
-        )}
-
-        <div onClick={() => navigate("/")} className="logo-contain">
-          <span className="image"></span>
-          <p className="letra">Tasking</p>
-        </div>
-
-        <button className="mode" onClick={changeMode}>
-          {mode == "dark" ? <MdDarkMode /> : <MdLightMode />}
+      {ban ? (
+        <button onClick={menuNone} className="menu">
+          {<HiOutlineMenu />}
         </button>
+      ) : (
+        (ban = false)
+      )}
+
+      <div onClick={() => navigate("/")} className="logo-contain">
+        <span className="image"></span>
+        <p className="letra">Tasking</p>
+      </div>
+
+      <button className="mode" onClick={changeMode}>
+        {mode == "dark" ? <MdDarkMode /> : <MdLightMode />}
+      </button>
     </header>
   );
 }
