@@ -1,3 +1,4 @@
+import React from "react";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
 import { Link } from "react-router-dom";
@@ -124,7 +125,7 @@ export default function CreateUser() {
       document.getElementById("error").textContent = "Validando datos...";
 
       newUser
-        .then((res) => {
+        .then(() => {
           const body = {
             username: `${email}`,
             password: `${password}`,
@@ -141,7 +142,6 @@ export default function CreateUser() {
           });
         })
         .catch((e) => {
-          bandera = false;
           document.getElementById("error").removeAttribute("style");
           document.getElementById("error").textContent = "";
           const containId = e.response.data.errors[0].message.includes("id");
@@ -156,7 +156,7 @@ export default function CreateUser() {
             document
               .querySelector(".email")
               .setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
-            error("E-mail en uso, elige otro.", true, "mail");
+            error("Email en uso, elige otro.", true, "mail");
           }
         })
         .finally(() => setLoading(false));

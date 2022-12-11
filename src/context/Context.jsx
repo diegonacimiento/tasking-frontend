@@ -1,3 +1,4 @@
+import React from "react";
 import { createContext, useState, useEffect } from "react";
 import tasksService from "../services/tasks.service";
 
@@ -105,7 +106,7 @@ export function ContextProvider(props) {
       return "valido";
     } else {
       error.setAttribute("style", "color: rgb(238, 16, 16)");
-      error.textContent = "E-mail inválido";
+      error.textContent = "Email inválido";
       if(spanError) spanError.setAttribute("style", "color: rgb(238, 16, 16)");
       email.setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
       return "invalido";

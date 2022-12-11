@@ -1,3 +1,4 @@
+import React from "react";
 import "./changePassword.css";
 
 import Header from "../header/Header";
@@ -26,16 +27,22 @@ export default function ChangePassword() {
     const newPassword = document.querySelector(".newPassword");
     const confirmNewPassword = document.querySelector(".confirmNewPassword");
     newPassword.setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
-    confirmNewPassword.setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
-  };
+    confirmNewPassword.setAttribute(
+      "style",
+      "border: 1px solid rgb(238, 16, 16)"
+    );
+  }
 
   function send() {
     const newPassword = document.querySelector(".newPassword").value;
-    const confirmNewPassword = document.querySelector(".confirmNewPassword").value;
+    const confirmNewPassword = document.querySelector(
+      ".confirmNewPassword"
+    ).value;
 
-    if(!newPassword && !confirmNewPassword) return error("Los campos no pueden quedar vacíos.");
+    if (!newPassword && !confirmNewPassword)
+      return error("Los campos no pueden quedar vacíos.");
 
-    if(newPassword !== confirmNewPassword) return;
+    if (newPassword !== confirmNewPassword) return;
 
     const uri = window.location.href;
 
@@ -45,18 +52,20 @@ export default function ChangePassword() {
 
     const body = {
       recoveryToken,
-      newPassword
+      newPassword,
     };
 
     const changePass = service.recoveryChangePassword(body);
 
-    changePass.then(() => {
-      document.getElementById("error").setAttribute("style", "color: green");
-      document.getElementById("error").textContent = "Cambio de contraseña exitoso.";
-      navigate("/");
-    }).catch(() => error("Ha ocurrido un error, envíe nuevamente el mail."));
-
-  };
+    changePass
+      .then(() => {
+        document.getElementById("error").setAttribute("style", "color: green");
+        document.getElementById("error").textContent =
+          "Cambio de contraseña exitoso.";
+        navigate("/");
+      })
+      .catch(() => error("Ha ocurrido un error, envíe nuevamente el email."));
+  }
 
   return (
     <>
@@ -96,11 +105,12 @@ export default function ChangePassword() {
         </label>
 
         <label>
-          <button onClick={send} className="button">Enviar</button>
+          <button onClick={send} className="button">
+            Enviar
+          </button>
         </label>
 
         <p id="error"></p>
-
       </main>
 
       <Footer />

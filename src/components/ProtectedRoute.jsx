@@ -1,3 +1,4 @@
+import React from "react";
 import { useContext } from "react";
 import { Context } from "../context/Context";
 import { Navigate, Outlet } from "react-router-dom";
@@ -6,14 +7,16 @@ import jwtDecode from "jwt-decode";
 export function ProtectedRouteUnLogged({ children, redirectTo = "/login" }) {
   const { token, setToken } = useContext(Context);
 
-  const decoded = jwtDecode(token);
+  if (token) {
+    const decoded = jwtDecode(token);
 
-  const timeNow = decoded.exp;
-  const timeToken = decoded.iat;
+    const timeNow = decoded.exp;
+    const timeToken = decoded.iat;
 
-  if (timeNow - timeToken > 259200) {
-    localStorage.removeItem("token");
-    setToken(localStorage.getItem("token"));
+    if (timeNow - timeToken > 259200) {
+      localStorage.removeItem("token");
+      setToken(localStorage.getItem("token"));
+    }
   }
 
   if (!token) return <Navigate to={redirectTo} />;

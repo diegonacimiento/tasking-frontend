@@ -1,3 +1,4 @@
+import React from 'react';
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
 import { Link, useNavigate } from "react-router-dom";
@@ -18,35 +19,35 @@ export default function RecoveryPassword() {
 
   function createUser() {
     navigate("/create-user");
-  };
+  }
 
   function send() {
     const email = document.querySelector(".email");
     if(email.value.length == 0) return error("Por favor ingrese su email.");
     const mailValidation = emailValidation();
-    if(mailValidation == "invalido") return error("Mail inválido");
+    if(mailValidation == "invalido") return error("Email inválido");
     setLoading(true);
     const mailSend = service.recoveryPassword({email: `${email.value}`});
     mailSend.then(() => {
       document.getElementById("error").setAttribute("style", "color: green");
-      document.getElementById("error").textContent = `Mail enviado con éxito`;
+      document.getElementById("error").textContent = `Email enviado con éxito`;
     })
     .catch((e) => {
-      if(e.response.status == 404) error("El mail no está vinculado.")
+      if(e.response.status == 404) error("El email no está vinculado.")
       else error("Ha ocurrido un error, intente de nuevo.");
     })
     .finally(() => setLoading(false));
-  };
+  }
 
   function error(msg) {
     document.getElementById("error").setAttribute("style", "color: rgb(238, 16, 16)");
     document.getElementById("error").textContent = `${msg}`;
 
-  };
+  }
 
   function form(e) {
     e.preventDefault();
-  };
+  }
 
   const style = document.documentElement.style;
 

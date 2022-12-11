@@ -1,3 +1,4 @@
+import React from "react";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
 import "./updateUser.css";
@@ -31,7 +32,7 @@ export default function UpdateUser() {
     if (email.value !== localStorage.getItem("email")) {
       const emailUpdate = service.update({ email: email.value }, token);
       emailUpdate
-        .then((res) => {
+        .then(() => {
           document
             .getElementById("error")
             .setAttribute("style", "color: green");
@@ -45,7 +46,7 @@ export default function UpdateUser() {
               .getElementById("error")
               .setAttribute("style", "color: rgb(238, 16, 16)");
             document.getElementById("error").textContent =
-              "El mail ya está en uso, elige otro.";
+              "El email ya está en uso, elige otro.";
             email.setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
           }
         });
@@ -74,7 +75,7 @@ export default function UpdateUser() {
         token
       );
       passwordUpdate
-        .then((res) => {
+        .then(() => {
           document
             .getElementById("error")
             .setAttribute("style", "color: darkgreen");
