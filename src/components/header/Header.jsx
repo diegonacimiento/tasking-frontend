@@ -1,3 +1,4 @@
+import React from "react";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { useContext } from "react";
 import { Context } from "../../context/Context";
@@ -29,14 +30,11 @@ export default function Header({ ban }) {
       style.setProperty("--colorLetra", "rgb(150, 150, 150)"));
 
   stateMenu == "false"
-    ? (
-        style.setProperty("--left", "0"),
-        setTimeout(() => {root.setAttribute("style", "display:none")}, 1000)
-      )
-    : (
-        style.setProperty("--left", "-2000rem"),
-        root.removeAttribute("style")
-      );
+    ? (style.setProperty("--left", "0"),
+      setTimeout(() => {
+        root.setAttribute("style", "display:none");
+      }, 1000))
+    : (style.setProperty("--left", "-2000rem"), root.removeAttribute("style"));
 
   return (
     <header>

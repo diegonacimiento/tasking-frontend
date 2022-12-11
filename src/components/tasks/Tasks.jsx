@@ -1,3 +1,4 @@
+import React from "react";
 import TasksList from "../tasks/tasks-components/tasksList/TasksList";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
@@ -8,10 +9,11 @@ import { TiPlus } from "react-icons/ti";
 import "./tasks.css";
 
 export default function Tasks() {
-  
   const modal = document.getElementById("modal");
 
-  const modalOn = () => {modal.setAttribute("style", "display:flex")};
+  const modalOn = () => {
+    modal.setAttribute("style", "display:flex");
+  };
 
   const style = document.documentElement.style;
 

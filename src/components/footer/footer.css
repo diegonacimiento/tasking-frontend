@@ -5,6 +5,7 @@ footer {
 
 footer .link-ig {
     display: flex;
+    padding: 0 0 7px 3px;
     height: 20px;
     align-items: center;
 }

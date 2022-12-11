@@ -1,3 +1,4 @@
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import CreateUserPage from "./pages/CreateUserPage";
@@ -29,7 +30,10 @@ export default function App() {
         </Route>
 
         <Route element={<ProtectedRecoveryPass />}>
-          <Route path="/recovery-change-password" element={<ChangePasswordPage />} />
+          <Route
+            path="/recovery-change-password"
+            element={<ChangePasswordPage />}
+          />
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />

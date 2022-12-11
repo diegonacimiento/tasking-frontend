@@ -1,6 +1,5 @@
 import React from "react";
 import "./changePassword.css";
-
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
 import { useContext } from "react";

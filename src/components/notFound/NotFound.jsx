@@ -1,3 +1,4 @@
+import React from "react";
 import "./notFound.css";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
@@ -5,12 +6,11 @@ import Footer from "../footer/Footer";
 export default function NotFound() {
   return (
     <>
-    <Header />
+      <Header />
 
-    <main className="notFound">Página no encontrada.</main>
+      <main className="notFound">Página no encontrada.</main>
 
-    <Footer />
+      <Footer />
     </>
-  )
+  );
 }
-

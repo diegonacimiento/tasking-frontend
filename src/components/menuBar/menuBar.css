@@ -38,7 +38,7 @@
     border: none;
     background: none;
     margin: 0;
-    color: var(--colorBotton);
+    color: rgb(161, 0, 0);
 }
 
 .contain-menu a {

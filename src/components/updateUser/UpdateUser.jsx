@@ -2,10 +2,11 @@ import React from "react";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
 import "./updateUser.css";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Context } from "../../context/Context";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import usersService from "../../services/user.service";
+import Loading from "../loading/Loading";
 
 const service = new usersService();
 
@@ -22,6 +23,8 @@ export default function UpdateUser() {
     passwordValidation,
   } = useContext(Context);
 
+  const [loading, setLoading] = useState(false);
+
   function sendForm() {
     const email = document.querySelector(".main-update__input-email");
 
@@ -30,6 +33,7 @@ export default function UpdateUser() {
     const confirmNewPassword = document.querySelector(".confirmNewPassword");
 
     if (email.value !== localStorage.getItem("email")) {
+      setLoading(true);
       const emailUpdate = service.update({ email: email.value }, token);
       emailUpdate
         .then(() => {
@@ -49,7 +53,8 @@ export default function UpdateUser() {
               "El email ya está en uso, elige otro.";
             email.setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
           }
-        });
+        })
+        .finally(() => setLoading(false));
     }
 
     if (newPassword.value.length && confirmNewPassword.value.length > 5) {
@@ -60,12 +65,15 @@ export default function UpdateUser() {
         document.querySelector(".e-pass-act").textContent =
           "Debe ingresar su contraseña.";
         password.setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
-        document.querySelector(".span-pass-act").setAttribute("style", "color: rgb(238, 16, 16)");
+        document
+          .querySelector(".span-pass-act")
+          .setAttribute("style", "color: rgb(238, 16, 16)");
         return;
       }
 
       password.removeAttribute("style", "border: 1px solid rgb(238, 16, 16)");
 
+      setLoading(true);
       const passwordUpdate = service.updatePassword(
         {
           password: password.value,
@@ -110,7 +118,8 @@ export default function UpdateUser() {
               "border: 1px solid rgb(238, 16, 16)"
             );
           }
-        });
+        })
+        .finally(() => setLoading(false));
     }
   }
 
@@ -149,13 +158,18 @@ export default function UpdateUser() {
             <div className="contain-input-button-pass">
               <input
                 onChange={() => {
-                document.querySelector(".e-pass-act").removeAttribute("style");
-                document.querySelector(".e-pass-act").textContent = "";
-                document.querySelector(".password").removeAttribute("style");
-                document.querySelector(".span-pass-act").removeAttribute("style");
-                }} 
-                className="password" 
-                type={"password"} />
+                  document
+                    .querySelector(".e-pass-act")
+                    .removeAttribute("style");
+                  document.querySelector(".e-pass-act").textContent = "";
+                  document.querySelector(".password").removeAttribute("style");
+                  document
+                    .querySelector(".span-pass-act")
+                    .removeAttribute("style");
+                }}
+                className="password"
+                type={"password"}
+              />
               <button onClick={viewPassword} className="view-password">
                 {modeViewPass == "invisible" ? (
                   <AiOutlineEyeInvisible />
@@ -206,7 +220,7 @@ export default function UpdateUser() {
           </label>
 
           <button onClick={sendForm} className="button">
-            Guardar cambios
+            {loading ? <Loading /> : "Guardar cambios"}
           </button>
 
           <p id="error"></p>
