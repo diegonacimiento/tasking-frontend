@@ -55,10 +55,14 @@ export function ContextProvider(props) {
       style.setProperty("--colorRoot", "rgb(34, 34, 34)");
       style.setProperty("--colorBorder", "rgb(104, 104, 104)");
       style.setProperty("--colorBotton", "rgb(255, 255, 255)");
+      style.setProperty("--bkButton", "#343434");
+      style.setProperty("--loading-top", "#bde0fe");
     } else {
       style.setProperty("--colorRoot", "rgb(230, 230, 230)");
       style.setProperty("--colorBorder", "rgb(104, 104, 104)");
       style.setProperty("--colorBotton", "rgb(0, 0, 0)");
+      style.setProperty("--bkButton", "#adb5bd");
+      style.setProperty("--loading-top", "#03045e");
     }
   }
 
@@ -89,18 +93,20 @@ export function ContextProvider(props) {
       /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
 
     const email = document.querySelector(".email");
+    const error = document.querySelector(".e-mail");
+    const spanError = document.querySelector(".span-mail");
 
     const emailValue = email.value;
 
     if (emailRegex.test(emailValue)) {
-      document.getElementById("error").textContent = "";
+      error.textContent = "";
       email.removeAttribute("style");
+      if(spanError) spanError.removeAttribute("style");
       return "valido";
     } else {
-      document
-        .getElementById("error")
-        .setAttribute("style", "color: rgb(238, 16, 16)");
-      document.getElementById("error").textContent = "Mail inválido";
+      error.setAttribute("style", "color: rgb(238, 16, 16)");
+      error.textContent = "E-mail inválido";
+      if(spanError) spanError.setAttribute("style", "color: rgb(238, 16, 16)");
       email.setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
       return "invalido";
     }
@@ -109,34 +115,36 @@ export function ContextProvider(props) {
   function passwordValidation() {
     const newPassword = document.querySelector(".newPassword");
     const confirmNewPassword = document.querySelector(".confirmNewPassword");
+    const error = document.querySelector(".e-pass");
+    const error2 = document.querySelector(".e-con-pass");
+    const spanError = document.querySelector(".span-pass");
+    const spanError2 = document.querySelector(".span-con-pass");
 
-    if (newPassword.value !== confirmNewPassword.value) {
-      document
-        .getElementById("error")
-        .setAttribute("style", "color: rgb(238, 16, 16)");
-      document.getElementById("error").textContent =
-        "Las contraseñas no coinciden";
+    error.textContent = "";
+    error2.textContent = "";
+    spanError.removeAttribute("style");
+    spanError2.removeAttribute("style");
+    newPassword.removeAttribute("style");
+    confirmNewPassword.removeAttribute("style");
+
+    if (newPassword.value.length < 6) {
+      error.setAttribute("style", "color: rgb(238, 16, 16)");
+      error.textContent = "Mínimo 6 carácteres.";
+      spanError.setAttribute("style", "color: rgb(238, 16, 16)");
       newPassword.setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
+    } else if (newPassword.value !== confirmNewPassword.value) {
+      error2.setAttribute("style", "color: rgb(238, 16, 16)");
+      error2.textContent = "La contraseña no coincide";
+      spanError2.setAttribute("style", "color: rgb(238, 16, 16)");
       confirmNewPassword.setAttribute(
         "style",
         "border: 1px solid rgb(238, 16, 16)"
       );
-    } else if (
-      newPassword.value.length &&
-      confirmNewPassword.value.length < 6
-    ) {
-      document
-        .getElementById("error")
-        .setAttribute("style", "color: rgb(238, 16, 16)");
-      newPassword.setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
-      confirmNewPassword.setAttribute(
-        "style",
-        "border: 1px solid rgb(238, 16, 16)"
-      );
-
-      document.getElementById("error").textContent = "Mínimo 6 carácteres.";
     } else {
-      document.getElementById("error").textContent = "";
+      error.textContent = "";
+      error2.textContent = "";
+      spanError.removeAttribute("style");
+      spanError2.removeAttribute("style");
       newPassword.removeAttribute("style");
       confirmNewPassword.removeAttribute("style");
     }

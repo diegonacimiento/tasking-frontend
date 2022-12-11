@@ -10,7 +10,11 @@
 .main-update form label{
     display: flex;
     flex-direction: column;
-    width: 75%;
+    width: 80%;
+}
+
+.main-update form label .error {
+    margin: auto;
 }
 
 .main-update form h2 {

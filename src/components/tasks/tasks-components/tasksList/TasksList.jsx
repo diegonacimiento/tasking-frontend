@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Context } from "../../../../context/Context";
 import TasksCard from "../tasksCard/TasksCard";
 import "./tasksList.css";
+import Loading from "../../../loading/Loading";
 
 export default function TasksList() {
   const { tasks, search } = useContext(Context);
@@ -15,7 +16,7 @@ export default function TasksList() {
 
   if(search == "NF") return <h2>No hubo resultados en su búsqueda.</h2>
 
-  if(!tasksList) return <h2>Cargando...</h2>
+  if(!tasksList) return <div className="loading-taskList"><Loading className={"load-contain"}/></div>
 
   if(tasksList.length == 0) return <h2>No hay tareas.</h2>
 

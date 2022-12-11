@@ -16,6 +16,10 @@
     width: 75%;
 }
 
+.main-login__login .password {
+    padding-left: 30px;
+}
+
 
 .main-login__create-user h3, .main-login__create-user button {
     display: inline-block;
@@ -23,13 +27,14 @@
     width: 75%;
 }
 
+.main-login__link-rp {
+    text-decoration: underline;
+    text-underline-offset: 5px;
+}
+
 .main-login .main-login__login .password-contain input {
     padding-right: 30px;
     width: 100%;
-}
-
-.main-login .main-login__login .password-contain input::placeholder {
-    padding-left: 20px;
 }
 
 .main-login .main-login__login .password-contain {

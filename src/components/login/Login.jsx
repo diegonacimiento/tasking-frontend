@@ -2,19 +2,20 @@ import "./login.css";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Context } from "../../context/Context";
 import usersService from "../../services/user.service";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-
+import Loading from "../loading/Loading";
 
 const service = new usersService();
 
 export default function Login() {
- 
- const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
- const { setToken, modeViewPass, viewPassword } = useContext(Context);
+  const navigate = useNavigate();
+
+  const { setToken, modeViewPass, viewPassword } = useContext(Context);
 
   function create() {
     navigate("/create-user");
@@ -29,10 +30,17 @@ export default function Login() {
     const email = document.getElementById("input-email").value;
     const password = document.querySelector(".password").value;
     const error = document.getElementById("error");
+
+    if (!email || !password)
+      error.textContent = `Ingrese su email y contraseña`;
+
     const body = {
       username: `${email}`,
       password: `${password}`,
     };
+
+    setLoading(true);
+
     const user = service.loginUser(body);
     user
       .then((res) => {
@@ -40,17 +48,17 @@ export default function Login() {
         localStorage.setItem("email", `${res.data.user.email}`);
         if (res.data.token) {
           localStorage.setItem("token", `${res.data.token}`);
-          localStorage.setItem("timeToken", `${Date.now()}`);
           setToken(res.data.token);
           return navigate("/");
         }
       })
       .catch((e) => {
-        if (e.response.status == 400) {
-          error.textContent = `Ingrese su email y contraseña`;
-        } else if (e.response.status == 401 || 404) {
+        if (e.response.status == 401 || e.response.status == 404) {
           error.textContent = `Contraseña incorrecta`;
         }
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }
 
@@ -62,12 +70,12 @@ export default function Login() {
         <div className="main-login__login">
           <input id="input-email" type={"email"} placeholder="Email" />
           <div className="password-contain">
-          <input
-            className="password"
-            type={"password"}
-            placeholder="Contraseña"
-          />
-          <button onClick={viewPassword} className="view-password">
+            <input
+              className="password"
+              type={"password"}
+              placeholder="Contraseña"
+            />
+            <button onClick={viewPassword} className="view-password">
               {modeViewPass == "invisible" ? (
                 <AiOutlineEyeInvisible />
               ) : (
@@ -75,9 +83,9 @@ export default function Login() {
               )}
             </button>
           </div>
-          
+
           <button className="button" onClick={login}>
-            Iniciar sesión
+            {loading ? <Loading /> : "Iniciar sesión"}
           </button>
           <p id="error"></p>
         </div>

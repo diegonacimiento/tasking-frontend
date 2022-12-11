@@ -1,45 +1,40 @@
 import { useContext } from "react";
 import { Context } from "../context/Context";
 import { Navigate, Outlet } from "react-router-dom";
+import jwtDecode from "jwt-decode";
 
-export function ProtectedRouteUnLogged({ children, redirectTo="/login" }) {
+export function ProtectedRouteUnLogged({ children, redirectTo = "/login" }) {
+  const { token, setToken } = useContext(Context);
 
-    const { token, setToken } = useContext(Context);
+  const decoded = jwtDecode(token);
 
-    const timeToken = localStorage.getItem("timeToken");
+  const timeNow = decoded.exp;
+  const timeToken = decoded.iat;
 
-    const timeNow = Date.now();
+  if (timeNow - timeToken > 259200) {
+    localStorage.removeItem("token");
+    setToken(localStorage.getItem("token"));
+  }
 
-    if(timeNow - timeToken > 259200000 ) {
-        localStorage.removeItem("timeToken");
-        localStorage.removeItem("token");
-        setToken(localStorage.getItem("token"));
-    };
+  if (!token) return <Navigate to={redirectTo} />;
 
-    if(!token) return <Navigate to={redirectTo} />
+  return children ? children : <Outlet />;
+}
 
-    return children ? children : <Outlet />;
+export function ProtectedRouteLogged({ children, redirectTo = "/" }) {
+  const { token } = useContext(Context);
 
-};
+  if (token) return <Navigate to={redirectTo} />;
 
-export function ProtectedRouteLogged({ children, redirectTo="/" }) {
+  return children ? children : <Outlet />;
+}
 
-    const { token } = useContext(Context);
+export function ProtectedRecoveryPass({ children, redirectTo = "/" }) {
+  const uri = window.location.href;
 
-    if(token) return <Navigate to={redirectTo} />
+  const contain = uri.includes("?token=ey");
 
-    return children ? children : <Outlet />;
+  if (!contain) return <Navigate to={redirectTo} />;
 
-};
-
-export function ProtectedRecoveryPass({ children, redirectTo="/" }) {
-
-    const uri = window.location.href;
-
-    const contain = uri.includes("?token=ey");
-
-    if(!contain) return <Navigate to={redirectTo} />
-
-    return children ? children : <Outlet />;
-
-};
+  return children ? children : <Outlet />;
+}

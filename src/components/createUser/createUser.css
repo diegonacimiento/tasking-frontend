@@ -13,7 +13,7 @@
 }
 
 .main-create-user label {
-    width: 75%;
+    width: 80%;
 }
 
 .main-create-user label span, 
@@ -30,6 +30,9 @@
     margin: 0;
 }
 
+.main-create-user label input:invalid {
+    border: 1px solid rgb(238, 16, 16);
+}
 
 .main-create-user form p {
     margin-top: 10px;
@@ -40,7 +43,7 @@
     font-size: 14rem;
 }
 
-.main-create-user #error {
+.main-create-user #error, .main-create-user .error {
     margin: 0 auto;
 }
 
@@ -65,4 +68,9 @@
 
 .main-create-user .view-password svg{
     color: var(--colorBotton);
+}
+
+.link-login {
+    text-decoration: underline;
+    text-underline-offset: 5px;
 }

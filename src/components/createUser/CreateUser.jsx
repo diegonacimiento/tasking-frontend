@@ -4,13 +4,16 @@ import { Link } from "react-router-dom";
 import "./createUser.css";
 import usersService from "../../services/user.service";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Context } from "../../context/Context";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import Loading from "../loading/Loading";
 
 const service = new usersService();
 
 export default function CreateUser() {
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const {
@@ -27,12 +30,27 @@ export default function CreateUser() {
     e.preventDefault();
   }
 
-  function error(e) {
-    document.getElementById("error").textContent = e;
+  function error(msg, type, cl) {
+    if (type) {
+      document
+        .querySelector(`.span-${cl}`)
+        .setAttribute("style", "color: rgb(238, 16, 16)");
+      document
+        .querySelector(`.e-${cl}`)
+        .setAttribute("style", "color: rgb(238, 16, 16)");
+      document.querySelector(`.e-${cl}`).textContent = msg;
+    } else {
+      document
+        .getElementById("error")
+        .setAttribute("style", "color: rgb(238, 16, 16)");
+      document.getElementById("error").textContent = msg;
+    }
   }
 
   function inputDefault(input) {
     document.querySelector(`.${input}`).removeAttribute("style");
+    document.querySelector(`.e-${input}`).textContent = "";
+    document.querySelector(`.span-${input}`).removeAttribute("style");
   }
 
   function verifyInputs() {
@@ -41,40 +59,43 @@ export default function CreateUser() {
     const password = document.querySelector(".newPassword").value;
     const confirmPassword = document.querySelector(".confirmNewPassword").value;
 
+    error("");
+
     if (!username) {
       document
         .querySelector(".user")
         .setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
+      document
+        .querySelector(".span-user")
+        .setAttribute("style", "color: rgb(238, 16, 16)");
       error("Debe completar todos los campos.");
     }
     if (!email) {
       document
         .querySelector(".email")
         .setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
+      document
+        .querySelector(".span-mail")
+        .setAttribute("style", "color: rgb(238, 16, 16)");
       error("Debe completar todos los campos.");
     }
     if (!password) {
       document
         .querySelector(".newPassword")
         .setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
+      document
+        .querySelector(".span-pass")
+        .setAttribute("style", "color: rgb(238, 16, 16)");
       error("Debe completar todos los campos.");
     }
     if (!confirmPassword) {
       document
         .querySelector(".confirmNewPassword")
         .setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
+      document
+        .querySelector(".span-con-pass")
+        .setAttribute("style", "color: rgb(238, 16, 16)");
       error("Debe completar todos los campos.");
-    }
-  }
-
-  function arreglo() {
-    const password = document.querySelector(".newPassword").value;
-    const confirmPassword = document.querySelector(".confirmNewPassword").value;
-
-    const valideMail = emailValidation();
-    if (valideMail == "valido" && (password || confirmPassword)) {
-      passwordValidation();
-      verifyInputs();
     }
   }
 
@@ -92,8 +113,15 @@ export default function CreateUser() {
       password: `${password}`,
     };
 
-    if (username && email && password && confirmPassword) {
+    if (username && email && password && confirmPassword && loading === false) {
+      setLoading(true);
+
       const newUser = service.create(body);
+
+      document
+        .getElementById("error")
+        .setAttribute("style", "color: var(--colorBotton)");
+      document.getElementById("error").textContent = "Validando datos...";
 
       newUser
         .then((res) => {
@@ -113,7 +141,9 @@ export default function CreateUser() {
           });
         })
         .catch((e) => {
-          console.log(e);
+          bandera = false;
+          document.getElementById("error").removeAttribute("style");
+          document.getElementById("error").textContent = "";
           const containId = e.response.data.errors[0].message.includes("id");
           const containEmail =
             e.response.data.errors[0].message.includes("email");
@@ -121,21 +151,21 @@ export default function CreateUser() {
             document
               .querySelector(".user")
               .setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
-            error("El usuario ya está en uso, elige otro.");
+            error("Usuario en uso, elige otro.", true, "user");
           } else if (containEmail) {
             document
-            .querySelector(".email")
-            .setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
-            error("Mail en uso, elige otro.");
-          };
-          });
-    } else {
+              .querySelector(".email")
+              .setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
+            error("E-mail en uso, elige otro.", true, "mail");
+          }
+        })
+        .finally(() => setLoading(false));
     }
   }
   const style = document.documentElement.style;
 
   style.setProperty("--heightRoot", "100vh");
-  style.setProperty("--minHeightRoot", "620px");
+  style.setProperty("--minHeightRoot", "725px");
 
   return (
     <>
@@ -146,22 +176,37 @@ export default function CreateUser() {
           <h3>Completa el registro</h3>
 
           <label>
-            <span>Usuario</span>
+            <span className="span-user">Usuario</span>
             <input
-              onChange={() => inputDefault("user")}
+              onChange={() => {
+                inputDefault("user");
+                document.getElementById("error").textContent = "";
+              }}
               className="user"
               type={"text"}
             />
+            <p className="error e-user"></p>
           </label>
           <label>
-            <span>Correo electrónico</span>
-            <input onChange={arreglo} className="email" type={"email"} />
+            <span className="span-mail">Correo electrónico</span>
+            <input
+              onChange={() => {
+                emailValidation();
+                document.getElementById("error").textContent = "";
+              }}
+              className="email"
+              type={"email"}
+            />
+            <p className="error e-mail"></p>
           </label>
           <label className="label-pass">
-            <span>Contraseña</span>
+            <span className="span-pass">Contraseña</span>
             <div className="contain-input-button-pass">
               <input
-                onChange={passwordValidation}
+                onChange={() => {
+                  passwordValidation();
+                  document.getElementById("error").textContent = "";
+                }}
                 className="newPassword"
                 type={"password"}
               />
@@ -173,12 +218,16 @@ export default function CreateUser() {
                 )}
               </button>
             </div>
+            <p className="error e-pass"></p>
           </label>
           <label className="label-confirm-pass">
-            <span>Confirmar contraseña</span>
+            <span className="span-con-pass">Confirmar contraseña</span>
             <div className="contain-input-button-pass">
               <input
-                onChange={passwordValidation}
+                onChange={() => {
+                  passwordValidation();
+                  document.getElementById("error").textContent = "";
+                }}
                 className="confirmNewPassword"
                 type={"password"}
               />
@@ -190,10 +239,11 @@ export default function CreateUser() {
                 )}
               </button>
             </div>
+            <p className="error e-con-pass"></p>
           </label>
           <label id="label-button">
             <button onClick={createUser} className="button">
-              Crear
+              { loading ? <Loading /> : "Crear" }
             </button>
           </label>
         </form>

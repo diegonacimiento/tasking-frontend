@@ -2,13 +2,16 @@ import Header from "../header/Header";
 import Footer from "../footer/Footer";
 import { Link, useNavigate } from "react-router-dom";
 import "./recoveryPassword.css";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Context } from "../../context/Context";
 import usersService from "../../services/user.service";
+import Loading from "../loading/Loading";
 
 const service = new usersService();
 
 export default function RecoveryPassword() {
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const { emailValidation } = useContext(Context);
@@ -22,6 +25,7 @@ export default function RecoveryPassword() {
     if(email.value.length == 0) return error("Por favor ingrese su email.");
     const mailValidation = emailValidation();
     if(mailValidation == "invalido") return error("Mail inválido");
+    setLoading(true);
     const mailSend = service.recoveryPassword({email: `${email.value}`});
     mailSend.then(() => {
       document.getElementById("error").setAttribute("style", "color: green");
@@ -30,7 +34,8 @@ export default function RecoveryPassword() {
     .catch((e) => {
       if(e.response.status == 404) error("El mail no está vinculado.")
       else error("Ha ocurrido un error, intente de nuevo.");
-    });
+    })
+    .finally(() => setLoading(false));
   };
 
   function error(msg) {
@@ -46,7 +51,7 @@ export default function RecoveryPassword() {
   const style = document.documentElement.style;
 
   style.setProperty("--heightRoot", "100vh");
-  style.setProperty("--minHeightRoot", "620px");
+  style.setProperty("--minHeightRoot", "650px");
 
   return (
     <>
@@ -70,12 +75,12 @@ export default function RecoveryPassword() {
             onClick={send}
             className="button"
           >
-            Enviar
+            { loading ? <Loading /> : "Enviar" }
           </button>
-          <p id="error"></p>
+          <p id="error" className="e-mail"></p>
         </form>
 
-        <Link to={"/login"}>Regresar al inicio de sesión</Link>
+        <Link className="back-login" to={"/login"}>Regresar al inicio de sesión</Link>
 
         <div className="main-rp__login">
             <h3>¿Aún no tienes un usuario?</h3>
