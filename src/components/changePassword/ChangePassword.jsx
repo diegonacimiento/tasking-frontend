@@ -2,11 +2,12 @@ import React from "react";
 import "./changePassword.css";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Context } from "../../context/Context";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import usersService from "../../services/user.service";
 import { useNavigate } from "react-router-dom";
+import Loading from "../loading/Loading";
 
 const service = new usersService();
 
@@ -19,10 +20,12 @@ export default function ChangePassword() {
     viewPasswordCNP,
   } = useContext(Context);
 
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
-  function error(e) {
-    document.getElementById("error").textContent = e;
+  function error(msg) {
+    document.getElementById("error").textContent = msg;
     const newPassword = document.querySelector(".newPassword");
     const confirmNewPassword = document.querySelector(".confirmNewPassword");
     newPassword.setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
@@ -30,6 +33,12 @@ export default function ChangePassword() {
       "style",
       "border: 1px solid rgb(238, 16, 16)"
     );
+    document
+      .querySelector(".span-pass")
+      .setAttribute("style", "color: rgb(238, 16, 16)");
+    document
+      .querySelector(".span-con-pass")
+      .setAttribute("style", "color: rgb(238, 16, 16)");
   }
 
   function send() {
@@ -39,7 +48,7 @@ export default function ChangePassword() {
     ).value;
 
     if (!newPassword && !confirmNewPassword)
-      return error("Los campos no pueden quedar vacíos.");
+      return error("Debe rellenar todos los campos.");
 
     if (newPassword !== confirmNewPassword) return;
 
@@ -54,6 +63,8 @@ export default function ChangePassword() {
       newPassword,
     };
 
+    setLoading(true);
+
     const changePass = service.recoveryChangePassword(body);
 
     changePass
@@ -63,7 +74,8 @@ export default function ChangePassword() {
           "Cambio de contraseña exitoso.";
         navigate("/");
       })
-      .catch(() => error("Ha ocurrido un error, envíe nuevamente el email."));
+      .catch(() => error("Ha ocurrido un error, envíe nuevamente el email."))
+      .finally(() => setLoading(false));
   }
 
   return (
@@ -72,40 +84,53 @@ export default function ChangePassword() {
 
       <main className="main-change-pass">
         <label>
-          <span>Nueva contraseña</span>
-          <input
-            onChange={passwordValidation}
-            className="newPassword"
-            type={"password"}
-          />
-          <button onClick={viewPasswordNP} className="view-password">
-            {modeViewNP == "invisible" ? (
-              <AiOutlineEyeInvisible />
-            ) : (
-              <AiOutlineEye />
-            )}
-          </button>
+          <span className="span-pass">Nueva contraseña</span>
+          <div className="contain-input-button-pass">
+            <input
+              onChange={() => {
+                passwordValidation();
+                document.getElementById("error").textContent = "";
+              }}
+              className="newPassword"
+              type={"password"}
+            />
+            <button onClick={viewPasswordNP} className="view-password">
+              {modeViewNP == "invisible" ? (
+                <AiOutlineEyeInvisible />
+              ) : (
+                <AiOutlineEye />
+              )}
+            </button>
+          </div>
+          <p className="error e-pass"></p>
         </label>
 
         <label>
-          <span>Confirmar nueva contraseña</span>
-          <input
-            onChange={passwordValidation}
-            className="confirmNewPassword"
-            type={"password"}
-          />
-          <button onClick={viewPasswordCNP} className="view-password">
-            {modeViewCNP == "invisible" ? (
-              <AiOutlineEyeInvisible />
-            ) : (
-              <AiOutlineEye />
-            )}
-          </button>
+          <span className="span-con-pass">Confirmar nueva contraseña</span>
+          <div className="contain-input-button-pass">
+            <input
+              onChange={() => {
+                passwordValidation();
+                document.getElementById("error").textContent = "";
+              }}
+              className="confirmNewPassword"
+              type={"password"}
+            />
+            <button onClick={viewPasswordCNP} className="view-password">
+              {modeViewCNP == "invisible" ? (
+                <AiOutlineEyeInvisible />
+              ) : (
+                <AiOutlineEye />
+              )}
+            </button>
+          </div>
+
+          <p className="error e-con-pass"></p>
         </label>
 
         <label>
           <button onClick={send} className="button">
-            Enviar
+            {loading ? <Loading /> : "Enviar"}
           </button>
         </label>
 
