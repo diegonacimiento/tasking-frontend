@@ -10,10 +10,10 @@ export function ProtectedRouteUnLogged({ children, redirectTo = "/login" }) {
   if (token) {
     const decoded = jwtDecode(token);
 
-    const timeNow = decoded.exp;
-    const timeToken = decoded.iat;
+    const timeNow = Date.now();
+    const timeToken = decoded.iat*1000;
 
-    if (timeNow - timeToken > 259200) {
+    if (timeNow - timeToken > 259200000) {
       localStorage.removeItem("token");
       setToken(localStorage.getItem("token"));
     }
