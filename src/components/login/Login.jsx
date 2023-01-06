@@ -27,13 +27,16 @@ export default function Login() {
   style.setProperty("--heightRoot", "100vh");
   style.setProperty("--minHeightRoot", "620px");
 
+  function error(msg) {
+    const error = document.getElementById("error");
+    error.textContent = msg;
+  }
+
   function login() {
     const email = document.getElementById("input-email").value;
     const password = document.querySelector(".password").value;
-    const error = document.getElementById("error");
 
-    if (!email || !password)
-      error.textContent = `Ingrese su email y contraseña`;
+    if (!email || !password) error(`Ingrese su email y contraseña`);
 
     const body = {
       username: `${email}`,
@@ -55,8 +58,11 @@ export default function Login() {
       })
       .catch((e) => {
         if (e.response.status == 401 || e.response.status == 404) {
-          error.textContent = `Contraseña incorrecta`;
-        }
+          error(`Contraseña incorrecta`);
+        } else {
+          error("Ha ocurrido un error.")
+          return navigate("/serverError");
+        };
       })
       .finally(() => {
         setLoading(false);

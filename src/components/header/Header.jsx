@@ -6,12 +6,9 @@ import { HiOutlineMenu } from "react-icons/hi";
 import MenuBar from "../menuBar/MenuBar";
 import Menu from "../../../Menu";
 import "./header.css";
-import { useNavigate } from "react-router-dom";
 
 export default function Header({ ban }) {
   const { mode, changeMode, menuNone, stateMenu } = useContext(Context);
-
-  const navigate = useNavigate();
 
   const style = document.documentElement.style;
 
@@ -54,7 +51,7 @@ export default function Header({ ban }) {
         (ban = false)
       )}
 
-      <div onClick={() => navigate("/")} className="logo-contain">
+      <div onClick={() => window.location = "/"} className="logo-contain">
         <span className="image"></span>
         <p className="letra">Tasking</p>
       </div>

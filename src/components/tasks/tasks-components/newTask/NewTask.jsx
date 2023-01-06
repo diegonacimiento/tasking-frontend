@@ -32,7 +32,6 @@ export default function NewTask() {
         setTaskId(res.data.newTask.id);
       })
       .catch((e) => {
-        console.log(e);
         document.getElementById("error").textContent = "Ocurrió un error";
       });
     setTasks([...tasks, { description: task, id, status: "pendiente" }]);

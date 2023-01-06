@@ -31,17 +31,18 @@ export function ContextProvider(props) {
       const taskId = service.searchUser(token);
       const tasks = service.searchAll(token);
       taskId
-        .then((res) => setTaskId(res.data.taskId))
-        .catch((e) => console.log(e));
-      tasks.then((res) => setTasks([...res.data])).catch((e) => console.log(e));
+        .then((res) => setTaskId(res.data.taskId));
+      tasks.then((res) => setTasks([...res.data])).catch(() => setTasks(["Error server"]));
     }
   }, [token]);
 
   function searchTask(text) {
     const response = tasks.filter((task) => {
       setSearch(null);
+      if(task == "Error server") return task;
       return task.description.includes(text);
     });
+    if(response == "Error server") return setSearch(response);
     response.length > 0 ? setSearch([...response]) : setSearch("NF");
     if (text == "") {
       setTasks([...tasks]);
@@ -106,7 +107,7 @@ export function ContextProvider(props) {
       return "valido";
     } else {
       error.setAttribute("style", "color: rgb(238, 16, 16)");
-      error.textContent = "Email inválido";
+      error.textContent = "Email inválido.";
       if(spanError) spanError.setAttribute("style", "color: rgb(238, 16, 16)");
       email.setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
       return "invalido";
@@ -135,7 +136,7 @@ export function ContextProvider(props) {
       newPassword.setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
     } else if (newPassword.value !== confirmNewPassword.value) {
       error2.setAttribute("style", "color: rgb(238, 16, 16)");
-      error2.textContent = "La contraseña no coincide";
+      error2.textContent = "La contraseña no coincide.";
       spanError2.setAttribute("style", "color: rgb(238, 16, 16)");
       confirmNewPassword.setAttribute(
         "style",

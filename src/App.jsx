@@ -7,6 +7,7 @@ import UpdateUserPage from "./pages/UpdateUserPage";
 import ChangePasswordPage from "./pages/ChangePasswordPage";
 import TasksPage from "./pages/TasksPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import ServerErrorPage from "./pages/ServerErrorPage";
 import "./App.css";
 import {
   ProtectedRouteLogged,
@@ -35,6 +36,8 @@ export default function App() {
             element={<ChangePasswordPage />}
           />
         </Route>
+
+        <Route path="/serverError" element={<ServerErrorPage />} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

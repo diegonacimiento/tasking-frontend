@@ -34,7 +34,10 @@ export default function RecoveryPassword() {
     })
     .catch((e) => {
       if(e.response.status == 404) error("El email no está vinculado.")
-      else error("Ha ocurrido un error, intente de nuevo.");
+      else {
+        error("Ha ocurrido un error.")
+        return navigate("/serverError");
+      };    
     })
     .finally(() => setLoading(false));
   }

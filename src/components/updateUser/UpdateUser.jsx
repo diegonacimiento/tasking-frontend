@@ -7,6 +7,7 @@ import { Context } from "../../context/Context";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import usersService from "../../services/user.service";
 import Loading from "../loading/Loading";
+import { useNavigate } from "react-router-dom";
 
 const service = new usersService();
 
@@ -22,6 +23,8 @@ export default function UpdateUser() {
     emailValidation,
     passwordValidation,
   } = useContext(Context);
+
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
 
@@ -52,7 +55,7 @@ export default function UpdateUser() {
             document.getElementById("error").textContent =
               "El email ya está en uso, elige otro.";
             email.setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
-          }
+          } else navigate("/serverError");
         })
         .finally(() => setLoading(false));
     }
@@ -103,21 +106,7 @@ export default function UpdateUser() {
               "style",
               "border: 1px solid rgb(238, 16, 16)"
             );
-          } else {
-            document
-              .getElementById("error")
-              .setAttribute("style", "color: rgb(238, 16, 16)");
-            document.getElementById("error").textContent =
-              "Asegúrese que coincidan.";
-            newPassword.setAttribute(
-              "style",
-              "border: 1px solid rgb(238, 16, 16)"
-            );
-            confirmNewPassword.setAttribute(
-              "style",
-              "border: 1px solid rgb(238, 16, 16)"
-            );
-          }
+          } else navigate("/serverError");
         })
         .finally(() => setLoading(false));
     }

@@ -144,10 +144,14 @@ export default function CreateUser() {
         .catch((e) => {
           document.getElementById("error").removeAttribute("style");
           document.getElementById("error").textContent = "";
-          const containId = e.response.data.errors[0].message.includes("id");
-          const containEmail =
-            e.response.data.errors[0].message.includes("email");
-          if (containId) {
+            if(e.response.status == 500) {
+              error("Ha ocurrido un error.")
+              return navigate("/serverError");
+            }
+            const containId = e.response.data.errors[0].message.includes("id");
+            const containEmail =
+              e.response.data.errors[0].message.includes("email");
+            if (containId) {
             document
               .querySelector(".user")
               .setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
@@ -157,7 +161,7 @@ export default function CreateUser() {
               .querySelector(".email")
               .setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
             error("Email en uso, elige otro.", true, "mail");
-          }
+          };
         })
         .finally(() => setLoading(false));
     }
