@@ -1,10 +1,12 @@
 .search-tasks-div {
-    margin-bottom: 20px;
+    margin: 20px 0;
     height: 55px;
     width: 90%;
+    max-width: 300px;
 }
 
 .search-tasks-div input {
+    height: 40px;
     width: 100%;
     border: none;
     border-bottom: 2px solid var(--colorBorder);
@@ -14,4 +16,8 @@
 .search-tasks-div input:focus {
     border: none;
     border-bottom: 2px solid var(--colorBotton);
+}
+
+.search-tasks-div input::placeholder {
+    color: rgba(102, 102, 102, 0.85);
 }

@@ -1,7 +1,8 @@
 .task-list-div {
     position: relative;
     width: 80%;
-    margin: 20px 0;
+    max-width: 350px;
+    margin: 20px;
 }
 
 .loading-taskList .load-contain {

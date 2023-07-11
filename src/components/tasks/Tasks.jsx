@@ -31,7 +31,9 @@ export default function Tasks() {
 
         <SearchTasks />
 
-        <TasksList />
+        <div className="task-list-container">
+          <TasksList />
+        </div>
 
         <p id="error"></p>
 

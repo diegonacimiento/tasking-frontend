@@ -5,6 +5,13 @@
     min-height: calc(100vh - 80px);
 }
 
+.task-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
 #root .root-tasks {
     height: max-content;
 }

@@ -36,7 +36,7 @@ export default function Login() {
     const email = document.getElementById("input-email").value;
     const password = document.querySelector(".password").value;
 
-    if (!email || !password) error(`Ingrese su email y contraseña`);
+    if (!email || !password) return error(`Ingrese su email y contraseña`);
 
     const body = {
       username: `${email}`,
@@ -58,11 +58,13 @@ export default function Login() {
       })
       .catch((e) => {
         if (e.response.status == 401 || e.response.status == 404) {
-          error(`Contraseña incorrecta`);
+          error(`Email o contraseña incorrecta`);
+        } else if(e.response.status == 400) {
+          error(`Ingrese su email y contraseña`)
         } else {
           error("Ha ocurrido un error.")
           return navigate("/serverError");
-        };
+        }
       })
       .finally(() => {
         setLoading(false);
