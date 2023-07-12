@@ -6,7 +6,7 @@
     height: 100%;
     width: 100%;
     background: var(--colorRoot);
-    transition: background-color 0.5s, left 1s;
+    transition: background-color 0.5s, left 0.5s ease;
 }
 
 .menu-bar__button {
@@ -15,7 +15,6 @@
     height: 60px;
     width: 30px;
     padding-top: 10px;
-    padding-left: 10px;
     background: none;
     border: none;
     color: var(--colorBotton);
@@ -41,10 +40,11 @@
     color: rgb(161, 0, 0);
 }
 
-.contain-menu a {
+.links-menu {
     display: flex;
     justify-content: center;
     margin: 0;
     height: 50px;
     line-height: 50px;
+    transition: opacity 0.5s;
 }

@@ -123,7 +123,7 @@ export default function UpdateUser() {
 
   return (
     <>
-      <Header ban={true} />
+      <Header />
 
       <main className="main-update">
         <form onSubmit={error}>
@@ -132,6 +132,7 @@ export default function UpdateUser() {
           <label>
             <h3>Actualiza tus datos.</h3>
           </label>
+
           <label>
             <span className="span-mail">Correo electrónico</span>
             <input

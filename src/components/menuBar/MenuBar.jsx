@@ -1,21 +1,16 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { Context } from "../../context/Context";
 import "./menuBar.css";
 import { VscClose } from "react-icons/vsc";
 
 export default function MenuBar() {
-  const { menuNone, setToken } = useContext(Context);
+  const { logout, menuNone } = useContext(Context);
 
-  const navigate = useNavigate();
-
-  function logout() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    setToken(null);
-    navigate("/login");
+  const handleLogout = () => {
     menuNone();
+    logout();
   }
 
   return (
@@ -30,7 +25,7 @@ export default function MenuBar() {
         <Link onClick={menuNone} className="links-menu" to={"/update-user"}>
           Editar usuario
         </Link>
-        <button onClick={logout} id="bt-menu" className="button">
+        <button onClick={handleLogout} id="bt-menu" className="button">
           Cerrar sesión
         </button>
       </div>

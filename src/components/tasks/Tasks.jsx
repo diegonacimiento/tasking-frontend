@@ -22,7 +22,7 @@ export default function Tasks() {
 
   return (
     <>
-      <Header ban={true} />
+      <Header />
 
       <main className="main-tasks">
         <Modal>

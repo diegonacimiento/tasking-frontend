@@ -1,14 +1,23 @@
 import React from "react";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Context } from "../../context/Context";
-import { HiOutlineMenu } from "react-icons/hi";
-import MenuBar from "../menuBar/MenuBar";
-import Menu from "../../../Menu";
 import "./header.css";
+import HeaderMobile from "./HeaderMobile";
+import HeaderDesktop from "./HeaderDesktop";
 
-export default function Header({ ban }) {
-  const { mode, changeMode, menuNone, stateMenu } = useContext(Context);
+const isMobile = window.innerWidth <= 712 || window.innerHeight <= 575; 
+
+export default function Header() {
+  const { mode, changeMode, menuNone, stateMenu, token, logout } = useContext(Context);
+
+  const [isMobileScreen, setIsMobileScreen] = useState(isMobile);
+
+  addEventListener('resize', () => {
+    const changeScreen = window.innerWidth <= 712 || window.innerHeight <= 575; 
+    setIsMobileScreen(changeScreen);
+    console.log('pepe')
+  })
 
   const style = document.documentElement.style;
 
@@ -16,14 +25,14 @@ export default function Header({ ban }) {
 
   mode == "dark"
     ? (style.setProperty(
-        "--image",
-        'url("https://i.ibb.co/kQZ260V/tasking-Blanco.png")'
-      ),
+      "--image",
+      'url("https://i.ibb.co/kQZ260V/tasking-Blanco.png")'
+    ),
       style.setProperty("--colorLetra", "rgb(0, 0, 0)"))
     : (style.setProperty(
-        "--image",
-        'url("https://i.ibb.co/h89BLcF/tasking.png")'
-      ),
+      "--image",
+      'url("https://i.ibb.co/h89BLcF/tasking.png")'
+    ),
       style.setProperty("--colorLetra", "rgb(150, 150, 150)"));
 
   stateMenu == "false"
@@ -35,26 +44,19 @@ export default function Header({ ban }) {
 
   return (
     <header>
-      {ban ? (
-        <Menu>
-          <MenuBar />{" "}
-        </Menu>
-      ) : (
-        (ban = false)
-      )}
-
-      {ban ? (
-        <button onClick={menuNone} className="menu">
-          {<HiOutlineMenu />}
-        </button>
-      ) : (
-        (ban = false)
-      )}
+      {(token && isMobileScreen) && (
+        <HeaderMobile menuNone={menuNone} />
+      )
+      }
 
       <div onClick={() => window.location = "/"} className="logo-contain">
         <span className="image"></span>
         <p className="letra">Tasking</p>
       </div>
+
+      {(token && !isMobileScreen) && (
+        <HeaderDesktop logout={logout} />
+      )}
 
       <button className="mode" onClick={changeMode}>
         {mode == "dark" ? <MdDarkMode /> : <MdLightMode />}

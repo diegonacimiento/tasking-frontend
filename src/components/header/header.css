@@ -3,12 +3,24 @@ header {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    padding: 0 10px;
+}
+
+.contain-desktop {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
 }
 
 .logo-contain {
     display: flex;
     padding-top: 5px;
-    padding-left: 5px;
+    transition: opacity 0.5s;
+}
+
+.logo-contain:hover {
+    opacity: 0.5;
 }
 
 .logo-contain .image {
@@ -26,11 +38,10 @@ header {
     line-height: 50px;
     font-weight: 700;
     letter-spacing: 2px;
+    user-select: none;
 }
 
 header .mode {
-    padding-top: 10px;
-    padding-right: 15px;
     background: none;
     border: none;
     color: var(--colorBotton);
@@ -43,7 +54,6 @@ header .menu svg {
 
 header .menu {
     padding-top: 10px;
-    padding-left: 10px;
     background: none;
     border: none;
     color: var(--colorBotton);

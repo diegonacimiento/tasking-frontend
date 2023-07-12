@@ -1,5 +1,6 @@
 import React from "react";
 import { createContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import tasksService from "../services/tasks.service";
 
 const service = new tasksService();
@@ -10,6 +11,8 @@ localStorage.setItem("stateMenu", "true");
 
 export function ContextProvider(props) {
   const [mode, setMode] = useState(localStorage.getItem("mode"));
+
+  const navigate = useNavigate();
 
   if (!mode) {
     localStorage.setItem("mode", "light");
@@ -188,6 +191,13 @@ export function ContextProvider(props) {
     }
   }
 
+  function logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setToken(null);
+    navigate("/login");
+  }
+
   return (
     <Context.Provider
       value={{
@@ -212,6 +222,7 @@ export function ContextProvider(props) {
         changeMode,
         menuNone,
         searchTask,
+        logout,
       }}
     >
       {props.children}
