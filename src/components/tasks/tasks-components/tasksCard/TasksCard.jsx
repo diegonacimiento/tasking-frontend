@@ -4,6 +4,7 @@ import { VscClose, VscCheck } from "react-icons/vsc";
 import { useContext } from "react";
 import { Context } from "../../../../context/Context";
 import tasksService from "../../../../services/tasks.service";
+import { capitalizeString } from "../../../../utils/dataUtils";
 
 const service = new tasksService();
 
@@ -46,7 +47,7 @@ export default function TasksCard({ task }) {
         <VscClose />
       </button>
 
-      <p className={`task-p ${status}`}>{task.description}</p>
+      <p className={`task-p ${status}`}>{capitalizeString(task.description)}</p>
 
       <button onClick={statusTask}>
         <VscCheck />

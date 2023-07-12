@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { VscClose } from "react-icons/vsc";
 import { Context } from "../../context/Context";
 import "./menuBar.css";
-import { VscClose } from "react-icons/vsc";
 
 export default function MenuBar() {
   const { logout, menuNone } = useContext(Context);

@@ -39,6 +39,10 @@ export function ContextProvider(props) {
     }
   }, [token]);
 
+  useEffect(() => {
+    interfaceMode(mode);
+  }, [])
+
   function searchTask(text) {
     const response = tasks.filter((task) => {
       setSearch(null);
@@ -70,8 +74,6 @@ export function ContextProvider(props) {
       style.setProperty("--loading-top", "#03045e");
     }
   }
-
-  interfaceMode(mode);
 
   function changeMode() {
     mode == "light"

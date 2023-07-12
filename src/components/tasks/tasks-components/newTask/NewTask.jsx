@@ -1,8 +1,7 @@
-import React from "react";
-import "./newTask.css";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { Context } from "../../../../context/Context";
 import tasksService from "../../../../services/tasks.service";
+import "./newTask.css";
 
 const service = new tasksService();
 
@@ -21,7 +20,8 @@ export default function NewTask() {
 
   function postTask() {
     document.getElementById("error").textContent = "";
-    const task = document.querySelector(".task-input-create").value;
+    const task = document.querySelector(".task-input-create").value.toLowerCase();
+    if(!task) return;
     const id = taskId + 1;
     setTaskId(id);
     const body = { taskId: id };
@@ -31,7 +31,7 @@ export default function NewTask() {
       .then((res) => {
         setTaskId(res.data.newTask.id);
       })
-      .catch((e) => {
+      .catch(() => {
         document.getElementById("error").textContent = "Ocurrió un error";
       });
     setTasks([...tasks, { description: task, id, status: "pendiente" }]);

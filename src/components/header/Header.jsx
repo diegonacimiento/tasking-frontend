@@ -16,7 +16,6 @@ export default function Header() {
   addEventListener('resize', () => {
     const changeScreen = window.innerWidth <= 712 || window.innerHeight <= 575; 
     setIsMobileScreen(changeScreen);
-    console.log('pepe')
   })
 
   const style = document.documentElement.style;
@@ -39,7 +38,7 @@ export default function Header() {
     ? (style.setProperty("--left", "0"),
       setTimeout(() => {
         root.setAttribute("style", "display:none");
-      }, 1000))
+      }, 500))
     : (style.setProperty("--left", "-2000rem"), root.removeAttribute("style"));
 
   return (

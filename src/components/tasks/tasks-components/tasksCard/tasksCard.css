@@ -56,7 +56,7 @@
     opacity: 0.4;
     text-decoration: line-through;
     box-shadow: none;
-    transition: opacity 1s, text-decoration 1s height 1s;
+    transition: opacity 1s, text-decoration 1s, height 1s;
 }
 
 .completado button:nth-child(3) {
@@ -66,5 +66,5 @@
 .pendiente {
     opacity: 1;
     text-decoration: none;
-    transition: opacity 0.5s, text-decoration 0.5s height 1s;
+    transition: opacity 0.5s, text-decoration 0.5s, height 1s;
 }
