@@ -1,50 +1,46 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { useContext, useState } from "react";
 import { Context } from "../../context/Context";
 import "./header.css";
 import HeaderMobile from "./HeaderMobile";
 import HeaderDesktop from "./HeaderDesktop";
+import toggleTheme from "../../assets/theme";
 
-const isMobile = window.innerWidth <= 712 || window.innerHeight <= 575; 
+const isMobile = window.innerWidth <= 712 || window.innerHeight <= 575;
+
+const isDarkModeParse = JSON.parse(localStorage.getItem("isDarkMode"));
 
 export default function Header() {
-  const { mode, changeMode, menuNone, stateMenu, token, logout } = useContext(Context);
+  const { token, logout } = useContext(Context);
+
+  const [isDarkMode, setIsDarkMode] = useState(isDarkModeParse);
+
+  useEffect(() => {
+    toggleTheme(isDarkMode);
+  }, [])
+
+  function changeMode() {
+    isDarkMode
+      ? (localStorage.setItem("isDarkMode", "false"),
+        setIsDarkMode(false),
+        toggleTheme(false))
+      : (localStorage.setItem("isDarkMode", "true"),
+        setIsDarkMode(true),
+        toggleTheme(true));
+  }
 
   const [isMobileScreen, setIsMobileScreen] = useState(isMobile);
 
   addEventListener('resize', () => {
-    const changeScreen = window.innerWidth <= 712 || window.innerHeight <= 575; 
-    setIsMobileScreen(changeScreen);
+    const newIsMobileScreen = window.innerWidth <= 712 || window.innerHeight <= 575; 
+    setIsMobileScreen(newIsMobileScreen);
   })
-
-  const style = document.documentElement.style;
-
-  const root = document.getElementById("root");
-
-  mode == "dark"
-    ? (style.setProperty(
-      "--image",
-      'url("https://i.ibb.co/kQZ260V/tasking-Blanco.png")'
-    ),
-      style.setProperty("--colorLetra", "rgb(0, 0, 0)"))
-    : (style.setProperty(
-      "--image",
-      'url("https://i.ibb.co/h89BLcF/tasking.png")'
-    ),
-      style.setProperty("--colorLetra", "rgb(150, 150, 150)"));
-
-  stateMenu == "false"
-    ? (style.setProperty("--left", "0"),
-      setTimeout(() => {
-        root.setAttribute("style", "display:none");
-      }, 500))
-    : (style.setProperty("--left", "-2000rem"), root.removeAttribute("style"));
 
   return (
     <header>
       {(token && isMobileScreen) && (
-        <HeaderMobile menuNone={menuNone} />
+        <HeaderMobile />
       )
       }
 
@@ -58,7 +54,7 @@ export default function Header() {
       )}
 
       <button className="mode" onClick={changeMode}>
-        {mode == "dark" ? <MdDarkMode /> : <MdLightMode />}
+        {isDarkMode ? <MdDarkMode /> : <MdLightMode />}
       </button>
     </header>
   );

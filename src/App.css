@@ -1,15 +1,14 @@
 :root {
     --heightRoot: 100vh;
     --minHeightRoot: 620px;
-    --colorRoot: rgb(17, 17, 17);
+    --colorRoot: rgb(230, 230, 230);
     --colorBorder: rgb(104, 104, 104);
-    --colorBotton: rgb(255, 255, 255);
+    --colorBotton: rgb(0, 0, 0);
     --left: -500rem;
     --image: url("https://i.ibb.co/h89BLcF/tasking.png");
-    --colorLetra: rgb(150, 150, 150);
     --bkModal: rgba(0, 0, 0, 1);
     --bkButton: #adb5bd;
-    --loading-top: #bde0fe;
+    --loading-top: #03045e;
 }
 
 html {
@@ -20,21 +19,21 @@ html {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-size: 16rem;
     font-family: 'Poppins', sans-serif;
+    font-size: 16rem;
     text-align: center;
 }
 
 #root {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     height: var(--heightRoot);
     min-height: var(--minHeightRoot);
     width: 100%;
     min-width: 275px;
     background: var(--colorRoot);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
     transition: background-color 0.5s;
 }
 

@@ -1,4 +1,4 @@
-#menu-bar {
+#drawer {
     position: fixed;
     top: 0;
     left: var(--left);
@@ -9,7 +9,7 @@
     transition: background-color 0.5s, left 0.5s ease;
 }
 
-.menu-bar__button {
+.drawer__button-close {
     position: absolute;
     display: block;
     height: 60px;
@@ -20,11 +20,11 @@
     color: var(--colorBotton);
 }
 
-.menu-bar__button svg {
+.drawer__button-close svg {
     font-size: 20rem;
 }
 
-.contain-menu {
+.contain-drawer {
     height: 75%;
     min-height: 100vh;
     display: flex;
@@ -33,14 +33,14 @@
     align-items: center;
 }
 
-#bt-menu {
+#bt-drawer {
     border: none;
     background: none;
     margin: 0;
     color: rgb(161, 0, 0);
 }
 
-.links-menu {
+.links-drawer {
     display: flex;
     justify-content: center;
     margin: 0;

@@ -48,11 +48,11 @@ header .mode {
 }
 
 header .mode svg, 
-header .menu svg {
+header .drawer svg {
     font-size: 20rem;
 }
 
-header .menu {
+header .drawer {
     padding-top: 10px;
     background: none;
     border: none;

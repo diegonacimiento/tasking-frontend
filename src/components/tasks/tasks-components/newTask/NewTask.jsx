@@ -6,7 +6,7 @@ import "./newTask.css";
 const service = new tasksService();
 
 export default function NewTask() {
-  const { mode, token, tasks, setTasks, taskId, setTaskId } =
+  const { token, tasks, setTasks, taskId, setTaskId } =
     useContext(Context);
 
   const modal = document.getElementById("modal");
@@ -37,11 +37,6 @@ export default function NewTask() {
     setTasks([...tasks, { description: task, id, status: "pendiente" }]);
     modalNone();
   }
-
-  const style = document.documentElement.style;
-  if (mode == "light") {
-    style.setProperty("--bkModal", "rgba(0, 0, 0, 1)");
-  } else style.setProperty("--bkModal", "rgba(0, 0, 0, 1)");
 
   return (
     <form onSubmit={submitOff} className="new-task">

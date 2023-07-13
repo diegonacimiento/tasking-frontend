@@ -1,5 +1,4 @@
-import React from "react";
-import { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import tasksService from "../services/tasks.service";
 
@@ -7,19 +6,8 @@ const service = new tasksService();
 
 export const Context = createContext();
 
-localStorage.setItem("stateMenu", "true");
-
 export function ContextProvider(props) {
-  const [mode, setMode] = useState(localStorage.getItem("mode"));
-
   const navigate = useNavigate();
-
-  if (!mode) {
-    localStorage.setItem("mode", "light");
-    setMode(localStorage.getItem("mode"));
-  }
-
-  const [stateMenu, setStateMenu] = useState(localStorage.getItem("stateMenu"));
 
   const [token, setToken] = useState(localStorage.getItem("token"));
 
@@ -39,10 +27,6 @@ export function ContextProvider(props) {
     }
   }, [token]);
 
-  useEffect(() => {
-    interfaceMode(mode);
-  }, [])
-
   function searchTask(text) {
     const response = tasks.filter((task) => {
       setSearch(null);
@@ -55,40 +39,6 @@ export function ContextProvider(props) {
       setTasks([...tasks]);
       setSearch(null);
     }
-  }
-
-  const style = document.documentElement.style;
-
-  function interfaceMode(mode) {
-    if (mode == "dark") {
-      style.setProperty("--colorRoot", "rgb(34, 34, 34)");
-      style.setProperty("--colorBorder", "rgb(104, 104, 104)");
-      style.setProperty("--colorBotton", "rgb(255, 255, 255)");
-      style.setProperty("--bkButton", "#343434");
-      style.setProperty("--loading-top", "#bde0fe");
-    } else {
-      style.setProperty("--colorRoot", "rgb(230, 230, 230)");
-      style.setProperty("--colorBorder", "rgb(104, 104, 104)");
-      style.setProperty("--colorBotton", "rgb(0, 0, 0)");
-      style.setProperty("--bkButton", "#adb5bd");
-      style.setProperty("--loading-top", "#03045e");
-    }
-  }
-
-  function changeMode() {
-    mode == "light"
-      ? (localStorage.setItem("mode", "dark"),
-        setMode("dark"),
-        interfaceMode("dark"))
-      : (localStorage.setItem("mode", "light"),
-        setMode("light"),
-        interfaceMode("light"));
-  }
-
-  function menuNone() {
-    stateMenu == "false"
-      ? (localStorage.setItem("stateMenu", "true"), setStateMenu("true"))
-      : (localStorage.setItem("stateMenu", "false"), setStateMenu("false"));
   }
 
   const [modeViewPass, setModeViewPass] = useState("invisible");
@@ -204,8 +154,6 @@ export function ContextProvider(props) {
     <Context.Provider
       value={{
         tasks,
-        mode,
-        stateMenu,
         token,
         taskId,
         search,
@@ -221,8 +169,6 @@ export function ContextProvider(props) {
         setTaskId,
         setTasks,
         setToken,
-        changeMode,
-        menuNone,
         searchTask,
         logout,
       }}
