@@ -1,13 +1,10 @@
-import React from "react";
-import Header from "../header/Header";
-import Footer from "../footer/Footer";
-import "./updateUser.css";
-import { useContext, useState } from "react";
-import { Context } from "../../context/Context";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import usersService from "../../services/user.service";
-import Loading from "../loading/Loading";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { Context } from "../../context/Context";
+import Loading from "../loading/Loading";
+import usersService from "../../services/user.service";
+import "./updateUser.css";
 
 const service = new usersService();
 
@@ -122,102 +119,96 @@ export default function UpdateUser() {
   style.setProperty("--minHeightRoot", "725px");
 
   return (
-    <>
-      <Header />
+    <main className="main-update">
+      <form onSubmit={error}>
+        <h2>{"Hola " + localStorage.getItem("user") + "."}</h2>
 
-      <main className="main-update">
-        <form onSubmit={error}>
-          <h2>{"Hola " + localStorage.getItem("user") + "."}</h2>
+        <label>
+          <h3>Actualiza tus datos.</h3>
+        </label>
 
-          <label>
-            <h3>Actualiza tus datos.</h3>
-          </label>
-
-          <label>
-            <span className="span-mail">Correo electrónico</span>
+        <label>
+          <span className="span-mail">Correo electrónico</span>
+          <input
+            onChange={emailValidation}
+            className="main-update__input-email email"
+            type={"email"}
+            defaultValue={localStorage.getItem("email")}
+          />
+          <p className="error e-mail"></p>
+        </label>
+        <label>
+          <span className="span-pass-act">Contraseña actual</span>
+          <div className="contain-input-button-pass">
             <input
-              onChange={emailValidation}
-              className="main-update__input-email email"
-              type={"email"}
-              defaultValue={localStorage.getItem("email")}
+              onChange={() => {
+                document
+                  .querySelector(".e-pass-act")
+                  .removeAttribute("style");
+                document.querySelector(".e-pass-act").textContent = "";
+                document.querySelector(".password").removeAttribute("style");
+                document
+                  .querySelector(".span-pass-act")
+                  .removeAttribute("style");
+              }}
+              className="password"
+              type={"password"}
             />
-            <p className="error e-mail"></p>
-          </label>
-          <label>
-            <span className="span-pass-act">Contraseña actual</span>
-            <div className="contain-input-button-pass">
-              <input
-                onChange={() => {
-                  document
-                    .querySelector(".e-pass-act")
-                    .removeAttribute("style");
-                  document.querySelector(".e-pass-act").textContent = "";
-                  document.querySelector(".password").removeAttribute("style");
-                  document
-                    .querySelector(".span-pass-act")
-                    .removeAttribute("style");
-                }}
-                className="password"
-                type={"password"}
-              />
-              <button onClick={viewPassword} className="view-password">
-                {modeViewPass == "invisible" ? (
-                  <AiOutlineEyeInvisible />
-                ) : (
-                  <AiOutlineEye />
-                )}
-              </button>
-            </div>
-            <p className="error e-pass-act"></p>
-          </label>
-          <label>
-            <span className="span-pass">Nueva contraseña</span>
-            <div className="contain-input-button-pass">
-              <input
-                onChange={passwordValidation}
-                className="newPassword"
-                type={"password"}
-                minLength={6}
-              />
-              <button onClick={viewPasswordNP} className="view-password">
-                {modeViewNP == "invisible" ? (
-                  <AiOutlineEyeInvisible />
-                ) : (
-                  <AiOutlineEye />
-                )}
-              </button>
-            </div>
-            <p className="error e-pass"></p>
-          </label>
-          <label>
-            <span className="span-con-pass">Confirmar nueva contraseña</span>
-            <div className="contain-input-button-pass">
-              <input
-                onChange={passwordValidation}
-                className="confirmNewPassword"
-                type={"password"}
-                minLength={6}
-              />
-              <button onClick={viewPasswordCNP} className="view-password">
-                {modeViewCNP == "invisible" ? (
-                  <AiOutlineEyeInvisible />
-                ) : (
-                  <AiOutlineEye />
-                )}
-              </button>
-            </div>
-            <p className="error e-con-pass"></p>
-          </label>
+            <button onClick={viewPassword} className="view-password">
+              {modeViewPass == "invisible" ? (
+                <AiOutlineEyeInvisible />
+              ) : (
+                <AiOutlineEye />
+              )}
+            </button>
+          </div>
+          <p className="error e-pass-act"></p>
+        </label>
+        <label>
+          <span className="span-pass">Nueva contraseña</span>
+          <div className="contain-input-button-pass">
+            <input
+              onChange={passwordValidation}
+              className="newPassword"
+              type={"password"}
+              minLength={6}
+            />
+            <button onClick={viewPasswordNP} className="view-password">
+              {modeViewNP == "invisible" ? (
+                <AiOutlineEyeInvisible />
+              ) : (
+                <AiOutlineEye />
+              )}
+            </button>
+          </div>
+          <p className="error e-pass"></p>
+        </label>
+        <label>
+          <span className="span-con-pass">Confirmar nueva contraseña</span>
+          <div className="contain-input-button-pass">
+            <input
+              onChange={passwordValidation}
+              className="confirmNewPassword"
+              type={"password"}
+              minLength={6}
+            />
+            <button onClick={viewPasswordCNP} className="view-password">
+              {modeViewCNP == "invisible" ? (
+                <AiOutlineEyeInvisible />
+              ) : (
+                <AiOutlineEye />
+              )}
+            </button>
+          </div>
+          <p className="error e-con-pass"></p>
+        </label>
 
-          <button onClick={sendForm} className="button">
-            {loading ? <Loading /> : "Guardar cambios"}
-          </button>
+        <button onClick={sendForm} className="button">
+          {loading ? <Loading /> : "Guardar cambios"}
+        </button>
 
-          <p id="error"></p>
-        </form>
-      </main>
-
-      <Footer />
-    </>
+        <p id="error"></p>
+      </form>
+    </main>
   );
 }

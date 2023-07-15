@@ -1,20 +1,30 @@
-import React, { useState } from 'react'
-import Menu from '../../../Menu'
-import Drawer from '../drawer/Drawer'
-import { HiOutlineMenu } from 'react-icons/hi'
+import React, { useState } from 'react';
+import Menu from '../../../Menu';
+import Drawer from '../drawer/Drawer';
+import { HiOutlineMenu } from 'react-icons/hi';
 
-export default function HeaderMobile() {
+const style = document.documentElement.style;
+
+const root = document.getElementById("root");
+
+export default function HeaderMobile({ logout }) {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-    function handleDrawer() {
+    function toggleDrawer() {
         setIsDrawerOpen(prevState => !prevState);
+        !isDrawerOpen
+            ? (style.setProperty("--left", "0"),
+                setTimeout(() => {
+                    root.setAttribute("style", "display:none");
+                }, 500))
+            : (style.setProperty("--left", "-2000px"), root.removeAttribute("style"));
     }
     return (
         <>
             <Menu>
-                <Drawer isDrawerOpen={isDrawerOpen} handleDrawer={handleDrawer} />{" "}
+                <Drawer toggleDrawer={toggleDrawer} logout={logout} />{" "}
             </Menu>
-            <button onClick={handleDrawer} className="drawer">
+            <button onClick={toggleDrawer} className="drawer">
                 {<HiOutlineMenu />}
             </button>
         </>

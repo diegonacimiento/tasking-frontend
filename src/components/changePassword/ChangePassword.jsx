@@ -1,13 +1,10 @@
-import React from "react";
-import "./changePassword.css";
-import Header from "../header/Header";
-import Footer from "../footer/Footer";
-import { useContext, useState } from "react";
-import { Context } from "../../context/Context";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import usersService from "../../services/user.service";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { Context } from "../../context/Context";
+import usersService from "../../services/user.service";
 import Loading from "../loading/Loading";
+import "./changePassword.css";
 
 const service = new usersService();
 
@@ -79,65 +76,59 @@ export default function ChangePassword() {
   }
 
   return (
-    <>
-      <Header />
-
-      <main className="main-change-pass">
-        <label>
-          <span className="span-pass">Nueva contraseña</span>
-          <div className="contain-input-button-pass">
-            <input
-              onChange={() => {
-                passwordValidation();
-                document.getElementById("error").textContent = "";
-              }}
-              className="newPassword"
-              type={"password"}
-            />
-            <button onClick={viewPasswordNP} className="view-password">
-              {modeViewNP == "invisible" ? (
-                <AiOutlineEyeInvisible />
-              ) : (
-                <AiOutlineEye />
-              )}
-            </button>
-          </div>
-          <p className="error e-pass"></p>
-        </label>
-
-        <label>
-          <span className="span-con-pass">Confirmar nueva contraseña</span>
-          <div className="contain-input-button-pass">
-            <input
-              onChange={() => {
-                passwordValidation();
-                document.getElementById("error").textContent = "";
-              }}
-              className="confirmNewPassword"
-              type={"password"}
-            />
-            <button onClick={viewPasswordCNP} className="view-password">
-              {modeViewCNP == "invisible" ? (
-                <AiOutlineEyeInvisible />
-              ) : (
-                <AiOutlineEye />
-              )}
-            </button>
-          </div>
-
-          <p className="error e-con-pass"></p>
-        </label>
-
-        <label>
-          <button onClick={send} className="button">
-            {loading ? <Loading /> : "Enviar"}
+    <main className="main-change-pass">
+      <label>
+        <span className="span-pass">Nueva contraseña</span>
+        <div className="contain-input-button-pass">
+          <input
+            onChange={() => {
+              passwordValidation();
+              document.getElementById("error").textContent = "";
+            }}
+            className="newPassword"
+            type={"password"}
+          />
+          <button onClick={viewPasswordNP} className="view-password">
+            {modeViewNP == "invisible" ? (
+              <AiOutlineEyeInvisible />
+            ) : (
+              <AiOutlineEye />
+            )}
           </button>
-        </label>
+        </div>
+        <p className="error e-pass"></p>
+      </label>
 
-        <p id="error"></p>
-      </main>
+      <label>
+        <span className="span-con-pass">Confirmar nueva contraseña</span>
+        <div className="contain-input-button-pass">
+          <input
+            onChange={() => {
+              passwordValidation();
+              document.getElementById("error").textContent = "";
+            }}
+            className="confirmNewPassword"
+            type={"password"}
+          />
+          <button onClick={viewPasswordCNP} className="view-password">
+            {modeViewCNP == "invisible" ? (
+              <AiOutlineEyeInvisible />
+            ) : (
+              <AiOutlineEye />
+            )}
+          </button>
+        </div>
 
-      <Footer />
-    </>
+        <p className="error e-con-pass"></p>
+      </label>
+
+      <label>
+        <button onClick={send} className="button">
+          {loading ? <Loading /> : "Enviar"}
+        </button>
+      </label>
+
+      <p id="error"></p>
+    </main>
   );
 }

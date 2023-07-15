@@ -1,45 +1,10 @@
-import React, { createContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import tasksService from "../services/tasks.service";
-
-const service = new tasksService();
+import React, { createContext, useState } from "react";
 
 export const Context = createContext();
 
 export function ContextProvider(props) {
-  const navigate = useNavigate();
 
   const [token, setToken] = useState(localStorage.getItem("token"));
-
-  const [tasks, setTasks] = useState();
-
-  const [taskId, setTaskId] = useState(0);
-
-  const [search, setSearch] = useState(null);
-
-  useEffect(() => {
-    if (token) {
-      const taskId = service.searchUser(token);
-      const tasks = service.searchAll(token);
-      taskId
-        .then((res) => setTaskId(res.data.taskId));
-      tasks.then((res) => setTasks([...res.data])).catch(() => setTasks(["Error server"]));
-    }
-  }, [token]);
-
-  function searchTask(text) {
-    const response = tasks.filter((task) => {
-      setSearch(null);
-      if(task == "Error server") return task;
-      return task.description.includes(text);
-    });
-    if(response == "Error server") return setSearch(response);
-    response.length > 0 ? setSearch([...response]) : setSearch("NF");
-    if (text == "") {
-      setTasks([...tasks]);
-      setSearch(null);
-    }
-  }
 
   const [modeViewPass, setModeViewPass] = useState("invisible");
   const [modeViewNP, setModeViewNP] = useState("invisible");
@@ -143,20 +108,10 @@ export function ContextProvider(props) {
     }
   }
 
-  function logout() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    setToken(null);
-    navigate("/login");
-  }
-
   return (
     <Context.Provider
       value={{
-        tasks,
         token,
-        taskId,
-        search,
         modeViewPass,
         modeViewNP,
         modeViewCNP,
@@ -165,12 +120,7 @@ export function ContextProvider(props) {
         viewPassword,
         viewPasswordNP,
         viewPasswordCNP,
-        setSearch,
-        setTaskId,
-        setTasks,
         setToken,
-        searchTask,
-        logout,
       }}
     >
       {props.children}

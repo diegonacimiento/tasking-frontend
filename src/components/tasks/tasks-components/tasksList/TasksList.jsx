@@ -1,44 +1,33 @@
 import React from "react";
-import { useContext } from "react";
-import { Context } from "../../../../context/Context";
+import { useNavigate } from "react-router-dom";
+import Loading from "../../../loading/Loading";
 import TasksCard from "../tasksCard/TasksCard";
 import "./tasksList.css";
-import Loading from "../../../loading/Loading";
-import { useNavigate } from "react-router-dom";
 
-export default function TasksList() {
-  const { tasks, search } = useContext(Context);
+export default function TasksList({ tasks, setTasks, resultSearch, loading }) {
 
   const navigate = useNavigate();
 
   const sortTasks = (a, b) => a.id - b.id;
 
-  let tasksList = [];
+  if(tasks === "Error server") return navigate("/serverError");
 
-  if (search != null && search != "NF") {
-    tasksList = search;
-  } else {
-    tasksList = tasks;
-  }
+  if (resultSearch === undefined) return <h2>No hubo resultados en su búsqueda.</h2>;
 
-  if(search == "Error server") return navigate("/serverError");
-
-  if (search == "NF") return <h2>No hubo resultados en su búsqueda.</h2>;
-
-  if (!tasksList)
+  if (!tasks)
     return (
       <div className="loading-taskList">
         <Loading className={"load-contain"} />
       </div>
     );
 
-  if (tasksList.length == 0) return <h2>No hay tareas.</h2>;
+  if (tasks.length === 0) return <h2>No hay tareas.</h2>;
 
-  if(tasksList[0] == "Error server") return navigate("/serverError");
+  const render = resultSearch || tasks;
 
-  return [...tasksList].sort(sortTasks).map((task, i) => (
+  return [...render].sort(sortTasks).map((task, i) => (
     <div className="task-list-div" key={i}>
-      <TasksCard task={task} />
+      <TasksCard task={task} tasks={tasks} setTasks={setTasks} loading={loading} />
     </div>
   ));
 }

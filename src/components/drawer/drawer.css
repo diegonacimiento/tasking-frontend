@@ -24,7 +24,7 @@
     font-size: 20rem;
 }
 
-.contain-drawer {
+.contain-nav-bar {
     height: 75%;
     min-height: 100vh;
     display: flex;
@@ -33,14 +33,14 @@
     align-items: center;
 }
 
-#bt-drawer {
+#bt-nav-bar {
     border: none;
     background: none;
     margin: 0;
     color: rgb(161, 0, 0);
 }
 
-.links-drawer {
+.links-nav-bar {
     display: flex;
     justify-content: center;
     margin: 0;

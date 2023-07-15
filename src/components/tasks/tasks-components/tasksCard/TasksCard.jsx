@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./tasksCard.css";
 import { VscClose, VscCheck } from "react-icons/vsc";
 import { useContext } from "react";
@@ -8,8 +8,8 @@ import { capitalizeString } from "../../../../utils/dataUtils";
 
 const service = new tasksService();
 
-export default function TasksCard({ task }) {
-  const { token, tasks, setTasks } = useContext(Context);
+export default function TasksCard({ task, tasks, setTasks, loading }) {
+  const { token } = useContext(Context);
 
   function statusTask() {
     if (task.status == "pendiente") {
@@ -42,16 +42,20 @@ export default function TasksCard({ task }) {
   let status = task.status == "completado" ? "completado" : "pendiente";
 
   return (
+    typeof task.description === 'string' ? 
     <div className={`task-card-div ${status}`}>
       <button onClick={deleteTask}>
         <VscClose />
       </button>
 
-      <p className={`task-p ${status}`}>{capitalizeString(task.description)}</p>
+      <p className={`task-p ${status}`}>{
+        capitalizeString(task.description)
+      }</p>
 
       <button onClick={statusTask}>
         <VscCheck />
       </button>
     </div>
+    : task.description
   );
 }

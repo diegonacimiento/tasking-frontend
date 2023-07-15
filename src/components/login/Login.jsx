@@ -1,13 +1,10 @@
-import React from 'react';
-import "./login.css";
-import Header from "../header/Header";
-import Footer from "../footer/Footer";
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
-import { Context } from "../../context/Context";
-import usersService from "../../services/user.service";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { Context } from "../../context/Context";
 import Loading from "../loading/Loading";
+import usersService from "../../services/user.service";
+import "./login.css";
 
 const service = new usersService();
 
@@ -59,7 +56,7 @@ export default function Login() {
       .catch((e) => {
         if (e.response.status == 401 || e.response.status == 404) {
           error(`Email o contraseña incorrecta`);
-        } else if(e.response.status == 400) {
+        } else if (e.response.status == 400) {
           error(`Ingrese su email y contraseña`)
         } else {
           error("Ha ocurrido un error.")
@@ -72,46 +69,40 @@ export default function Login() {
   }
 
   return (
-    <>
-      <Header />
-
-      <main className="main-login">
-        <div className="main-login__login">
-          <input id="input-email" type={"email"} placeholder="Email" />
-          <div className="password-contain">
-            <input
-              className="password"
-              type={"password"}
-              placeholder="Contraseña"
-            />
-            <button onClick={viewPassword} className="view-password">
-              {modeViewPass == "invisible" ? (
-                <AiOutlineEyeInvisible />
-              ) : (
-                <AiOutlineEye />
-              )}
-            </button>
-          </div>
-
-          <button className="button" onClick={login}>
-            {loading ? <Loading /> : "Iniciar sesión"}
-          </button>
-          <p id="error"></p>
-        </div>
-
-        <Link className="main-login__link-rp" to="/recovery-password">
-          ¿Olvidaste tu contraseña?
-        </Link>
-
-        <div className="main-login__create-user">
-          <h3>¿Aún no tienes un usuario?</h3>
-          <button className="button" onClick={create}>
-            Crear usuario
+    <main className="main-login">
+      <div className="main-login__login">
+        <input id="input-email" type={"email"} placeholder="Email" />
+        <div className="password-contain">
+          <input
+            className="password"
+            type={"password"}
+            placeholder="Contraseña"
+          />
+          <button onClick={viewPassword} className="view-password">
+            {modeViewPass == "invisible" ? (
+              <AiOutlineEyeInvisible />
+            ) : (
+              <AiOutlineEye />
+            )}
           </button>
         </div>
-      </main>
 
-      <Footer />
-    </>
+        <button className="button" onClick={login}>
+          {loading ? <Loading /> : "Iniciar sesión"}
+        </button>
+        <p id="error"></p>
+      </div>
+
+      <Link className="main-login__link-rp" to="/recovery-password">
+        ¿Olvidaste tu contraseña?
+      </Link>
+
+      <div className="main-login__create-user">
+        <h3>¿Aún no tienes un usuario?</h3>
+        <button className="button" onClick={create}>
+          Crear usuario
+        </button>
+      </div>
+    </main>
   );
 }

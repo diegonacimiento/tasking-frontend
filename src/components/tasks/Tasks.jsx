@@ -1,15 +1,41 @@
-import React from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import TasksList from "../tasks/tasks-components/tasksList/TasksList";
-import Header from "../header/Header";
-import Footer from "../footer/Footer";
+import { TiPlus } from "react-icons/ti";
+import { Context } from "../../context/Context";
 import Modal from "../../../Modal";
 import NewTask from "./tasks-components/newTask/NewTask";
 import SearchTasks from "./tasks-components/searchTasks/SearchTasks";
-import { TiPlus } from "react-icons/ti";
+import tasksService from "../../services/tasks.service";
 import "./tasks.css";
+
+const service = new tasksService();
 
 export default function Tasks() {
   const modal = document.getElementById("modal");
+
+  const error = useRef(null);
+
+  const { token } = useContext(Context);
+
+  const [tasks, setTasks] = useState(undefined);
+  const [resultSearch, setResultSearch] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  function foundError(msg) {
+    error.current.textContent = msg;
+  }
+
+  useEffect(() => {
+    async function getTasks() {
+      try {
+        const response = await service.searchAll(token);
+        setTasks(response.data);
+      } catch (error) {
+        setTasks('Error server');
+      }
+    }
+    getTasks();
+  }, []);
 
   const modalOn = () => {
     modal.setAttribute("style", "display:flex");
@@ -21,29 +47,23 @@ export default function Tasks() {
   style.setProperty("--minHeightRoot", "100vh");
 
   return (
-    <>
-      <Header />
+    <main className="main-tasks">
+      <Modal>
+        <NewTask tasks={tasks} setTasks={setTasks} setLoading={setLoading} foundError={foundError} />
+      </Modal>
 
-      <main className="main-tasks">
-        <Modal>
-          <NewTask />
-        </Modal>
+      <SearchTasks tasks={tasks} setResultSearch={setResultSearch} />
 
-        <SearchTasks />
+      <div className="task-list-container">
+        <TasksList tasks={tasks} setTasks={setTasks} resultSearch={resultSearch} loading={loading} />
+      </div>
 
-        <div className="task-list-container">
-          <TasksList />
-        </div>
+      <p id="error" ref={error}></p>
 
-        <p id="error"></p>
-
-        <button className="button-add-task" onClick={modalOn}>
-          {" "}
-          <TiPlus />{" "}
-        </button>
-      </main>
-
-      <Footer />
-    </>
+      <button className="button-add-task" onClick={modalOn}>
+        {" "}
+        <TiPlus />{" "}
+      </button>
+    </main>
   );
 }

@@ -1,12 +1,20 @@
-import React, { useContext } from "react";
-import { Context } from "../../../../context/Context";
+import React from "react";
 import "./searchTasks.css";
 
-export default function SearchTasks() {
-  const { searchTask } = useContext(Context);
+export default function SearchTasks({ tasks, setResultSearch }) {
+
+  function searchTask(text) {
+    const result = tasks.filter((task) => {
+      return task.description.includes(text);
+    });
+    result.length > 0 ? setResultSearch([...result]) : setResultSearch(undefined);
+    if (text == "") {
+      setResultSearch(null);
+    }
+  }
 
   function search(e) {
-    searchTask(e.target.value.toLowerCase());
+    searchTask(e.target.value);
   }
 
   return (

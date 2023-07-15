@@ -1,14 +1,10 @@
-import React from "react";
-import Header from "../header/Header";
-import Footer from "../footer/Footer";
-import { Link } from "react-router-dom";
-import "./createUser.css";
-import usersService from "../../services/user.service";
-import { useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
-import { Context } from "../../context/Context";
+import React, { useContext, useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { Context } from "../../context/Context";
+import usersService from "../../services/user.service";
 import Loading from "../loading/Loading";
+import "./createUser.css";
 
 const service = new usersService();
 
@@ -144,14 +140,14 @@ export default function CreateUser() {
         .catch((e) => {
           document.getElementById("error").removeAttribute("style");
           document.getElementById("error").textContent = "";
-            if(e.response.status == 500) {
-              error("Ha ocurrido un error.")
-              return navigate("/serverError");
-            }
-            const containId = e.response.data.errors[0].message.includes("id");
-            const containEmail =
-              e.response.data.errors[0].message.includes("email");
-            if (containId) {
+          if (e.response.status == 500) {
+            error("Ha ocurrido un error.")
+            return navigate("/serverError");
+          }
+          const containId = e.response.data.errors[0].message.includes("id");
+          const containEmail =
+            e.response.data.errors[0].message.includes("email");
+          if (containId) {
             document
               .querySelector(".user")
               .setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
@@ -161,7 +157,7 @@ export default function CreateUser() {
               .querySelector(".email")
               .setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
             error("Email en uso, elige otro.", true, "mail");
-          };
+          }
         })
         .finally(() => setLoading(false));
     }
@@ -172,97 +168,91 @@ export default function CreateUser() {
   style.setProperty("--minHeightRoot", "725px");
 
   return (
-    <>
-      <Header />
+    <main className="main-create-user">
+      <form onClick={send}>
+        <h3>Completa el registro</h3>
 
-      <main className="main-create-user">
-        <form onClick={send}>
-          <h3>Completa el registro</h3>
-
-          <label>
-            <span className="span-user">Usuario</span>
+        <label>
+          <span className="span-user">Usuario</span>
+          <input
+            onChange={() => {
+              inputDefault("user");
+              document.getElementById("error").textContent = "";
+            }}
+            className="user"
+            type={"text"}
+          />
+          <p className="error e-user"></p>
+        </label>
+        <label>
+          <span className="span-mail">Correo electrónico</span>
+          <input
+            onChange={() => {
+              emailValidation();
+              document.getElementById("error").textContent = "";
+            }}
+            className="email"
+            type={"email"}
+          />
+          <p className="error e-mail"></p>
+        </label>
+        <label className="label-pass">
+          <span className="span-pass">Contraseña</span>
+          <div className="contain-input-button-pass">
             <input
               onChange={() => {
-                inputDefault("user");
+                passwordValidation();
                 document.getElementById("error").textContent = "";
               }}
-              className="user"
-              type={"text"}
+              className="newPassword"
+              type={"password"}
             />
-            <p className="error e-user"></p>
-          </label>
-          <label>
-            <span className="span-mail">Correo electrónico</span>
-            <input
-              onChange={() => {
-                emailValidation();
-                document.getElementById("error").textContent = "";
-              }}
-              className="email"
-              type={"email"}
-            />
-            <p className="error e-mail"></p>
-          </label>
-          <label className="label-pass">
-            <span className="span-pass">Contraseña</span>
-            <div className="contain-input-button-pass">
-              <input
-                onChange={() => {
-                  passwordValidation();
-                  document.getElementById("error").textContent = "";
-                }}
-                className="newPassword"
-                type={"password"}
-              />
-              <button onClick={viewPasswordNP} className="view-password">
-                {modeViewNP == "invisible" ? (
-                  <AiOutlineEyeInvisible />
-                ) : (
-                  <AiOutlineEye />
-                )}
-              </button>
-            </div>
-            <p className="error e-pass"></p>
-          </label>
-          <label className="label-confirm-pass">
-            <span className="span-con-pass">Confirmar contraseña</span>
-            <div className="contain-input-button-pass">
-              <input
-                onChange={() => {
-                  passwordValidation();
-                  document.getElementById("error").textContent = "";
-                }}
-                className="confirmNewPassword"
-                type={"password"}
-              />
-              <button onClick={viewPasswordCNP} className="view-password">
-                {modeViewCNP == "invisible" ? (
-                  <AiOutlineEyeInvisible />
-                ) : (
-                  <AiOutlineEye />
-                )}
-              </button>
-            </div>
-            <p className="error e-con-pass"></p>
-          </label>
-          <label id="label-button">
-            <button onClick={createUser} className="button">
-              { loading ? <Loading /> : "Crear" }
+            <button onClick={viewPasswordNP} className="view-password">
+              {modeViewNP == "invisible" ? (
+                <AiOutlineEyeInvisible />
+              ) : (
+                <AiOutlineEye />
+              )}
             </button>
-          </label>
-        </form>
+          </div>
+          <p className="error e-pass"></p>
+        </label>
+        <label className="label-confirm-pass">
+          <span className="span-con-pass">Confirmar contraseña</span>
+          <div className="contain-input-button-pass">
+            <input
+              onChange={() => {
+                passwordValidation();
+                document.getElementById("error").textContent = "";
+              }}
+              className="confirmNewPassword"
+              type={"password"}
+            />
+            <button onClick={viewPasswordCNP} className="view-password">
+              {modeViewCNP == "invisible" ? (
+                <AiOutlineEyeInvisible />
+              ) : (
+                <AiOutlineEye />
+              )}
+            </button>
+          </div>
+          <p className="error e-con-pass"></p>
+        </label>
+        <label id="label-button">
+          <button onClick={createUser} className="button">
+            {loading ? <Loading /> : "Crear"}
+          </button>
+        </label>
+      </form>
 
-        <p id="error"></p>
+      <p id="error"></p>
 
-        <div className="main-create-user__login">
-          <h3>¿Ya estás registrado?</h3>
-          <Link className="link-login" to={"/login"}>
-            Iniciar sesión
-          </Link>
-        </div>
-      </main>
-
-      <Footer />
-    </>
+      <div className="main-create-user__login">
+        <h3>¿Ya estás registrado?</h3>
+        <Link className="link-login" to={"/login"}>
+          Iniciar sesión
+        </Link>
+      </div>
+    </main>
   );
 }

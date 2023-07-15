@@ -1,20 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
-import { useContext, useState } from "react";
-import { Context } from "../../context/Context";
-import "./header.css";
-import HeaderMobile from "./HeaderMobile";
 import HeaderDesktop from "./HeaderDesktop";
+import HeaderMobile from "./HeaderMobile";
 import toggleTheme from "../../assets/theme";
+import "./header.css";
+import { Context } from "../../context/Context";
 
 const isMobile = window.innerWidth <= 712 || window.innerHeight <= 575;
 
 const isDarkModeParse = JSON.parse(localStorage.getItem("isDarkMode"));
 
 export default function Header() {
-  const { token, logout } = useContext(Context);
+  const navigate = useNavigate();
+
+  const { token, setToken } = useContext(Context);
 
   const [isDarkMode, setIsDarkMode] = useState(isDarkModeParse);
+  const [isMobileScreen, setIsMobileScreen] = useState(isMobile);
+
+  function logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setToken(null);
+    navigate("/login");
+  }
 
   useEffect(() => {
     toggleTheme(isDarkMode);
@@ -30,8 +40,6 @@ export default function Header() {
         toggleTheme(true));
   }
 
-  const [isMobileScreen, setIsMobileScreen] = useState(isMobile);
-
   addEventListener('resize', () => {
     const newIsMobileScreen = window.innerWidth <= 712 || window.innerHeight <= 575; 
     setIsMobileScreen(newIsMobileScreen);
@@ -40,7 +48,7 @@ export default function Header() {
   return (
     <header>
       {(token && isMobileScreen) && (
-        <HeaderMobile />
+        <HeaderMobile logout={logout} />
       )
       }
 
@@ -53,7 +61,7 @@ export default function Header() {
         <HeaderDesktop logout={logout} />
       )}
 
-      <button className="mode" onClick={changeMode}>
+      <button title="Cambiar tema" className="mode" onClick={changeMode}>
         {isDarkMode ? <MdDarkMode /> : <MdLightMode />}
       </button>
     </header>
