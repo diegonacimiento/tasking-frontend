@@ -8,7 +8,7 @@ import { capitalizeString } from "../../../../utils/dataUtils";
 
 const service = new tasksService();
 
-export default function TasksCard({ task, tasks, setTasks, loading }) {
+export default function TasksCard({ task, tasks, setTasks }) {
   const { token } = useContext(Context);
 
   function statusTask() {

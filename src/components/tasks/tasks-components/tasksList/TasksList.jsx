@@ -4,7 +4,7 @@ import Loading from "../../../loading/Loading";
 import TasksCard from "../tasksCard/TasksCard";
 import "./tasksList.css";
 
-export default function TasksList({ tasks, setTasks, resultSearch, loading }) {
+export default function TasksList({ tasks, setTasks, resultSearch }) {
 
   const navigate = useNavigate();
 
@@ -27,7 +27,7 @@ export default function TasksList({ tasks, setTasks, resultSearch, loading }) {
 
   return [...render].sort(sortTasks).map((task, i) => (
     <div className="task-list-div" key={i}>
-      <TasksCard task={task} tasks={tasks} setTasks={setTasks} loading={loading} />
+      <TasksCard task={task} tasks={tasks} setTasks={setTasks} />
     </div>
   ));
 }

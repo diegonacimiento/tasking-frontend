@@ -6,7 +6,7 @@ import Loading from "../../../loading/Loading";
 
 const service = new tasksService();
 
-export default function NewTask({ tasks, setTasks, setLoading, foundError }) {
+export default function NewTask({ tasks, setTasks, foundError }) {
   const { token } = useContext(Context);
 
   const copyTasks = tasks;
@@ -20,7 +20,6 @@ export default function NewTask({ tasks, setTasks, setLoading, foundError }) {
     if(!task) return;
     postTask(task);
     setTasks([...tasks, {description: <Loading />}]);
-    // setLoading(true);
     modalNone();
   }
 

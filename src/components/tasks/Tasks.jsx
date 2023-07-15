@@ -19,7 +19,6 @@ export default function Tasks() {
 
   const [tasks, setTasks] = useState(undefined);
   const [resultSearch, setResultSearch] = useState(null);
-  const [loading, setLoading] = useState(false);
 
   function foundError(msg) {
     error.current.textContent = msg;
@@ -49,13 +48,13 @@ export default function Tasks() {
   return (
     <main className="main-tasks">
       <Modal>
-        <NewTask tasks={tasks} setTasks={setTasks} setLoading={setLoading} foundError={foundError} />
+        <NewTask tasks={tasks} setTasks={setTasks} foundError={foundError} />
       </Modal>
 
       <SearchTasks tasks={tasks} setResultSearch={setResultSearch} />
 
       <div className="task-list-container">
-        <TasksList tasks={tasks} setTasks={setTasks} resultSearch={resultSearch} loading={loading} />
+        <TasksList tasks={tasks} setTasks={setTasks} resultSearch={resultSearch} />
       </div>
 
       <p id="error" ref={error}></p>
