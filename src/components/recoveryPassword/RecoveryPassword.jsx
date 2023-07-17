@@ -49,21 +49,16 @@ export default function RecoveryPassword() {
     e.preventDefault();
   }
 
-  const style = document.documentElement.style;
-
-  style.setProperty("--heightRoot", "100vh");
-  style.setProperty("--minHeightRoot", "650px");
-
   return (
     <main className="main-rp">
+      <h2>
+        Revisa tu correo y sigue las instrucciones
+      </h2>
+      <p>
+        Te enviaremos un enlace a tu correo para que puedas cambiar la
+        contraseña
+      </p>
       <form onSubmit={form}>
-        <h2>
-          Revisa tu correo y sigue las instrucciones
-        </h2>
-        <p>
-          Te enviaremos un enlace a tu correo para que puedas cambiar la
-          contraseña
-        </p>
         <input
           className="email"
           placeholder="Email"

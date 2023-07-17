@@ -162,10 +162,6 @@ export default function CreateUser() {
         .finally(() => setLoading(false));
     }
   }
-  const style = document.documentElement.style;
-
-  style.setProperty("--heightRoot", "100vh");
-  style.setProperty("--minHeightRoot", "725px");
 
   return (
     <main className="main-create-user">

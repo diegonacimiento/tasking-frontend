@@ -10,8 +10,11 @@ import "./tasks.css";
 
 const service = new tasksService();
 
+const modal = document.getElementById("modal");
+
+const style = document.documentElement.style;
+
 export default function Tasks() {
-  const modal = document.getElementById("modal");
 
   const error = useRef(null);
 
@@ -19,10 +22,6 @@ export default function Tasks() {
 
   const [tasks, setTasks] = useState(undefined);
   const [resultSearch, setResultSearch] = useState(null);
-
-  function foundError(msg) {
-    error.current.textContent = msg;
-  }
 
   useEffect(() => {
     async function getTasks() {
@@ -36,14 +35,16 @@ export default function Tasks() {
     getTasks();
   }, []);
 
-  const modalOn = () => {
+  function foundError(msg) {
+    error.current.textContent = msg;
+  }
+
+  function modalOn() {
     modal.setAttribute("style", "display:flex");
-  };
+  }
 
-  const style = document.documentElement.style;
-
-  style.setProperty("--heightRoot", "max-content");
-  style.setProperty("--minHeightRoot", "100vh");
+  // style.setProperty("--heightRoot", "max-content");
+  // style.setProperty("--minHeightRoot", "100vh");
 
   return (
     <main className="main-tasks">

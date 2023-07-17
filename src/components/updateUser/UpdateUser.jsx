@@ -115,8 +115,8 @@ export default function UpdateUser() {
 
   const style = document.documentElement.style;
 
-  style.setProperty("--heightRoot", "100vh");
-  style.setProperty("--minHeightRoot", "725px");
+  // style.setProperty("--heightRoot", "100vh");
+  // style.setProperty("--minHeightRoot", "725px");
 
   return (
     <main className="main-update">

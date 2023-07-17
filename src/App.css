@@ -1,6 +1,4 @@
 :root {
-    --heightRoot: 100vh;
-    --minHeightRoot: 620px;
     --colorRoot: rgb(230, 230, 230);
     --colorBorder: rgb(104, 104, 104);
     --colorBotton: rgb(0, 0, 0);
@@ -29,8 +27,7 @@ html {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    height: var(--heightRoot);
-    min-height: var(--minHeightRoot);
+    min-height: 100vh;
     width: 100%;
     min-width: 275px;
     background: var(--colorRoot);
@@ -38,7 +35,8 @@ html {
 }
 
 main {
-    height: 100%;
+    display: flex;
+    flex: 1;
     width: 100%;
 }
 

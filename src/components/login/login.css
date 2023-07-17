@@ -2,14 +2,14 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    max-width: 750px;
+    max-width: 620px;
 }
 
 .main-login__login {
-    height: 60%;
+    min-height: 350px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
 }
 
@@ -21,6 +21,9 @@
     padding-left: 30px;
 }
 
+.main-login__create-user {
+    min-height: 170px;
+}
 
 .main-login__create-user h3, .main-login__create-user button {
     display: inline-block;
