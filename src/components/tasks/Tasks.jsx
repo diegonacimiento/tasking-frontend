@@ -12,8 +12,6 @@ const service = new tasksService();
 
 const modal = document.getElementById("modal");
 
-const style = document.documentElement.style;
-
 export default function Tasks() {
 
   const error = useRef(null);
@@ -42,9 +40,6 @@ export default function Tasks() {
   function modalOn() {
     modal.setAttribute("style", "display:flex");
   }
-
-  // style.setProperty("--heightRoot", "max-content");
-  // style.setProperty("--minHeightRoot", "100vh");
 
   return (
     <main className="main-tasks">

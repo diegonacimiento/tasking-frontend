@@ -51,50 +51,31 @@ export default function CreateUser() {
   }
 
   function verifyInputs() {
-    const username = document.querySelector(".user").value;
-    const email = document.querySelector(".email").value;
-    const password = document.querySelector(".newPassword").value;
-    const confirmPassword = document.querySelector(".confirmNewPassword").value;
-
+    const inputs = [
+      { selector: ".user", spanSelector: ".span-user", errorMessage: "Debe completar todos los campos" },
+      { selector: ".email", spanSelector: ".span-email", errorMessage: "Debe completar todos los campos" },
+      { selector: ".newPassword", spanSelector: ".span-password", errorMessage: "Debe completar todos los campos" },
+      { selector: ".confirmNewPassword", spanSelector: ".span-password-confirm", errorMessage: "Debe completar todos los campos" }
+    ];
+  
     error("");
-
-    if (!username) {
-      document
-        .querySelector(".user")
-        .setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
-      document
-        .querySelector(".span-user")
-        .setAttribute("style", "color: rgb(238, 16, 16)");
-      error("Debe completar todos los campos.");
-    }
-    if (!email) {
-      document
-        .querySelector(".email")
-        .setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
-      document
-        .querySelector(".span-mail")
-        .setAttribute("style", "color: rgb(238, 16, 16)");
-      error("Debe completar todos los campos.");
-    }
-    if (!password) {
-      document
-        .querySelector(".newPassword")
-        .setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
-      document
-        .querySelector(".span-pass")
-        .setAttribute("style", "color: rgb(238, 16, 16)");
-      error("Debe completar todos los campos.");
-    }
-    if (!confirmPassword) {
-      document
-        .querySelector(".confirmNewPassword")
-        .setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
-      document
-        .querySelector(".span-con-pass")
-        .setAttribute("style", "color: rgb(238, 16, 16)");
-      error("Debe completar todos los campos.");
-    }
+  
+    inputs.forEach(input => {
+      const value = document.querySelector(input.selector).value;
+      const span = document.querySelector(input.spanSelector);
+      const element = document.querySelector(input.selector);
+  
+      if (!value) {
+        element.style.border = "1px solid rgb(238, 16, 16)";
+        span.style.color = "rgb(238, 16, 16)";
+        error(input.errorMessage);
+      } else {
+        element.style.border = "";
+        span.style.color = "";
+      }
+    });
   }
+  
 
   function createUser() {
     verifyInputs();
@@ -165,8 +146,8 @@ export default function CreateUser() {
 
   return (
     <main className="main-create-user">
+      <h3>Completa el registro</h3>
       <form onClick={send}>
-        <h3>Completa el registro</h3>
 
         <label>
           <span className="span-user">Usuario</span>
@@ -181,7 +162,7 @@ export default function CreateUser() {
           <p className="error e-user"></p>
         </label>
         <label>
-          <span className="span-mail">Correo electrónico</span>
+          <span className="span-email">Correo electrónico</span>
           <input
             onChange={() => {
               emailValidation();
@@ -193,7 +174,7 @@ export default function CreateUser() {
           <p className="error e-mail"></p>
         </label>
         <label className="label-pass">
-          <span className="span-pass">Contraseña</span>
+          <span className="span-password">Contraseña</span>
           <div className="contain-input-button-pass">
             <input
               onChange={() => {
@@ -214,7 +195,7 @@ export default function CreateUser() {
           <p className="error e-pass"></p>
         </label>
         <label className="label-confirm-pass">
-          <span className="span-con-pass">Confirmar contraseña</span>
+          <span className="span-password-confirm">Confirmar contraseña</span>
           <div className="contain-input-button-pass">
             <input
               onChange={() => {
