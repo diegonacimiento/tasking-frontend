@@ -31,12 +31,9 @@
     margin: 0;
 }
 
-.main-create-user label input:invalid {
-    border: 1px solid rgb(238, 16, 16);
-}
-
-.main-create-user form p {
-    margin-top: 10px;
+.main-create-user #error {
+    margin: 0px auto;
+    margin-top: 12px;
 }
 
 .main-create-user label span {
@@ -44,7 +41,7 @@
     font-size: 14rem;
 }
 
-.main-create-user #error, .main-create-user .error {
+.main-create-user .error {
     margin: 0 auto;
 }
 

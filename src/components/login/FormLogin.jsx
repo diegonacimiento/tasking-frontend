@@ -1,17 +1,14 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useRef } from 'react';
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { Context } from '../../context/Context';
 import Loading from '../loading/Loading';
-import usersService from '../../services/user.service';
+import useForm from "../../hooks/useForm"
 
-const service = new usersService();
-
-export default function FormLogin({ navigate }) {
-
-    const { setToken } = useContext(Context);
+export default function FormLogin() {
 
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    
+    const { sendFormLogin } = useForm();
 
     const error = useRef(null);
     const email = useRef(null);
@@ -21,35 +18,11 @@ export default function FormLogin({ navigate }) {
         error.current.textContent = msg;
     }
 
-    function togglePasswordVisibility(e) {
+    function toggleShowPassword(e) {
         e.preventDefault();
         setShowPassword(prevState => !prevState);
     }
-
-    async function sendFormLogin(body) {
-        try {
-            const response = await service.loginUser(body);
-            localStorage.setItem("user", `${response.data.user.id}`);
-            localStorage.setItem("email", `${response.data.user.email}`);
-            if (response.data.token) {
-                localStorage.setItem("token", `${response.data.token}`);
-                setToken(response.data.token);
-                return navigate("/");
-            }
-        } catch (error) {
-            if (error.response.status === 401 || error.response.status === 404) {
-                showError(`Email o contraseña incorrecta`);
-            } else if (error.response.status === 400) {
-                showError(`Ingrese su email y contraseña`)
-            } else {
-                showError("Ha ocurrido un error")
-                return navigate("/serverError");
-            }
-        } finally {
-            setLoading(false);
-        }
-    }
-
+    
     function handleLogin(e) {
         e.preventDefault();
 
@@ -65,7 +38,16 @@ export default function FormLogin({ navigate }) {
 
         setLoading(true);
 
-        sendFormLogin(body);
+        async function responseSendForm() {
+            try {
+                await sendFormLogin(body);
+            } catch (error) {
+                showError(error);
+            } finally {
+                setLoading(false);
+            }
+        }
+        responseSendForm();
     }
 
     return (
@@ -80,7 +62,7 @@ export default function FormLogin({ navigate }) {
                 />
                 <button
                     title={showPassword ? "Ocultar contraseña" : "Ver contraseña"}
-                    onClick={togglePasswordVisibility}
+                    onClick={toggleShowPassword}
                     className="view-password"
                 >
                     { showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible /> }
