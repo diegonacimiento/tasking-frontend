@@ -19,12 +19,16 @@
 
 .main-create-user label span, 
 .main-create-user label input, 
-.main-create-user label button,
 .main-create-user__login h3, 
 .main-create-user__login .link-login {
     display: inline-block;
     width: 100%;
     margin-top: 5px;
+}
+
+.main-create-user form button {
+    margin-top: 5px;
+    width: 75%;
 }
 
 .main-create-user label input {

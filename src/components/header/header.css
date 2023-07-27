@@ -47,6 +47,14 @@ header .mode {
     color: var(--colorBotton);
 }
 
+header .mode svg {
+    transition: opacity 0.5s;
+}
+
+header .mode svg:hover {
+    opacity: 0.5;
+}
+
 header .mode svg, 
 header .drawer svg {
     font-size: 20rem;

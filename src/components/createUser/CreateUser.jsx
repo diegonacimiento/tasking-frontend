@@ -5,7 +5,6 @@ import "./createUser.css";
 
 
 export default function CreateUser() {
-  
   return (
     <main className="main-create-user">
       <h3>Completa el registro</h3>
