@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import Loading from '../loading/Loading';
 import useForm from "../../hooks/useForm"
@@ -7,29 +7,42 @@ export default function FormLogin() {
 
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const [form, setForm] = useState({});
     
-    const { sendFormLogin } = useForm();
+    const { sendFormLogin, showError, hasDataInput } = useForm();
 
     const error = useRef(null);
-    const email = useRef(null);
-    const password = useRef(null);
+    const formRef = useRef(null);
 
-    function showError(msg) {
-        error.current.textContent = msg;
-    }
+    useEffect(() => {
+        setForm({
+            email: {
+                span: formRef.current.children[0].children[0],
+                input: formRef.current.children[0].children[1],
+                error: error.current
+            },
+            password: {
+                span: formRef.current.children[1].children[0],
+                input: formRef.current.children[1].children[1],
+                error: error.current
+            }
+        });
+    }, [])
 
     function toggleShowPassword(e) {
         e.preventDefault();
         setShowPassword(prevState => !prevState);
     }
     
-    function handleLogin(e) {
+    function handleSubmit(e) {
         e.preventDefault();
 
-        const valueEmail = email.current.value;
-        const valuePassword = password.current.value;
+        const valueEmail = form.email.input.value;
+        const valuePassword = form.password.input.value;
 
-        if (!valueEmail || !valuePassword) return showError(`Ingrese su email y contraseña`);
+        const isValidateForm = hasDataInput(form, error, "Ingrese su email y contraseña");
+
+        if (!isValidateForm) return null;
 
         const body = {
             username: `${valueEmail}`,
@@ -41,8 +54,9 @@ export default function FormLogin() {
         async function responseSendForm() {
             try {
                 await sendFormLogin(body);
-            } catch (error) {
-                showError(error);
+            } catch (e) {
+                showError(e, form.email);
+                showError(e, form.password);
             } finally {
                 setLoading(false);
             }
@@ -51,23 +65,22 @@ export default function FormLogin() {
     }
 
     return (
-        <form className="main-login__login" onSubmit={handleLogin}>
-            <input id="input-email" type={"email"} placeholder="Email" ref={email} />
-            <div className="password-contain">
-                <input
-                    className="password"
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Contraseña"
-                    ref={password}
-                />
+        <form className="main-login__login" onSubmit={handleSubmit} ref={formRef}>
+            <label>
+                <span>Email</span>
+                <input type={"email"} />
+            </label>
+            <label>
+                <span>Contraseña</span>
+                <input type={showPassword ? "text" : "password"} />
                 <button
                     title={showPassword ? "Ocultar contraseña" : "Ver contraseña"}
                     onClick={toggleShowPassword}
-                    className="view-password"
-                >
+                    className="show-password"
+                    >
                     { showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible /> }
                 </button>
-            </div>
+            </label>
 
             <button title='Iniciar sesión' className="button">
                 { loading ? <Loading /> : "Iniciar sesión" }

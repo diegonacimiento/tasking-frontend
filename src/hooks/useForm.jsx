@@ -31,15 +31,17 @@ export default function useForm() {
         })
     }
 
-    function hasDataInput(inputs, errorForm) {
+    function hasDataInput(inputs, errorForm, msg) {
+        const msgError = msg ?? "Debe completar todos los campos";
         const elements = Object.entries(inputs);
         const results = elements.map((item) => {
             const { span, input } = item[1];
             const value = input.value;
             if (!value) {
                 input.style.border = "1px solid rgb(238, 16, 16)";
+                input.style.color = "rgb(238, 16, 16)";
                 span.style.color = "rgb(238, 16, 16)";
-                showError("Debe completar todos los campos", errorForm);
+                showError(msgError, errorForm);
                 return false;
             }
             resetInput(item[1]);

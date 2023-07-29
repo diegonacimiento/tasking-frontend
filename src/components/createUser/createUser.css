@@ -14,6 +14,7 @@
 }
 
 .main-create-user label {
+    position: relative;
     width: 75%;
 }
 
@@ -26,7 +27,7 @@
     margin-top: 5px;
 }
 
-.main-create-user form button {
+.main-create-user form .button {
     margin-top: 5px;
     width: 75%;
 }
@@ -57,18 +58,16 @@
     padding-right: 30px;
 }
 
-.main-create-user .view-password {
+.main-create-user .show-password {
     position: absolute;
-    display: flex;
-    margin: 0;
-    background: none;
-    border: none;
-    top: calc(50% - 8px);
     right: 10px;
+    bottom: 30px;
+    display: flex;
+    align-items: center;
+    border: none;
+    height: 50rem;
     width: max-content;
-}
-
-.main-create-user .view-password svg{
+    background: none;
     color: var(--colorBotton);
 }
 

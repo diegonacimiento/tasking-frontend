@@ -1,53 +1,80 @@
-import React, { useContext, useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { Context } from "../../context/Context";
 import usersService from "../../services/user.service";
 import Loading from "../loading/Loading";
+import useForm from "../../hooks/useForm";
 import "./changePassword.css";
 
 const service = new usersService();
 
 export default function ChangePassword() {
-  const {
-    modeViewNP,
-    modeViewCNP,
-    passwordValidation,
-    viewPasswordNP,
-    viewPasswordCNP,
-  } = useContext(Context);
-
   const [loading, setLoading] = useState(false);
+  const [form, setForm] = useState({});
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const formRef = useRef(null);
+  const errorForm = useRef(null);
+
+  const { showError, hasDataInput, validatePasswords } = useForm();
+
+  useEffect(() => {
+    setForm({
+      newPassword: {
+        span: formRef.current.children[0].children[0],
+        input: formRef.current.children[0].children[1],
+        error: formRef.current.children[0].children[3]  
+    },
+      confirmPassword: {
+        span: formRef.current.children[1].children[0],
+        input: formRef.current.children[1].children[1],
+        error: formRef.current.children[1].children[3]  
+    },
+    });
+  }, [])
 
   const navigate = useNavigate();
 
-  function error(msg) {
-    document.getElementById("error").textContent = msg;
-    const newPassword = document.querySelector(".newPassword");
-    const confirmNewPassword = document.querySelector(".confirmNewPassword");
-    newPassword.setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
-    confirmNewPassword.setAttribute(
-      "style",
-      "border: 1px solid rgb(238, 16, 16)"
-    );
-    document
-      .querySelector(".span-pass")
-      .setAttribute("style", "color: rgb(238, 16, 16)");
-    document
-      .querySelector(".span-con-pass")
-      .setAttribute("style", "color: rgb(238, 16, 16)");
+  function toggleShowNewPassword(e) {
+    e.preventDefault();
+    setShowNewPassword(prevState => !prevState);
   }
 
-  function send() {
-    const newPassword = document.querySelector(".newPassword").value;
-    const confirmNewPassword = document.querySelector(
-      ".confirmNewPassword"
-    ).value;
+  function toggleShowConfirmPassword(e) {
+    e.preventDefault();
+    setShowConfirmPassword(prevState => !prevState);
+  }
 
-    if (!newPassword && !confirmNewPassword)
-      return error("Debe rellenar todos los campos.");
+  function checkForm() {
+    const isFormComplete = hasDataInput(form, errorForm, "Ingrese y confirme su nueva contraseña");
+    if(isFormComplete) {
+      const isValidatePasswords = validatePasswords(form.newPassword, form.confirmPassword);
+      return isValidatePasswords;
+    }
+    return false;
+  }
 
-    if (newPassword !== confirmNewPassword) return;
+  async function sendForm(body) {
+    try {
+      await service.recoveryChangePassword(body);
+      errorForm.current.setAttribute("style", "color: green");
+      errorForm.current.textContent = "Cambio de contraseña exitoso.";
+      return navigate("/");
+    } catch (e) {
+      if(e.response.status === 500) return navigate("/serverError");
+      showError("Ha ocurrido un error, envíe nuevamente el email", errorForm);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const isValidateForm = checkForm();
+
+    if(!isValidateForm) return null;
 
     const uri = window.location.href;
 
@@ -57,78 +84,51 @@ export default function ChangePassword() {
 
     const body = {
       recoveryToken,
-      newPassword,
+      newPassword: form.newPassword.input.value,
     };
 
     setLoading(true);
 
-    const changePass = service.recoveryChangePassword(body);
-
-    changePass
-      .then(() => {
-        document.getElementById("error").setAttribute("style", "color: green");
-        document.getElementById("error").textContent =
-          "Cambio de contraseña exitoso.";
-        navigate("/");
-      })
-      .catch(() => error("Ha ocurrido un error, envíe nuevamente el email."))
-      .finally(() => setLoading(false));
+    sendForm(body);
   }
 
   return (
-    <main className="main-change-pass">
-      <label>
-        <span className="span-pass">Nueva contraseña</span>
-        <div className="contain-input-button-pass">
-          <input
-            onChange={() => {
-              passwordValidation();
-              document.getElementById("error").textContent = "";
-            }}
-            className="newPassword"
-            type={"password"}
-          />
-          <button onClick={viewPasswordNP} className="view-password">
-            {modeViewNP == "invisible" ? (
-              <AiOutlineEyeInvisible />
-            ) : (
-              <AiOutlineEye />
-            )}
+    <main className="main-change-password">
+      <form onSubmit={handleSubmit} ref={formRef}>
+
+        <label>
+          <span>Nueva contraseña</span>
+          <input type={ showNewPassword ? "text" : "password"} />
+          <button 
+            onClick={toggleShowNewPassword} 
+            title={showNewPassword ? "Ocultar contraseña" : "Ver contraseña"}
+            className="show-password" 
+          >
+            { showNewPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible /> }
           </button>
-        </div>
-        <p className="error e-pass"></p>
-      </label>
+          <p className="error"></p>
+        </label>
 
-      <label>
-        <span className="span-con-pass">Confirmar nueva contraseña</span>
-        <div className="contain-input-button-pass">
-          <input
-            onChange={() => {
-              passwordValidation();
-              document.getElementById("error").textContent = "";
-            }}
-            className="confirmNewPassword"
-            type={"password"}
-          />
-          <button onClick={viewPasswordCNP} className="view-password">
-            {modeViewCNP == "invisible" ? (
-              <AiOutlineEyeInvisible />
-            ) : (
-              <AiOutlineEye />
-            )}
+        <label>
+          <span>Confirmar nueva contraseña</span>
+          <input type={ showConfirmPassword ? "text" : "password"} />
+          <button 
+            onClick={toggleShowConfirmPassword}
+            title={showConfirmPassword ? "Ocultar contraseña" : "Ver contraseña"}
+            className="show-password" 
+          >
+            { showConfirmPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible /> }
           </button>
-        </div>
+          <p className="error"></p>
+        </label>
 
-        <p className="error e-con-pass"></p>
-      </label>
-
-      <label>
-        <button onClick={send} className="button">
-          {loading ? <Loading /> : "Enviar"}
+        <button title="Enviar" className="button">
+          { loading ? <Loading /> : "Enviar" }
         </button>
-      </label>
 
-      <p id="error"></p>
+        <p id="error" ref={errorForm}></p>
+
+      </form>
     </main>
   );
 }

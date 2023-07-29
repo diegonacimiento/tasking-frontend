@@ -12,54 +12,53 @@ export default function FormCreateUser() {
     const { hasDataInput, showError, validateEmail, validatePasswords, sendFormLogin } = useForm();
 
     const [loading, setLoading] = useState(false);
-    const [formRef, setFormRef] = useState([]);
+    const [form, setForm] = useState({});
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const errorForm = useRef(null);
-    const labelUser = useRef(null);
-    const labelEmail = useRef(null);
-    const labelPassword = useRef(null);
-    const labelConfirmPassword = useRef(null);
+    const formRef = useRef(null);
 
     useEffect(() => {
-        setFormRef({
+        setForm({
             username: {
-                span: labelUser.current.children[0],
-                input: labelUser.current.children[1],
-                error: labelUser.current.children[2]  
+                span: formRef.current.children[0].children[0],
+                input: formRef.current.children[0].children[1],
+                error: formRef.current.children[0].children[2]  
             },
             email: {
-                span: labelEmail.current.children[0],
-                input: labelEmail.current.children[1],
-                error: labelEmail.current.children[2]  
+                span: formRef.current.children[1].children[0],
+                input: formRef.current.children[1].children[1],
+                error: formRef.current.children[1].children[2]  
             },
             password: {
-                span: labelPassword.current.children[0],
-                input: labelPassword.current.children[1].children[0],
-                error: labelPassword.current.children[2]  
+                span: formRef.current.children[2].children[0],
+                input: formRef.current.children[2].children[1],
+                error: formRef.current.children[2].children[3]  
             },
             confirmPassword: {
-                span: labelConfirmPassword.current.children[0],
-                input: labelConfirmPassword.current.children[1].children[0],
-                error: labelConfirmPassword.current.children[2]  
+                span: formRef.current.children[3].children[0],
+                input: formRef.current.children[3].children[1],
+                error: formRef.current.children[3].children[3]  
             },
         });
     }, [])
 
-    function toggleShowPassword() {
+    function toggleShowPassword(e) {
+        e.preventDefault();
         setShowPassword(prevState => !prevState);
     }
 
-    function toggleShowConfirmPassword() {
+    function toggleShowConfirmPassword(e) {
+        e.preventDefault();
         setShowConfirmPassword(prevState => !prevState);
     }
 
     function checkForm() {
-        const isCompleteInputs = hasDataInput(formRef, errorForm);
+        const isCompleteInputs = hasDataInput(form, errorForm);
         if(isCompleteInputs) {
-            const isValidateEmail = validateEmail(formRef.email);
-            const isValidatePasswords = validatePasswords(formRef.password, formRef.confirmPassword);
+            const isValidateEmail = validateEmail(form.email);
+            const isValidatePasswords = validatePasswords(form.password, form.confirmPassword);
             if(isValidateEmail && isValidatePasswords) {
                 return true;
             }
@@ -83,25 +82,25 @@ export default function FormCreateUser() {
             const containId = e.response.data.errors[0].message.includes("id");
             const containEmail = e.response.data.errors[0].message.includes("email");
             if (containId) {
-                showError("Usuario en uso, elige otro", formRef.username);
+                showError("Usuario en uso, elige otro", form.username);
             } else if (containEmail) {
-                showError("Email en uso, elige otro", formRef.email);
+                showError("Email en uso, elige otro", form.email);
             }
         } finally {
             setLoading(false)
         }
     }
 
-    function handleCreate(e) {
+    function handleSubmit(e) {
         e.preventDefault();
 
-        const isFormComplete = checkForm();
+        const isValidateForm = checkForm();
 
-        if(!isFormComplete) return null;
+        if(!isValidateForm) return null;
 
-        const username = formRef.username.input.value.toLowerCase();
-        const email = formRef.email.input.value;
-        const password = formRef.password.input.value;
+        const username = form.username.input.value.toLowerCase();
+        const email = form.email.input.value;
+        const password = form.password.input.value;
 
         const body = {
         id: `${username}`,
@@ -116,47 +115,43 @@ export default function FormCreateUser() {
     }
 
     return (
-        <form onSubmit={handleCreate}>
+        <form onSubmit={handleSubmit} ref={formRef}>
 
-            <label ref={labelUser}>
+            <label>
                 <span>Usuario</span>
                 <input type={"text"} />
                 <p className="error"></p>
             </label>
 
-            <label ref={labelEmail}>
-                <span>Correo electrónico</span>
+            <label>
+                <span>Email</span>
                 <input type={"email"} />
                 <p className="error"></p>
             </label>
 
-            <label ref={labelPassword}>
+            <label>
                 <span>Contraseña</span>
-                <div className="contain-input-button-pass">
-                    <input type={ showPassword ? "text" : "password" } />
-                    <button 
-                        onClick={toggleShowPassword} 
-                        title={showPassword ? "Ocultar contraseña" : "Ver contraseña"}
-                        className="view-password" 
-                    >
-                        { showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible /> }
-                    </button>
-                </div>
+                <input type={ showPassword ? "text" : "password" } />
+                <button 
+                    onClick={toggleShowPassword} 
+                    title={showPassword ? "Ocultar contraseña" : "Ver contraseña"}
+                    className="show-password" 
+                >
+                    { showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible /> }
+                </button>
                 <p className="error"></p>
             </label>
 
-            <label ref={labelConfirmPassword}>
+            <label>
                 <span>Confirmar contraseña</span>
-                <div className="contain-input-button-pass">
-                    <input type={ showConfirmPassword ? "text" : "password"} />
-                    <button 
-                        onClick={toggleShowConfirmPassword} 
-                        title={ showConfirmPassword ? "Ocultar contraseña" : "Ver contraseña" }
-                        className="view-password"
-                    >
-                        { showConfirmPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible /> }
-                    </button>
-                </div>
+                <input type={ showConfirmPassword ? "text" : "password"} />
+                <button 
+                    onClick={toggleShowConfirmPassword} 
+                    title={ showConfirmPassword ? "Ocultar contraseña" : "Ver contraseña" }
+                    className="show-password"
+                >
+                    { showConfirmPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible /> }
+                </button>
                 <p className="error"></p>
             </label>
             
