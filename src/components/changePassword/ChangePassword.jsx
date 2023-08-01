@@ -98,11 +98,12 @@ export default function ChangePassword() {
 
         <label>
           <span>Nueva contraseña</span>
-          <input type={ showNewPassword ? "text" : "password"} />
+          <input type={ showNewPassword ? "text" : "password"} name="new-password" />
           <button 
             onClick={toggleShowNewPassword} 
             title={showNewPassword ? "Ocultar contraseña" : "Ver contraseña"}
-            className="show-password" 
+            className="show-password"
+            type="button"
           >
             { showNewPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible /> }
           </button>
@@ -111,18 +112,19 @@ export default function ChangePassword() {
 
         <label>
           <span>Confirmar nueva contraseña</span>
-          <input type={ showConfirmPassword ? "text" : "password"} />
+          <input type={ showConfirmPassword ? "text" : "password"} name="confirm-password" />
           <button 
             onClick={toggleShowConfirmPassword}
             title={showConfirmPassword ? "Ocultar contraseña" : "Ver contraseña"}
-            className="show-password" 
+            className="show-password"
+            type="button"
           >
             { showConfirmPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible /> }
           </button>
           <p className="error"></p>
         </label>
 
-        <button title="Enviar" className="button">
+        <button title="Enviar" className="button" type="submit">
           { loading ? <Loading /> : "Enviar" }
         </button>
 

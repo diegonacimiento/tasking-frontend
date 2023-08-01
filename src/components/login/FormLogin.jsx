@@ -68,21 +68,22 @@ export default function FormLogin() {
         <form className="main-login__login" onSubmit={handleSubmit} ref={formRef}>
             <label>
                 <span>Email</span>
-                <input type={"email"} />
+                <input type={"email"} name='email' />
             </label>
             <label>
                 <span>Contraseña</span>
-                <input type={showPassword ? "text" : "password"} />
+                <input type={showPassword ? "text" : "password"} name='password' />
                 <button
                     title={showPassword ? "Ocultar contraseña" : "Ver contraseña"}
                     onClick={toggleShowPassword}
                     className="show-password"
+                    type='button'
                     >
                     { showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible /> }
                 </button>
             </label>
 
-            <button title='Iniciar sesión' className="button">
+            <button title='Iniciar sesión' className="button" type='submit'>
                 { loading ? <Loading /> : "Iniciar sesión" }
             </button>
             <p id="error" ref={error}></p>

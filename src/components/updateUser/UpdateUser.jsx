@@ -148,7 +148,10 @@ export default function UpdateUser() {
           <input type={ showPassword ? "text" : "password"} />
           <button 
             className="show-password"
-            title={ showPassword ? "Ocultar contraseña" : "Ver contraseña" } onClick={toggleShowPassword}>
+            title={ showPassword ? "Ocultar contraseña" : "Ver contraseña" } 
+            onClick={toggleShowPassword}
+            type="button"
+            >
             { showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible /> }
           </button>
           <p className="error"></p>
@@ -156,12 +159,15 @@ export default function UpdateUser() {
 
         <label>
           <span>Nueva contraseña</span>
-            <input type={ showNewPassword ? "text" : "password"} />
-            <button 
-              className="show-password"
-              title={ showNewPassword ? "Ocultar contraseña" : "Ver contraseña" } onClick={toggleShowNewPassword}>
-              { showNewPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible /> }
-            </button>
+          <input type={ showNewPassword ? "text" : "password"} />
+          <button 
+            className="show-password"
+            title={ showNewPassword ? "Ocultar contraseña" : "Ver contraseña" } 
+            onClick={toggleShowNewPassword}
+            type="button"
+            >
+            { showNewPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible /> }
+          </button>
           <p className="error"></p>
         </label>
 
@@ -170,13 +176,16 @@ export default function UpdateUser() {
             <input type={ showConfirmPassword ? "text" : "password"} />
             <button 
               className="show-password"
-              title={ showConfirmPassword ? "Ocultar contraseña" : "Ver contraseña" } onClick={toggleShowConfirmPassword}>
+              title={ showConfirmPassword ? "Ocultar contraseña" : "Ver contraseña" } 
+              onClick={toggleShowConfirmPassword}
+              type="button"
+            >
               { showConfirmPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible /> }
             </button>
           <p className="error"></p>
         </label>
 
-        <button title="Enviar" className="button">
+        <button title="Enviar" className="button" type="submit">
           {loading ? <Loading /> : "Guardar cambios"}
         </button>
 

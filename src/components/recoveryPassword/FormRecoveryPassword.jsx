@@ -62,7 +62,7 @@ export default function FormRecoveryPassword({ navigate }) {
             <span>Email</span>
             <input type={"email"} />
         </label>
-        <button title="Enviar" className="button">
+        <button title="Enviar" className="button" type="submit">
             {loading ? <Loading /> : "Enviar"}
         </button>
         <p id="error" ref={msgForm}></p>

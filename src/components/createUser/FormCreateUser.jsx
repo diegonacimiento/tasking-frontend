@@ -119,23 +119,24 @@ export default function FormCreateUser() {
 
             <label>
                 <span>Usuario</span>
-                <input type={"text"} />
+                <input type={"text"} name="username" />
                 <p className="error"></p>
             </label>
 
             <label>
                 <span>Email</span>
-                <input type={"email"} />
+                <input type={"email"} name="email" />
                 <p className="error"></p>
             </label>
 
             <label>
                 <span>Contraseña</span>
-                <input type={ showPassword ? "text" : "password" } />
+                <input type={ showPassword ? "text" : "password" } name="new-password" />
                 <button 
                     onClick={toggleShowPassword} 
                     title={showPassword ? "Ocultar contraseña" : "Ver contraseña"}
-                    className="show-password" 
+                    className="show-password"
+                    type="button"
                 >
                     { showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible /> }
                 </button>
@@ -144,18 +145,19 @@ export default function FormCreateUser() {
 
             <label>
                 <span>Confirmar contraseña</span>
-                <input type={ showConfirmPassword ? "text" : "password"} />
+                <input type={ showConfirmPassword ? "text" : "password"} name="confirm-password" />
                 <button 
                     onClick={toggleShowConfirmPassword} 
                     title={ showConfirmPassword ? "Ocultar contraseña" : "Ver contraseña" }
                     className="show-password"
+                    type="button"
                 >
                     { showConfirmPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible /> }
                 </button>
                 <p className="error"></p>
             </label>
             
-            <button title="Crear usuario" className="button">
+            <button title="Crear usuario" className="button" type="submit">
                 {loading ? <Loading /> : "Crear"}
             </button>
             
