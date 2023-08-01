@@ -5,7 +5,7 @@ export default function SearchTasks({ tasks, setResultSearch }) {
 
   function searchTask(text) {
     const result = tasks.filter((task) => {
-      return task.description.includes(text);
+      return task.description.includes(text.toLowerCase());
     });
     result.length > 0 ? setResultSearch([...result]) : setResultSearch(undefined);
     if (text === "") {
