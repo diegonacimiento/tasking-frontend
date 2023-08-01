@@ -31,7 +31,7 @@ export default function SearchTasks({ tasks, setResultSearch }) {
 
   return (
     <div className="search-tasks-div">
-      <input onChange={search} placeholder="Buscar" type="text" value={valueInput} autoComplete="off" />
+      <input onChange={search} placeholder="Buscar" type="text" value={valueInput} />
       <button title="Borrar búsqueda" onClick={deleteSearch} ref={buttonDelete}><VscClose /></button>
     </div>
   );

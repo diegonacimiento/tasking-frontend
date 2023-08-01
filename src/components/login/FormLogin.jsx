@@ -68,7 +68,7 @@ export default function FormLogin() {
         <form className="main-login__login" onSubmit={handleSubmit} ref={formRef}>
             <label>
                 <span>Email</span>
-                <input type={"email"} autoComplete='off' />
+                <input type={"email"} />
             </label>
             <label>
                 <span>Contraseña</span>

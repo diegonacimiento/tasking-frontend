@@ -119,13 +119,13 @@ export default function FormCreateUser() {
 
             <label>
                 <span>Usuario</span>
-                <input type={"text"} autoComplete="off" />
+                <input type={"text"} />
                 <p className="error"></p>
             </label>
 
             <label>
                 <span>Email</span>
-                <input type={"email"} autoComplete="off" />
+                <input type={"email"} />
                 <p className="error"></p>
             </label>
 
