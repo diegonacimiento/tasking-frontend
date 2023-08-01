@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import usersService from "../../services/user.service";
 import Loading from "../loading/Loading";
 import useForm from "../../hooks/useForm";
+import usersService from "../../services/user.service";
 import "./changePassword.css";
 
 const service = new usersService();

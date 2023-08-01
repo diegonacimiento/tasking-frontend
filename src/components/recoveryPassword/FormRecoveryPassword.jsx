@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
-import usersService from "../../services/user.service";
 import Loading from "../loading/Loading";
 import useForm from "../../hooks/useForm";
+import usersService from "../../services/user.service";
 
 const service = new usersService();
 
@@ -10,20 +10,20 @@ export default function FormRecoveryPassword({ navigate }) {
     const [email, setEmail] = useState({});
 
     const labelEmail = useRef(null);
-    const error = useRef(null);
+    const msgForm = useRef(null);
 
     useEffect(() => {
         setEmail({
         span: labelEmail.current.children[0],
         input: labelEmail.current.children[1],
-        error: error.current,
+        error: msgForm.current,
         });
     }, [])
 
-    const { showError, validateEmail, resetInput, hasDataInput } = useForm();
+    const { showError, validateEmail, resetInput, hasDataInput, showSuccessMessage } = useForm();
 
     function checkForm() {
-        const isFormComplete = hasDataInput({ email }, error, "Ingrese su email");
+        const isFormComplete = hasDataInput({ email }, msgForm, "Ingrese su email");
         if(isFormComplete) {
             const isValidateEmail = validateEmail(email);
             return isValidateEmail;
@@ -34,8 +34,7 @@ export default function FormRecoveryPassword({ navigate }) {
     async function sendForm(body) {
         try {
             await service.recoveryPassword(body);
-            error.current.setAttribute("style", "color: green");
-            error.current.textContent = `Email enviado con éxito`;
+            showSuccessMessage("Email enviado con éxito", msgForm);
         } catch (e) {
         if (e.response.status === 404 || e.response.status === 401) {
             showError("El email no está vinculado", email);
@@ -66,7 +65,7 @@ export default function FormRecoveryPassword({ navigate }) {
         <button title="Enviar" className="button">
             {loading ? <Loading /> : "Enviar"}
         </button>
-        <p id="error" ref={error}></p>
+        <p id="error" ref={msgForm}></p>
         </form>
     );
 }

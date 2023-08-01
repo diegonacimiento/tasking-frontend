@@ -22,6 +22,11 @@ export default function useForm() {
         }
     }
 
+    function showSuccessMessage(msg, element) {
+        element.current.setAttribute("style", "color: green");
+        element.current.textContent = msg;
+    }
+
     function resetInput(...elements) {
         elements.forEach(element => {
             const { span, input, error } = element;
@@ -31,7 +36,7 @@ export default function useForm() {
         })
     }
 
-    function hasDataInput(inputs, errorForm, msg) {
+    function hasDataInput(inputs, msgForm, msg) {
         const msgError = msg ?? "Debe completar todos los campos";
         const elements = Object.entries(inputs);
         const results = elements.map((item) => {
@@ -41,14 +46,14 @@ export default function useForm() {
                 input.style.border = "1px solid rgb(238, 16, 16)";
                 input.style.color = "rgb(238, 16, 16)";
                 span.style.color = "rgb(238, 16, 16)";
-                showError(msgError, errorForm);
+                showError(msgError, msgForm || item[1]);
                 return false;
             }
             resetInput(item[1]);
             return true;
         });
         const isCompleteInputs = results.every((value) => value === true);
-        if(isCompleteInputs) showError("", errorForm);
+        if(isCompleteInputs && msgForm) showError("", msgForm);
         return isCompleteInputs;
     }
 
@@ -65,18 +70,16 @@ export default function useForm() {
 
     function validatePasswords(password, otherPassword) {
         resetInput(password, otherPassword);
+        let isValidatePasswords = true;
         if(password.input.value.length < 6) {
             showError("Mínimo 6 carácteres", password);
-            showError("", otherPassword);
-            return false;
+            isValidatePasswords = false;
         }
         if(password.input.value !== otherPassword.input.value) {
-            showError("Las contraseñas no coinciden", otherPassword);
-            showError("", password);
-            return false;
+            showError("La contraseña no coincide", otherPassword);
+            isValidatePasswords = false;
         }
-        resetInput(password, otherPassword);
-        return true;
+        return isValidatePasswords;
     }
 
     async function sendFormLogin(body) {
@@ -103,6 +106,7 @@ export default function useForm() {
     return {
         hasDataInput,
         showError,
+        showSuccessMessage,
         resetInput,
         validateEmail,
         validatePasswords,

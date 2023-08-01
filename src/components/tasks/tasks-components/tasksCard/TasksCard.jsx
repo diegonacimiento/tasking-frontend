@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import "./tasksCard.css";
 import { VscClose, VscCheck } from "react-icons/vsc";
 import { useContext } from "react";
+import { capitalizeString } from "../../../../utils/dataUtils";
 import { Context } from "../../../../context/Context";
 import tasksService from "../../../../services/tasks.service";
-import { capitalizeString } from "../../../../utils/dataUtils";
 
 const service = new tasksService();
 

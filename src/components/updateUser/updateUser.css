@@ -1,6 +1,10 @@
 .main-update {
-    justify-content: center;
+    flex-direction: column;
     max-width: 620px;
+}
+
+.main-update > * {
+    margin: 10px 0;
 }
 
 .main-update form {
@@ -22,6 +26,10 @@
     margin: auto;
 }
 
+.main-update form #error {
+    margin-top: 15px;
+}
+
 .main-update form h2 {
     font-size: 18rem;
 }
@@ -34,7 +42,7 @@
     width: 80%;
 }
 
-.main-update form label .contain-input-button-pass {
+.main-update form label {
     position: relative;
 }
 
@@ -43,16 +51,15 @@
     width: 100%;
 }
 
-.main-update .view-password {
+.main-update .show-password {
     position: absolute;
-    display: flex;
-    background: none;
-    border: none;
-    top: calc(50% - 8px);
     right: 10px;
+    bottom: 30px;
+    display: flex;
+    align-items: center;
+    border: none;
+    height: 50rem;
     width: max-content;
-}
-
-.main-update .view-password svg{
+    background: none;
     color: var(--colorBotton);
 }

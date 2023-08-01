@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import TasksList from "../tasks/tasks-components/tasksList/TasksList";
 import { TiPlus } from "react-icons/ti";
 import { Context } from "../../context/Context";
@@ -13,6 +14,7 @@ const service = new tasksService();
 const modal = document.getElementById("modal");
 
 export default function Tasks() {
+  const navigate = useNavigate();
 
   const error = useRef(null);
 
@@ -27,13 +29,13 @@ export default function Tasks() {
         const response = await service.searchAll(token);
         setTasks(response.data);
       } catch (error) {
-        setTasks('Error server');
+        return navigate("/serverError");
       }
     }
     getTasks();
   }, []);
 
-  function foundError(msg) {
+  function showError(msg) {
     error.current.textContent = msg;
   }
 
@@ -44,7 +46,7 @@ export default function Tasks() {
   return (
     <main className="main-tasks">
       <Modal>
-        <NewTask tasks={tasks} setTasks={setTasks} foundError={foundError} />
+        <NewTask tasks={tasks} setTasks={setTasks} showError={showError} />
       </Modal>
 
       <SearchTasks tasks={tasks} setResultSearch={setResultSearch} />

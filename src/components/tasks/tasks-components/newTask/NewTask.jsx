@@ -6,7 +6,7 @@ import Loading from "../../../loading/Loading";
 
 const service = new tasksService();
 
-export default function NewTask({ tasks, setTasks, foundError }) {
+export default function NewTask({ tasks, setTasks, showError }) {
   const { token } = useContext(Context);
 
   const copyTasks = tasks;
@@ -32,10 +32,10 @@ export default function NewTask({ tasks, setTasks, foundError }) {
     try {
       const newTask = await service.create(task, token);
       setTasks([...tasks, newTask.data.newTask]);
-      foundError("")
+      showError("")
     } catch (error) {
       setTasks(copyTasks);
-      foundError("Ocurrió un problema.");
+      showError("Ocurrió un problema.");
     }
   }
 

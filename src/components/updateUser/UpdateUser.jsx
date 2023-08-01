@@ -1,213 +1,186 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Context } from "../../context/Context";
 import Loading from "../loading/Loading";
+import useForm from "../../hooks/useForm";
 import usersService from "../../services/user.service";
 import "./updateUser.css";
 
 const service = new usersService();
 
 export default function UpdateUser() {
-  const {
-    token,
-    modeViewPass,
-    modeViewNP,
-    modeViewCNP,
-    viewPassword,
-    viewPasswordNP,
-    viewPasswordCNP,
-    emailValidation,
-    passwordValidation,
-  } = useContext(Context);
+  const { token } = useContext(Context);
 
   const navigate = useNavigate();
 
+  const { showError, validatePasswords, hasDataInput, showSuccessMessage } = useForm();
+
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [form, setForm] = useState({});
 
-  function sendForm() {
-    const email = document.querySelector(".main-update__input-email");
+  const formRef = useRef(null);
+  const msgForm = useRef(null);
 
-    const password = document.querySelector(".password");
-    const newPassword = document.querySelector(".newPassword");
-    const confirmNewPassword = document.querySelector(".confirmNewPassword");
+  useEffect(() => {
+    setForm({
+      email: {
+        span: formRef.current.children[0].children[0],
+        input: formRef.current.children[0].children[1],
+        error: formRef.current.children[0].children[2]  
+    },
+      password: {
+        span: formRef.current.children[1].children[0],
+        input: formRef.current.children[1].children[1],
+        error: formRef.current.children[1].children[3]  
+    },
+      newPassword: {
+      span: formRef.current.children[2].children[0],
+      input: formRef.current.children[2].children[1],
+      error: formRef.current.children[2].children[3]  
+    },
+      confirmPassword: {
+        span: formRef.current.children[3].children[0],
+        input: formRef.current.children[3].children[1],
+        error: formRef.current.children[3].children[3]  
+    },
+    });
+  }, [])
 
-    if (email.value !== localStorage.getItem("email")) {
-      setLoading(true);
-      const emailUpdate = service.update({ email: email.value }, token);
-      emailUpdate
-        .then(() => {
-          document
-            .getElementById("error")
-            .setAttribute("style", "color: green");
-          document.getElementById("error").textContent = "Datos actualizados.";
-          email.removeAttribute("style");
-          localStorage.setItem("email", email.value);
-        })
-        .catch((e) => {
-          if (e.response.status == 409) {
-            document
-              .getElementById("error")
-              .setAttribute("style", "color: rgb(238, 16, 16)");
-            document.getElementById("error").textContent =
-              "El email ya está en uso, elige otro.";
-            email.setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
-          } else navigate("/serverError");
-        })
-        .finally(() => setLoading(false));
-    }
-
-    if (newPassword.value.length && confirmNewPassword.value.length > 5) {
-      if (password.value.length < 1) {
-        document
-          .querySelector(".e-pass-act")
-          .setAttribute("style", "color: rgb(238, 16, 16)");
-        document.querySelector(".e-pass-act").textContent =
-          "Debe ingresar su contraseña.";
-        password.setAttribute("style", "border: 1px solid rgb(238, 16, 16)");
-        document
-          .querySelector(".span-pass-act")
-          .setAttribute("style", "color: rgb(238, 16, 16)");
-        return;
-      }
-
-      password.removeAttribute("style", "border: 1px solid rgb(238, 16, 16)");
-
-      setLoading(true);
-      const passwordUpdate = service.updatePassword(
-        {
-          password: password.value,
-          newPassword: newPassword.value,
-          confirmNewPassword: confirmNewPassword.value,
-        },
-        token
-      );
-      passwordUpdate
-        .then(() => {
-          document
-            .getElementById("error")
-            .setAttribute("style", "color: darkgreen");
-          document.getElementById("error").textContent = "Datos actualizados.";
-        })
-        .catch((e) => {
-          if (
-            e.response.status == 401 ||
-            e.response.data.message.includes("length")
-          ) {
-            document
-              .getElementById("error")
-              .setAttribute("style", "color: rgb(238, 16, 16)");
-            document.getElementById("error").textContent =
-              "Contraseña incorrecta.";
-            password.setAttribute(
-              "style",
-              "border: 1px solid rgb(238, 16, 16)"
-            );
-          } else navigate("/serverError");
-        })
-        .finally(() => setLoading(false));
-    }
-  }
-
-  function error(e) {
+  function toggleShowPassword(e) {
     e.preventDefault();
+    setShowPassword(prevState => !prevState);
   }
 
-  const style = document.documentElement.style;
+  function toggleShowNewPassword(e) {
+    e.preventDefault();
+    setShowNewPassword(prevState => !prevState);
+  }
 
-  // style.setProperty("--heightRoot", "100vh");
-  // style.setProperty("--minHeightRoot", "725px");
+  function toggleShowConfirmPassword(e) {
+    e.preventDefault();
+    setShowConfirmPassword(prevState => !prevState);
+  }
+
+  async function updateEmail(body) {
+    try {
+      await service.update(body, token);
+        showSuccessMessage("Datos actualizados", msgForm);
+        localStorage.setItem("email", body.email);
+    } catch (e) {
+      if(e.response.status === 401) {
+        showError("La contraseña es incorrecta", form.password);
+      } else if (e.response.status === 409) {
+        showError("Email en uso, elija otro", formRef.email);
+      } else navigate("/serverError");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function updatePassword(body) {
+    try {
+      await service.updatePassword(body, token);
+      showSuccessMessage("Datos actualizados", msgForm);
+    } catch (e) {
+      if(e.response.status === 400 || e.response.status === 401) {
+        showError("La contraseña es incorrecta", form.password);
+      } else navigate("/serverError");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const emailValue = form.email.input.value;
+    const newPasswordValue = form.newPassword.input.value;
+
+    if(emailValue !== localStorage.getItem("email") && emailValue) {
+      const hasPasswordValue = hasDataInput({ password: form.password }, null, "Debe ingresar su contraseña");
+      if(!hasPasswordValue) return null;
+      setLoading(true);
+      updateEmail({ email: emailValue });
+    }
+    
+    if(newPasswordValue) {
+      const hasPasswordValue = hasDataInput({ password: form.password }, null, "Debe ingresar su contraseña");
+      if(!hasPasswordValue) return null;
+
+      const isValidatePasswords = validatePasswords(form.newPassword, form.confirmPassword);
+      if(!isValidatePasswords) return null;
+      
+      const bodyUpdatePassword = {
+        password: form.password.input.value,
+        newPassword: newPasswordValue,
+        confirmNewPassword: form.confirmPassword.input.value,
+      };
+
+      setLoading(true);
+
+      updatePassword(bodyUpdatePassword);
+    }
+
+    return null;
+
+  }
 
   return (
     <main className="main-update">
-      <form onSubmit={error}>
-        <h2>{"Hola " + localStorage.getItem("user") + "."}</h2>
+      <h2>{"Hola " + localStorage.getItem("user")}</h2>
+
+      <h3>Actualiza tus datos</h3>
+
+      <form onSubmit={handleSubmit} ref={formRef}>
 
         <label>
-          <h3>Actualiza tus datos.</h3>
+          <span>Correo electrónico</span>
+          <input type={"email"} defaultValue={localStorage.getItem("email")} />
+          <p className="error"></p>
+        </label>
+        
+        <label>
+          <span>Contraseña actual</span>
+          <input type={ showPassword ? "text" : "password"} />
+          <button 
+            className="show-password"
+            title={ showPassword ? "Ocultar contraseña" : "Ver contraseña" } onClick={toggleShowPassword}>
+            { showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible /> }
+          </button>
+          <p className="error"></p>
         </label>
 
         <label>
-          <span className="span-mail">Correo electrónico</span>
-          <input
-            onChange={emailValidation}
-            className="main-update__input-email email"
-            type={"email"}
-            defaultValue={localStorage.getItem("email")}
-          />
-          <p className="error e-mail"></p>
-        </label>
-        <label>
-          <span className="span-pass-act">Contraseña actual</span>
-          <div className="contain-input-button-pass">
-            <input
-              onChange={() => {
-                document
-                  .querySelector(".e-pass-act")
-                  .removeAttribute("style");
-                document.querySelector(".e-pass-act").textContent = "";
-                document.querySelector(".password").removeAttribute("style");
-                document
-                  .querySelector(".span-pass-act")
-                  .removeAttribute("style");
-              }}
-              className="password"
-              type={"password"}
-            />
-            <button onClick={viewPassword} className="view-password">
-              {modeViewPass == "invisible" ? (
-                <AiOutlineEyeInvisible />
-              ) : (
-                <AiOutlineEye />
-              )}
+          <span>Nueva contraseña</span>
+            <input type={ showNewPassword ? "text" : "password"} />
+            <button 
+              className="show-password"
+              title={ showNewPassword ? "Ocultar contraseña" : "Ver contraseña" } onClick={toggleShowNewPassword}>
+              { showNewPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible /> }
             </button>
-          </div>
-          <p className="error e-pass-act"></p>
-        </label>
-        <label>
-          <span className="span-pass">Nueva contraseña</span>
-          <div className="contain-input-button-pass">
-            <input
-              onChange={passwordValidation}
-              className="newPassword"
-              type={"password"}
-              minLength={6}
-            />
-            <button onClick={viewPasswordNP} className="view-password">
-              {modeViewNP == "invisible" ? (
-                <AiOutlineEyeInvisible />
-              ) : (
-                <AiOutlineEye />
-              )}
-            </button>
-          </div>
-          <p className="error e-pass"></p>
-        </label>
-        <label>
-          <span className="span-con-pass">Confirmar nueva contraseña</span>
-          <div className="contain-input-button-pass">
-            <input
-              onChange={passwordValidation}
-              className="confirmNewPassword"
-              type={"password"}
-              minLength={6}
-            />
-            <button onClick={viewPasswordCNP} className="view-password">
-              {modeViewCNP == "invisible" ? (
-                <AiOutlineEyeInvisible />
-              ) : (
-                <AiOutlineEye />
-              )}
-            </button>
-          </div>
-          <p className="error e-con-pass"></p>
+          <p className="error"></p>
         </label>
 
-        <button onClick={sendForm} className="button">
+        <label>
+          <span>Confirmar nueva contraseña</span>
+            <input type={ showConfirmPassword ? "text" : "password"} />
+            <button 
+              className="show-password"
+              title={ showConfirmPassword ? "Ocultar contraseña" : "Ver contraseña" } onClick={toggleShowConfirmPassword}>
+              { showConfirmPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible /> }
+            </button>
+          <p className="error"></p>
+        </label>
+
+        <button title="Enviar" className="button">
           {loading ? <Loading /> : "Guardar cambios"}
         </button>
 
-        <p id="error"></p>
+        <p id="error" ref={msgForm}></p>
       </form>
     </main>
   );

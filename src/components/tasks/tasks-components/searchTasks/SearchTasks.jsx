@@ -8,7 +8,7 @@ export default function SearchTasks({ tasks, setResultSearch }) {
       return task.description.includes(text);
     });
     result.length > 0 ? setResultSearch([...result]) : setResultSearch(undefined);
-    if (text == "") {
+    if (text === "") {
       setResultSearch(null);
     }
   }
