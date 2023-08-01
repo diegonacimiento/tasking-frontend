@@ -1,6 +1,6 @@
 .search-tasks-div {
+    position: relative;
     margin: 20px 0;
-    height: 55px;
     width: 90%;
     max-width: 400px;
 }
@@ -20,4 +20,14 @@
 
 .search-tasks-div input::placeholder {
     color: rgba(102, 102, 102, 0.85);
+}
+
+.search-tasks-div button {
+    display: none;
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    height: 40px;
+    color: var(--colorBotton);
 }
