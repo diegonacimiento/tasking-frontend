@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Menu from '../../../Menu';
-import Drawer from '../drawer/Drawer';
 import { HiOutlineMenu } from 'react-icons/hi';
+import Drawer from '../drawer/Drawer';
+import Menu from '../../../Menu';
 
 const style = document.documentElement.style;
 
@@ -24,7 +24,7 @@ export default function HeaderMobile({ logout }) {
             <Menu>
                 <Drawer toggleDrawer={toggleDrawer} logout={logout} />{" "}
             </Menu>
-            <button onClick={toggleDrawer} className="drawer">
+            <button onClick={toggleDrawer} className="drawer" title='Abrir cajón' type='button'>
                 {<HiOutlineMenu />}
             </button>
         </>

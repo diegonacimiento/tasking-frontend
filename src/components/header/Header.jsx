@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
+import { Context } from "../../context/Context";
 import HeaderDesktop from "./HeaderDesktop";
 import HeaderMobile from "./HeaderMobile";
 import toggleTheme from "../../assets/theme";
 import "./header.css";
-import { Context } from "../../context/Context";
 
 const isMobile = window.innerWidth <= 712 || window.innerHeight <= 575;
 
@@ -61,7 +61,7 @@ export default function Header() {
         <HeaderDesktop logout={logout} />
       )}
 
-      <button title="Cambiar tema" className="mode" onClick={changeMode}>
+      <button title="Cambiar tema" className="mode" onClick={changeMode} type="button">
         {isDarkMode ? <MdDarkMode /> : <MdLightMode />}
       </button>
     </header>

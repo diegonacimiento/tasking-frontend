@@ -6,7 +6,7 @@ import "./drawer.css";
 export default function Drawer({ toggleDrawer, logout }) {
   return (
     <>
-      <button title="Cerrar" onClick={toggleDrawer} className="drawer__button-close">
+      <button title="Cerrar" onClick={toggleDrawer} className="drawer__button-close" type="button">
         <VscClose />
       </button>
       <div className="contain-nav-bar">

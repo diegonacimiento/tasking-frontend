@@ -14,7 +14,7 @@ export default function NavBar({ logout, toggleDrawer = () => {} }) {
             <Link onClick={toggleDrawer} className="links-nav-bar" to={"/update-user"}>
                 Editar usuario
             </Link>
-            <button title='Cerrar sesión' onClick={handleLogout} id="bt-nav-bar" className="button">
+            <button title='Cerrar sesión' onClick={handleLogout} id="bt-nav-bar" className="button" type='button'>
                 Cerrar sesión
             </button>
         </>
