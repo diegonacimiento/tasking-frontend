@@ -75,7 +75,7 @@ export default function UpdateUser() {
         showError("La contraseña es incorrecta", form.password);
       } else if (e.response.status === 409) {
         showError("Email en uso, elija otro", formRef.email);
-      } else navigate("/serverError");
+      } else navigate("/server-error");
     } finally {
       setLoading(false);
     }
@@ -88,7 +88,7 @@ export default function UpdateUser() {
     } catch (e) {
       if(e.response.status === 400 || e.response.status === 401) {
         showError("La contraseña es incorrecta", form.password);
-      } else navigate("/serverError");
+      } else navigate("/server-error");
     } finally {
       setLoading(false);
     }

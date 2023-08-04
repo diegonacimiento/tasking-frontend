@@ -29,7 +29,7 @@ export default function Tasks() {
         const response = await service.searchAll(token);
         setTasks(response.data);
       } catch (error) {
-        return navigate("/serverError");
+        return navigate("/server-error");
       }
     }
     getTasks();
@@ -52,7 +52,7 @@ export default function Tasks() {
       <SearchTasks tasks={tasks} setResultSearch={setResultSearch} />
 
       <div className="task-list-container">
-        <TasksList tasks={tasks} setTasks={setTasks} resultSearch={resultSearch} />
+        <TasksList tasks={tasks} setTasks={setTasks} resultSearch={resultSearch} showError={showError} />
       </div>
 
       <p id="error" ref={error}></p>

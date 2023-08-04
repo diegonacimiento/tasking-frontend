@@ -37,6 +37,7 @@ export default function SearchTasks({ tasks, setResultSearch }) {
         type="text" 
         value={valueInput} 
         name="search"
+        autoComplete="off"
       />
       <button title="Borrar búsqueda" onClick={deleteSearch} ref={buttonDelete}><VscClose /></button>
     </div>

@@ -12,7 +12,7 @@ class usersService {
 
   async create(body) {
     const newUser = await axios.post(
-      `${config.db_Url}/api/v1/usuarios/create`,
+      `${config.db_Url}/api/v1/users/create`,
       body
     );
     return newUser;
@@ -20,7 +20,7 @@ class usersService {
 
   async update(body, token) {
     const update = await axios.put(
-      `${config.db_Url}/api/v1/usuarios/editar`,
+      `${config.db_Url}/api/v1/users/update`,
       body,
       { headers: { Authorization: `Bearer ${token}` } }
     );
@@ -29,7 +29,7 @@ class usersService {
 
   async updatePassword(body, token) {
     const updatePass = await axios.put(
-      `${config.db_Url}/api/v1/usuarios/editar-password`,
+      `${config.db_Url}/api/v1/users/change-password`,
       body,
       { headers: { Authorization: `Bearer ${token}` } }
     );

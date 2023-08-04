@@ -41,7 +41,7 @@ export default function AppRouter() {
               />
             </Route>
 
-            <Route path="/serverError" element={<ServerErrorPage />} />
+            <Route path="/server-error" element={<ServerErrorPage />} />
 
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

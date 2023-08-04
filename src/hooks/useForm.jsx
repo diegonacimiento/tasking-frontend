@@ -93,12 +93,12 @@ export default function useForm() {
                 return navigate("/");
             }
         } catch (error) {
-            if (error.response.status === 401 || error.response.status === 404) {
+            if (error.response?.status === 401 || error.response?.status === 404) {
                 throw `Email o contraseña incorrecta`;
-            } else if (error.response.status === 400) {
+            } else if (error.response?.status === 400) {
                 throw `Ingrese su email y contraseña`;
             } else {
-                return navigate("/serverError");
+                return navigate("/server-error");
             }
         } 
     }

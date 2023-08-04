@@ -1,11 +1,12 @@
-.main-serverError {
+.main-server-error {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    max-width: 620px;
 }
 
-.main-serverError div {
+.main-server-error div {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,7 +15,7 @@
     height: 80%;
 }
 
-.main-serverError .contain-image {
+.main-server-error .contain-image {
     height: 250px;
     width: 250px;
     margin-bottom: 30px;
@@ -24,6 +25,6 @@
     background-size: cover;
 }
 
-.main-serverError h2 {
+.main-server-error h2 {
     padding: 0 10px;
 }

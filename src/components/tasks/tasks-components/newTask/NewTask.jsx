@@ -1,30 +1,30 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { Context } from "../../../../context/Context";
 import tasksService from "../../../../services/tasks.service";
 import "./newTask.css";
-import Loading from "../../../loading/Loading";
 
+const modal = document.getElementById("modal");
 const service = new tasksService();
 
 export default function NewTask({ tasks, setTasks, showError }) {
   const { token } = useContext(Context);
 
-  const copyTasks = tasks;
+  const newTaskInput = useRef(null);
 
-  const modal = document.getElementById("modal");
+  const copyTasks = tasks;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    document.getElementById("error").textContent = "";
-    const task = document.querySelector(".task-input-create").value.toLowerCase();
-    if(!task) return;
-    postTask(task);
-    setTasks([...tasks, {description: <Loading />}]);
+    showError("");
+    const newTask = newTaskInput.current.value.toLowerCase();
+    if(!newTask) return;
+    postTask(newTask);
+    setTasks([...tasks, {description: null}]);
     modalNone();
   }
 
   const modalNone = () => {
-    document.querySelector(".task-input-create").value = "";
+    newTaskInput.current.value = "";
     modal.setAttribute("style", "display:none");
   };
 
@@ -32,10 +32,10 @@ export default function NewTask({ tasks, setTasks, showError }) {
     try {
       const newTask = await service.create(task, token);
       setTasks([...tasks, newTask.data.newTask]);
-      showError("")
+      showError("");
     } catch (error) {
       setTasks(copyTasks);
-      showError("Ocurrió un problema.");
+      showError("Ocurrió un error, intente de nuevo");
     }
   }
 
@@ -44,13 +44,13 @@ export default function NewTask({ tasks, setTasks, showError }) {
       <input
         placeholder="Escribe una tarea"
         type={"text"}
-        className={"task-input-create"}
-      />
+        ref={newTaskInput}
+    />
       <div className="button-contain">
-        <button title="Cancelar" onClick={modalNone} className={`button bt-newTask`}>
+        <button title="Cancelar" onClick={modalNone} className={`button bt-newTask`} type="button">
           Cancelar
         </button>
-        <button title="Crear" className={`button bt-newTask`}>
+        <button title="Crear" className={`button bt-newTask`} type="submit">
           Crear
         </button>
       </div>

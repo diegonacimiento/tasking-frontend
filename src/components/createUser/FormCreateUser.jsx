@@ -76,11 +76,12 @@ export default function FormCreateUser() {
             };
             await sendFormLogin(bodyLogin);
         } catch (e) {
+            console.log(e)
             if (e.response.status === 500) {
-                return navigate("/serverError");
+                return navigate("/server-error");
             }
-            const containId = e.response.data.errors[0].message.includes("id");
-            const containEmail = e.response.data.errors[0].message.includes("email");
+            const containId = e.response?.data?.errors[0]?.message.includes("id");
+            const containEmail = e.response?.data?.errors[0]?.message.includes("email");
             if (containId) {
                 showError("Usuario en uso, elige otro", form.username);
             } else if (containEmail) {
@@ -119,7 +120,7 @@ export default function FormCreateUser() {
 
             <label>
                 <span>Usuario</span>
-                <input type={"text"} name="username" />
+                <input type={"text"} name="username" autoComplete="off" />
                 <p className="error"></p>
             </label>
 

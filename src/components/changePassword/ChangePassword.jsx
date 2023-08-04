@@ -62,7 +62,7 @@ export default function ChangePassword() {
       errorForm.current.textContent = "Cambio de contraseña exitoso.";
       return navigate("/");
     } catch (e) {
-      if(e.response.status === 500) return navigate("/serverError");
+      if(e.response.status === 500) return navigate("/server-error");
       showError("Ha ocurrido un error, envíe nuevamente el email", errorForm);
     } finally {
       setLoading(false);

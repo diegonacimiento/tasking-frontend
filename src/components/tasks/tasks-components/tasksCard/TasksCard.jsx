@@ -1,50 +1,45 @@
-import React from "react";
-import "./tasksCard.css";
+import React, { useContext, useState } from "react";
 import { VscClose, VscCheck } from "react-icons/vsc";
-import { useContext } from "react";
 import { capitalizeString } from "../../../../utils/dataUtils";
 import { Context } from "../../../../context/Context";
+import Loading from "../../../loading/Loading";
 import tasksService from "../../../../services/tasks.service";
+import "./tasksCard.css";
 
 const service = new tasksService();
 
-export default function TasksCard({ task, tasks, setTasks }) {
+export default function TasksCard({ task, tasks, setTasks, showError }) {
   const { token } = useContext(Context);
+  const [isComplete, setIsComplete] = useState(task.isComplete);
 
-  function statusTask() {
-    if (task.status == "pendiente") {
-      const body = { status: "completado" };
-      service.update(body, task.id, token);
-      const tasksAll = tasks;
-      const taskUpdate = tasksAll.filter((taskUpdate) => {
-        return taskUpdate.id == task.id;
-      });
-      taskUpdate[0].status = "completado";
-      setTasks([...tasksAll]);
-    } else if (task.status == "completado") {
-      const body = { status: "pendiente" };
-      service.update(body, task.id, token);
-      const tasksAll = tasks;
-      const taskUpdate = tasksAll.filter((taskUpdate) => {
-        return taskUpdate.id == task.id;
-      });
-      taskUpdate[0].status = "pendiente";
-      setTasks([...tasksAll]);
+  async function handleComplete() {
+    try {
+      setIsComplete(prevState => !prevState);
+      const body = { isComplete: !task.isComplete };
+      await service.update(body, task.id, token);
+      const copyTask = tasks;
+      const updateTask = copyTask.filter(t => t.id === task.id);
+      updateTask[0].isComplete = body.isComplete;
+      setTasks([...copyTask]);
+    } catch (e) {
+      showError("Ocurrió un error, intente de nuevo");
     }
   }
 
-  function deleteTask() {
-    service.delete(task.id, token);
-    const newTasksList = tasks.filter((taskOld) => taskOld.id != task.id);
-    setTasks([...newTasksList]);
+  async function handleDelete() {
+    try {
+      const newTasksList = tasks.filter((taskOld) => taskOld.id != task.id);
+      setTasks([...newTasksList]);
+      await service.delete(task.id, token);
+    } catch (e) {
+      showError("Ocurrió un error, intente de nuevo");
+    }
   }
 
-  let status = task.status == "completado" ? "completado" : "pendiente";
-
   return (
-    typeof task.description === 'string' ? 
-    <div className={`task-card-div ${status}`}>
-      <button onClick={deleteTask}>
+    task.description ? 
+    <div className={ isComplete ? "task-card-div complete" : "task-card-div"}>
+      <button onClick={handleDelete}>
         <VscClose />
       </button>
 
@@ -52,10 +47,10 @@ export default function TasksCard({ task, tasks, setTasks }) {
         capitalizeString(task.description)
       }</p>
 
-      <button onClick={statusTask}>
+      <button onClick={handleComplete}>
         <VscCheck />
       </button>
     </div>
-    : task.description
+    : <Loading />
   );
 }

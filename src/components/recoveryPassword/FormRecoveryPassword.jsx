@@ -39,7 +39,7 @@ export default function FormRecoveryPassword({ navigate }) {
         if (e.response.status === 404 || e.response.status === 401) {
             showError("El email no está vinculado", email);
         } else {
-            return navigate("/serverError");
+            return navigate("/server-error");
         }
         } finally {
             setLoading(false);
@@ -60,7 +60,7 @@ export default function FormRecoveryPassword({ navigate }) {
         <form onSubmit={handleSubmit}>
         <label ref={labelEmail}>
             <span>Email</span>
-            <input type={"email"} />
+            <input type={"email"} name="email" />
         </label>
         <button title="Enviar" className="button" type="submit">
             {loading ? <Loading /> : "Enviar"}

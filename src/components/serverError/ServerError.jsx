@@ -3,13 +3,13 @@ import "./serverError.css";
 
 export default function ServerError() {
     return (
-        <main className='main-serverError'>
+        <main className='main-server-error'>
             <div>
                 <div className='contain-image'></div>
                 <h2>
-                    El servidor no se encuentra funcionando. <br />
+                    El servidor no se encuentra funcionando <br />
                     Por favor intente de nuevo
-                    más tarde.
+                    más tarde
                 </h2>
             </div>
         </main>
