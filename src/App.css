@@ -11,6 +11,7 @@
 
 html {
     font-size: 6.25%;
+    -webkit-text-size-adjust:none;
 }
 
 * {
@@ -46,7 +47,7 @@ input {
     background: none;
     border: 1px solid var(--colorBorder);
     border-radius: 5px;
-    line-height: 50rem;
+    height: 50px;
     color: var(--colorBotton);
     text-align: center;
 }
@@ -65,7 +66,7 @@ input:focus {
     background: var(--bkButton);
     border: none;
     border-radius: 5px;
-    line-height: 52rem;
+    height: 50px;
     color: var(--colorBotton);
     font-weight: 600;
     transition: opacity 0.5s;
@@ -82,7 +83,7 @@ input:focus {
 #error, .error {
     min-height: 30px;
     width: 80%;
-    line-height: 30px;
+    height: 100%;
     color: rgb(238, 16, 16);
     font-size: 14rem;
     text-align: center;

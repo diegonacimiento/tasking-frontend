@@ -10,7 +10,6 @@
     width: 100%;
     border: none;
     border-bottom: 2px solid var(--colorBorder);
-    line-height: 50rem;
 }
 
 .search-tasks-div input:focus {

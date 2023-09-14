@@ -64,7 +64,7 @@
     display: flex;
     align-items: center;
     border: none;
-    height: 50rem;
+    height: 50px;
     width: max-content;
     background: none;
     color: var(--colorBotton);
