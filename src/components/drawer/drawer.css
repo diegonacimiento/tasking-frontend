@@ -1,12 +1,11 @@
 #drawer {
     position: fixed;
     top: 0;
-    left: var(--left);
-    overflow: auto;
+    display: flex;
+    overflow: hidden;
     height: 100%;
-    width: 100%;
-    background: var(--colorRoot);
-    transition: background-color 0.5s, left 0.5s ease;
+    width: 0;
+    transition: background-color 0.5s;
 }
 
 .drawer__button-close {
@@ -15,6 +14,7 @@
     height: 60px;
     width: 30px;
     padding-top: 10px;
+    padding-left: 10px;
     background: none;
     border: none;
     color: var(--colorBotton);
@@ -25,12 +25,15 @@
 }
 
 .contain-nav-bar {
-    height: 75%;
-    min-height: 100vh;
+    height: 100vh;
+    width: 0;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    background: var(--colorRoot);
+    overflow: hidden;
+    transition: width 0.3s ease;
 }
 
 #bt-nav-bar {
@@ -45,6 +48,12 @@
     justify-content: center;
     margin: 0;
     height: 50px;
+    width: max-content;
     line-height: 50px;
     transition: opacity 0.5s;
+}
+
+.stuffed-drawer {
+    flex: 1;
+    transition: background-color 0.5s ease;
 }
