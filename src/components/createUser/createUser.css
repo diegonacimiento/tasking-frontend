@@ -1,84 +1,85 @@
 .main-create-user {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    max-width: 620px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  max-width: 620px;
 }
 
 .main-create-user form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    min-height: 520px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 520px;
 }
 
 .main-create-user label {
-    position: relative;
-    width: 75%;
+  position: relative;
+  width: 75%;
 }
 
-.main-create-user label span, 
-.main-create-user label input, 
-.main-create-user__login h3, 
+.main-create-user label span,
+.main-create-user label input,
+.main-create-user__login h3,
 .main-create-user__login .link-login {
-    display: inline-block;
-    width: 100%;
-    margin-top: 5px;
+  display: inline-block;
+  width: 100%;
+  margin-top: 5px;
 }
 
 .main-create-user form .button {
-    margin-top: 5px;
-    width: 75%;
+  margin-top: 5px;
+  width: 75%;
 }
 
 .main-create-user label input {
-    margin: 0;
+  margin: 0;
 }
 
 .main-create-user #error {
-    margin: 0px auto;
-    margin-top: 12px;
+  margin: 0px auto;
+  margin-top: 12px;
 }
 
 .main-create-user label span {
-    text-align: left;
-    font-size: 14rem;
+  text-align: left;
+  font-size: 14rem;
 }
 
 .main-create-user .error {
-    margin: 0 auto;
+  margin: 0 auto;
 }
 
 .main-create-user form .contain-input-button-pass {
-    position: relative;
+  position: relative;
 }
 
-.main-create-user form .label-pass input, .main-create-user form .label-confirm-pass input {
-    padding-right: 30px;
+.main-create-user form .label-pass input,
+.main-create-user form .label-confirm-pass input {
+  padding-right: 30px;
 }
 
 .main-create-user .show-password {
-    position: absolute;
-    right: 10px;
-    bottom: 30px;
-    display: flex;
-    align-items: center;
-    border: none;
-    height: 50px;
-    width: max-content;
-    background: none;
-    color: var(--colorBotton);
+  position: absolute;
+  right: 10px;
+  bottom: 30px;
+  display: flex;
+  align-items: center;
+  border: none;
+  height: 50px;
+  width: max-content;
+  background: none;
+  color: var(--colorBotton);
 }
 
-.main-create-user__login{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    min-height: 100px;
+.main-create-user__login {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  min-height: 100px;
 }
 
 .link-login {
-    text-decoration: underline;
-    text-underline-offset: 5px;
+  text-decoration: underline;
+  text-underline-offset: 5px;
 }

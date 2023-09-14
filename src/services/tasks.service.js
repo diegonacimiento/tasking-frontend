@@ -16,7 +16,7 @@ class tasksService {
     const newTask = await axios.post(
       `${config.db_Url}/api/v1/tasks/create`,
       { description: `${task}` },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { headers: { Authorization: `Bearer ${token}` } },
     );
     return newTask;
   }

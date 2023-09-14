@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import FormCreateUser from "./FormCreateUser";
 import "./createUser.css";
 
-
 export default function CreateUser() {
   return (
     <main className="main-create-user">

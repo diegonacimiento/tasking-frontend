@@ -24,32 +24,39 @@ export default function ChangePassword() {
       newPassword: {
         span: formRef.current.children[0].children[0],
         input: formRef.current.children[0].children[1],
-        error: formRef.current.children[0].children[3]  
-    },
+        error: formRef.current.children[0].children[3],
+      },
       confirmPassword: {
         span: formRef.current.children[1].children[0],
         input: formRef.current.children[1].children[1],
-        error: formRef.current.children[1].children[3]  
-    },
+        error: formRef.current.children[1].children[3],
+      },
     });
-  }, [])
+  }, []);
 
   const navigate = useNavigate();
 
   function toggleShowNewPassword(e) {
     e.preventDefault();
-    setShowNewPassword(prevState => !prevState);
+    setShowNewPassword((prevState) => !prevState);
   }
 
   function toggleShowConfirmPassword(e) {
     e.preventDefault();
-    setShowConfirmPassword(prevState => !prevState);
+    setShowConfirmPassword((prevState) => !prevState);
   }
 
   function checkForm() {
-    const isFormComplete = hasDataInput(form, errorForm, "Ingrese y confirme su nueva contraseña");
-    if(isFormComplete) {
-      const isValidatePasswords = validatePasswords(form.newPassword, form.confirmPassword);
+    const isFormComplete = hasDataInput(
+      form,
+      errorForm,
+      "Ingrese y confirme su nueva contraseña",
+    );
+    if (isFormComplete) {
+      const isValidatePasswords = validatePasswords(
+        form.newPassword,
+        form.confirmPassword,
+      );
       return isValidatePasswords;
     }
     return false;
@@ -62,7 +69,7 @@ export default function ChangePassword() {
       errorForm.current.textContent = "Cambio de contraseña exitoso.";
       return navigate("/");
     } catch (e) {
-      if(e.response.status === 500) return navigate("/server-error");
+      if (e.response.status === 500) return navigate("/server-error");
       showError("Ha ocurrido un error, envíe nuevamente el email", errorForm);
     } finally {
       setLoading(false);
@@ -74,7 +81,7 @@ export default function ChangePassword() {
 
     const isValidateForm = checkForm();
 
-    if(!isValidateForm) return null;
+    if (!isValidateForm) return null;
 
     const uri = window.location.href;
 
@@ -95,41 +102,47 @@ export default function ChangePassword() {
   return (
     <main className="main-change-password">
       <form onSubmit={handleSubmit} ref={formRef}>
-
         <label>
           <span>Nueva contraseña</span>
-          <input type={ showNewPassword ? "text" : "password"} name="new-password" />
-          <button 
-            onClick={toggleShowNewPassword} 
+          <input
+            type={showNewPassword ? "text" : "password"}
+            name="new-password"
+          />
+          <button
+            onClick={toggleShowNewPassword}
             title={showNewPassword ? "Ocultar contraseña" : "Ver contraseña"}
             className="show-password"
             type="button"
           >
-            { showNewPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible /> }
+            {showNewPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
           </button>
           <p className="error"></p>
         </label>
 
         <label>
           <span>Confirmar nueva contraseña</span>
-          <input type={ showConfirmPassword ? "text" : "password"} name="confirm-password" />
-          <button 
+          <input
+            type={showConfirmPassword ? "text" : "password"}
+            name="confirm-password"
+          />
+          <button
             onClick={toggleShowConfirmPassword}
-            title={showConfirmPassword ? "Ocultar contraseña" : "Ver contraseña"}
+            title={
+              showConfirmPassword ? "Ocultar contraseña" : "Ver contraseña"
+            }
             className="show-password"
             type="button"
           >
-            { showConfirmPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible /> }
+            {showConfirmPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
           </button>
           <p className="error"></p>
         </label>
 
         <button title="Enviar" className="button" type="submit">
-          { loading ? <Loading /> : "Enviar" }
+          {loading ? <Loading /> : "Enviar"}
         </button>
 
         <p id="error" ref={errorForm}></p>
-
       </form>
     </main>
   );

@@ -17,11 +17,14 @@ export default function HeaderMobile({ logout }) {
     !isDrawerOpen
       ? (drawer.setAttribute("style", "width: 100%;"),
         navBarDrawer.current.setAttribute("style", "width: 200px;"),
-        stuffedDrawer.current.setAttribute("style", "background-color: rgba(0, 0, 0, 0.7);"),
+        stuffedDrawer.current.setAttribute(
+          "style",
+          "background-color: rgba(0, 0, 0, 0.7);",
+        ),
         root.setAttribute("style", "position: fixed;"))
       : (setTimeout(() => {
-        drawer.removeAttribute("style")
-      }, 500),
+          drawer.removeAttribute("style");
+        }, 500),
         navBarDrawer.current.removeAttribute("style"),
         stuffedDrawer.current.removeAttribute("style"),
         root.removeAttribute("style"));

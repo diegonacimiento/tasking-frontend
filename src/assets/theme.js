@@ -17,7 +17,7 @@ const darkMode = () => {
   style.setProperty("--loading-top", "#bde0fe");
   style.setProperty(
     "--image",
-    'url("https://i.ibb.co/kQZ260V/tasking-Blanco.png")'
+    'url("https://i.ibb.co/kQZ260V/tasking-Blanco.png")',
   );
 };
 

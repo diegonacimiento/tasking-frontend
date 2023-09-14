@@ -80,6 +80,7 @@ header .drawer {
   color: var(--colorBotton);
 }
 
-header .drawer:active, header .mode:active {
+header .drawer:active,
+header .mode:active {
   background-color: rgba(0, 59, 123, 0.415);
 }

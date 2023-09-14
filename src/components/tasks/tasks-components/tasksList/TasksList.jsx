@@ -3,11 +3,16 @@ import Loading from "../../../loading/Loading";
 import TasksCard from "../tasksCard/TasksCard";
 import "./tasksList.css";
 
-export default function TasksList({ tasks, setTasks, resultSearch, showError }) {
-
+export default function TasksList({
+  tasks,
+  setTasks,
+  resultSearch,
+  showError,
+}) {
   const sortTasks = (a, b) => a.id - b.id;
 
-  if (resultSearch === undefined) return <h2>No hubo resultados en su búsqueda</h2>;
+  if (resultSearch === undefined)
+    return <h2>No hubo resultados en su búsqueda</h2>;
 
   if (!tasks)
     return (
@@ -22,7 +27,12 @@ export default function TasksList({ tasks, setTasks, resultSearch, showError }) 
 
   return [...render].sort(sortTasks).map((task, i) => (
     <div className="task-list-div" key={i}>
-      <TasksCard task={task} tasks={tasks} setTasks={setTasks} showError={showError} />
+      <TasksCard
+        task={task}
+        tasks={tasks}
+        setTasks={setTasks}
+        showError={showError}
+      />
     </div>
   ));
 }

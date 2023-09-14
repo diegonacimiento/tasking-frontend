@@ -17,11 +17,11 @@ export default function NewTask({ tasks, setTasks, showError }) {
     e.preventDefault();
     showError("");
     const newTask = newTaskInput.current.value.toLowerCase();
-    if(!newTask) return;
+    if (!newTask) return;
     postTask(newTask);
-    setTasks([...tasks, {description: null}]);
+    setTasks([...tasks, { description: null }]);
     modalNone();
-  }
+  };
 
   const modalNone = () => {
     newTaskInput.current.value = "";
@@ -41,13 +41,14 @@ export default function NewTask({ tasks, setTasks, showError }) {
 
   return (
     <form onSubmit={handleSubmit} className="new-task">
-      <input
-        placeholder="Escribe una tarea"
-        type={"text"}
-        ref={newTaskInput}
-    />
+      <input placeholder="Escribe una tarea" type={"text"} ref={newTaskInput} />
       <div className="button-contain">
-        <button title="Cancelar" onClick={modalNone} className={`button bt-newTask`} type="button">
+        <button
+          title="Cancelar"
+          onClick={modalNone}
+          className={`button bt-newTask`}
+          type="button"
+        >
           Cancelar
         </button>
         <button title="Crear" className={`button bt-newTask`} type="submit">

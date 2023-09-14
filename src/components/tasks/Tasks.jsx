@@ -52,7 +52,12 @@ export default function Tasks() {
       <SearchTasks tasks={tasks} setResultSearch={setResultSearch} />
 
       <div className="task-list-container">
-        <TasksList tasks={tasks} setTasks={setTasks} resultSearch={resultSearch} showError={showError} />
+        <TasksList
+          tasks={tasks}
+          setTasks={setTasks}
+          resultSearch={resultSearch}
+          showError={showError}
+        />
       </div>
 
       <p id="error" ref={error}></p>

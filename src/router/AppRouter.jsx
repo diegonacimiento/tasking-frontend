@@ -16,7 +16,6 @@ import {
 import { ContextProvider } from "../context/Context";
 import Layout from "../components/Layout";
 
-
 export default function AppRouter() {
   return (
     <BrowserRouter>

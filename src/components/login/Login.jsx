@@ -1,8 +1,7 @@
-import React from 'react';
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import FormLogin from './FormLogin';
+import FormLogin from "./FormLogin";
 import "./login.css";
-
 
 export default function Login() {
   const navigate = useNavigate();
@@ -13,7 +12,6 @@ export default function Login() {
 
   return (
     <main className="main-login">
-      
       <FormLogin navigate={navigate} />
 
       <Link className="main-login__link-rp" to="/recovery-password">
@@ -22,11 +20,14 @@ export default function Login() {
 
       <div className="main-login__create-user">
         <h3>¿Aún no tienes un usuario?</h3>
-        <button title='Crear usuario' className="button" onClick={handleCreateUser}>
+        <button
+          title="Crear usuario"
+          className="button"
+          onClick={handleCreateUser}
+        >
           Crear usuario
         </button>
       </div>
-
     </main>
   );
 }

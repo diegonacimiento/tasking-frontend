@@ -1,48 +1,48 @@
 #modal {
-    position: fixed;
-    top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    background-color: var(--bkModal);
-    display: none;
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: var(--bkModal);
+  display: none;
 }
 
 .new-task {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 80%;
-    max-width: 400px;
-    height: 50%;
-    min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 80%;
+  max-width: 400px;
+  height: 50%;
+  min-height: 200px;
 }
 
 .new-task .button-contain {
-    display: flex;
-    justify-content: space-between;
-    color: white;
+  display: flex;
+  justify-content: space-between;
+  color: white;
 }
 
 .new-task .button-contain button {
-    width: 40%;
-    background: #343434;
-    color: white;
+  width: 40%;
+  background: #343434;
+  color: white;
 }
 
 .new-task input {
-    resize: none;
-    border: 1px solid grey;
-    color: white;
+  resize: none;
+  border: 1px solid grey;
+  color: white;
 }
 
 .new-task input:focus {
-    border: 1px solid white;
+  border: 1px solid white;
 }
 
 .task-input-create::placeholder {
-    opacity: 0.35;
-    letter-spacing: 1px;
+  opacity: 0.35;
+  letter-spacing: 1px;
 }

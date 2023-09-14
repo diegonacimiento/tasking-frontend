@@ -11,7 +11,9 @@ export default function SearchTasks({ tasks, setResultSearch }) {
     const result = tasks.filter((task) => {
       return task.description.includes(text.toLowerCase());
     });
-    result.length > 0 ? setResultSearch([...result]) : setResultSearch(undefined);
+    result.length > 0
+      ? setResultSearch([...result])
+      : setResultSearch(undefined);
     if (!text) {
       setResultSearch(null);
       buttonDelete.current.style.display = "none";
@@ -31,15 +33,17 @@ export default function SearchTasks({ tasks, setResultSearch }) {
 
   return (
     <div className="search-tasks-div">
-      <input 
-        onChange={search} 
-        placeholder="Buscar" 
-        type="text" 
-        value={valueInput} 
+      <input
+        onChange={search}
+        placeholder="Buscar"
+        type="text"
+        value={valueInput}
         name="search"
         autoComplete="off"
       />
-      <button title="Borrar búsqueda" onClick={deleteSearch} ref={buttonDelete}><VscClose /></button>
+      <button title="Borrar búsqueda" onClick={deleteSearch} ref={buttonDelete}>
+        <VscClose />
+      </button>
     </div>
   );
 }

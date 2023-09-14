@@ -1,30 +1,30 @@
 .main-server-error {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    max-width: 620px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 620px;
 }
 
 .main-server-error div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 80px;
-    height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 80px;
+  height: 80%;
 }
 
 .main-server-error .contain-image {
-    height: 250px;
-    width: 250px;
-    margin-bottom: 30px;
-    background-image: url(https://i.imgur.com/4zjiJww.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  height: 250px;
+  width: 250px;
+  margin-bottom: 30px;
+  background-image: url(https://i.imgur.com/4zjiJww.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .main-server-error h2 {
-    padding: 0 10px;
+  padding: 0 10px;
 }

@@ -13,7 +13,8 @@ const themeUser =
   window.matchMedia &&
   window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-const isDarkModeParse = JSON.parse(localStorage.getItem("isDarkMode")) ?? themeUser;
+const isDarkModeParse =
+  JSON.parse(localStorage.getItem("isDarkMode")) ?? themeUser;
 
 export default function Header() {
   const navigate = useNavigate();

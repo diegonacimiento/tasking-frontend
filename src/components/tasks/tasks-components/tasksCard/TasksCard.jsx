@@ -14,11 +14,11 @@ export default function TasksCard({ task, tasks, setTasks, showError }) {
 
   async function handleComplete() {
     try {
-      setIsComplete(prevState => !prevState);
+      setIsComplete((prevState) => !prevState);
       const body = { isComplete: !task.isComplete };
       await service.update(body, task.id, token);
       const copyTask = tasks;
-      const updateTask = copyTask.filter(t => t.id === task.id);
+      const updateTask = copyTask.filter((t) => t.id === task.id);
       updateTask[0].isComplete = body.isComplete;
       setTasks([...copyTask]);
     } catch (e) {
@@ -36,21 +36,19 @@ export default function TasksCard({ task, tasks, setTasks, showError }) {
     }
   }
 
-  return (
-    task.description ? 
-    <div className={ isComplete ? "task-card-div complete" : "task-card-div"}>
+  return task.description ? (
+    <div className={isComplete ? "task-card-div complete" : "task-card-div"}>
       <button onClick={handleDelete}>
         <VscClose />
       </button>
 
-      <p className={`task-p ${status}`}>{
-        capitalizeString(task.description)
-      }</p>
+      <p className={`task-p ${status}`}>{capitalizeString(task.description)}</p>
 
       <button onClick={handleComplete}>
         <VscCheck />
       </button>
     </div>
-    : <Loading />
+  ) : (
+    <Loading />
   );
 }

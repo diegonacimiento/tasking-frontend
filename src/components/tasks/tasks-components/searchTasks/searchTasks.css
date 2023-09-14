@@ -1,32 +1,32 @@
 .search-tasks-div {
-    position: relative;
-    margin: 20px 0;
-    width: 90%;
-    max-width: 400px;
+  position: relative;
+  margin: 20px 0;
+  width: 90%;
+  max-width: 400px;
 }
 
 .search-tasks-div input {
-    height: 40px;
-    width: 100%;
-    border: none;
-    border-bottom: 2px solid var(--colorBorder);
+  height: 40px;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid var(--colorBorder);
 }
 
 .search-tasks-div input:focus {
-    border: none;
-    border-bottom: 2px solid var(--colorBotton);
+  border: none;
+  border-bottom: 2px solid var(--colorBotton);
 }
 
 .search-tasks-div input::placeholder {
-    color: rgba(102, 102, 102, 0.85);
+  color: rgba(102, 102, 102, 0.85);
 }
 
 .search-tasks-div button {
-    display: none;
-    position: absolute;
-    right: 10px;
-    background: none;
-    border: none;
-    height: 40px;
-    color: var(--colorBotton);
+  display: none;
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  height: 40px;
+  color: var(--colorBotton);
 }

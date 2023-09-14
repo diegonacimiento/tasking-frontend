@@ -8,9 +8,11 @@ export default function Footer() {
       <a
         target={"_blank"}
         className="link-ig"
-        href="https://www.instagram.com/diegonacimiento/?hl=es" rel="noreferrer"
+        href="https://www.instagram.com/diegonacimiento/?hl=es"
+        rel="noreferrer"
       >
-        {<BsInstagram className="logo" />} <p className="texto">Diego Nacimiento</p>
+        {<BsInstagram className="logo" />}{" "}
+        <p className="texto">Diego Nacimiento</p>
       </a>
     </footer>
   );

@@ -1,127 +1,130 @@
 :root {
-    --colorRoot: rgb(230, 230, 230);
-    --colorBorder: rgb(104, 104, 104);
-    --colorBotton: rgb(0, 0, 0);
-    --image: url("https://i.ibb.co/h89BLcF/tasking.png");
-    --bkModal: rgba(0, 0, 0, 1);
-    --bkButton: #adb5bd;
-    --loading-top: #03045e;
+  --colorRoot: rgb(230, 230, 230);
+  --colorBorder: rgb(104, 104, 104);
+  --colorBotton: rgb(0, 0, 0);
+  --image: url("https://i.ibb.co/h89BLcF/tasking.png");
+  --bkModal: rgba(0, 0, 0, 1);
+  --bkButton: #adb5bd;
+  --loading-top: #03045e;
 }
 
 html {
-    font-size: 6.25%;
+  font-size: 6.25%;
 }
 
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    font-size: 16rem;
-    text-align: center;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  font-size: 16rem;
+  text-align: center;
 }
 
 #root {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    min-height: 100vh;
-    width: 100%;
-    min-width: 275px;
-    background: var(--colorRoot);
-    transition: background-color 0.5s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  min-width: 275px;
+  background: var(--colorRoot);
+  transition: background-color 0.5s;
 }
 
 main {
-    display: flex;
-    flex: 1;
-    width: 100%;
+  display: flex;
+  flex: 1;
+  width: 100%;
 }
 
 input {
-    padding: 0 10px;
-    outline: none;
-    background: none;
-    border: 1px solid var(--colorBorder);
-    border-radius: 5px;
-    height: 50px;
-    color: var(--colorBotton);
-    text-align: center;
+  padding: 0 10px;
+  outline: none;
+  background: none;
+  border: 1px solid var(--colorBorder);
+  border-radius: 5px;
+  height: 50px;
+  color: var(--colorBotton);
+  text-align: center;
 }
 
 input::placeholder {
-    text-align: center;
-    color: var(--colorBorderInput);
+  text-align: center;
+  color: var(--colorBorderInput);
 }
 
 input:focus {
-    border: 1px solid var(--colorBotton);
+  border: 1px solid var(--colorBotton);
 }
 
 .button {
-    background: none;
-    background: var(--bkButton);
-    border: none;
-    border-radius: 5px;
-    height: 50px;
-    color: var(--colorBotton);
-    font-weight: 600;
-    transition: opacity 0.5s;
+  background: none;
+  background: var(--bkButton);
+  border: none;
+  border-radius: 5px;
+  height: 50px;
+  color: var(--colorBotton);
+  font-weight: 600;
+  transition: opacity 0.5s;
 }
 
 .button:hover {
-    opacity: 0.5;
+  opacity: 0.5;
 }
 
 .button:active {
-    opacity: 0.3;
+  opacity: 0.3;
 }
 
-#error, .error {
-    min-height: 30px;
-    width: 80%;
-    height: 100%;
-    color: rgb(238, 16, 16);
-    font-size: 14rem;
-    text-align: center;
-    word-break: break-word;
+#error,
+.error {
+  min-height: 30px;
+  width: 80%;
+  height: 100%;
+  color: rgb(238, 16, 16);
+  font-size: 14rem;
+  text-align: center;
+  word-break: break-word;
 }
 
-a, h3, h2 {
-    color: var(--colorBotton);
-    text-decoration: none;
-    font-weight: 600;
+a,
+h3,
+h2 {
+  color: var(--colorBotton);
+  text-decoration: none;
+  font-weight: 600;
 }
 
 span {
-    color: var(--colorBotton);
+  color: var(--colorBotton);
 }
 
 a:hover {
-    opacity: 0.5;
-    transition: opacity 0.5s;
+  opacity: 0.5;
+  transition: opacity 0.5s;
 }
 
 .button-add-task {
-    height: 30px;
-    width: 30px;
-    margin: 20px 0;
-    border: 2px dashed var(--colorBotton);
-    border-radius: 100%;
-    background: none;
-    transition: opacity 0.5s;
+  height: 30px;
+  width: 30px;
+  margin: 20px 0;
+  border: 2px dashed var(--colorBotton);
+  border-radius: 100%;
+  background: none;
+  transition: opacity 0.5s;
 }
 
 .button-add-task:hover {
-    opacity: 0.5;
+  opacity: 0.5;
 }
 
 .button-add-task:active {
-    opacity: 0.3;
+  opacity: 0.3;
 }
 
 .button-add-task svg {
-    color: var(--colorBotton);
-    font-size: 25px;
+  color: var(--colorBotton);
+  font-size: 25px;
 }
