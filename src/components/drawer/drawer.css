@@ -1,59 +1,68 @@
 #drawer {
-    position: fixed;
-    top: 0;
-    display: flex;
-    overflow: hidden;
-    height: 100%;
-    width: 0;
-    transition: background-color 0.5s;
+  position: fixed;
+  top: 0;
+  display: flex;
+  overflow: hidden;
+  height: 100%;
+  width: 0;
+  transition: background-color 0.5s;
 }
 
 .drawer__button-close {
-    position: absolute;
-    display: block;
-    height: 60px;
-    width: 30px;
-    padding-top: 10px;
-    padding-left: 10px;
-    background: none;
-    border: none;
-    color: var(--colorBotton);
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  background: none;
+  border: none;
+  color: var(--colorBotton);
+}
+
+.container-button-drawer {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  height: 60px;
+  width: 200px;
 }
 
 .drawer__button-close svg {
-    font-size: 20rem;
+  font-size: 20rem;
 }
 
 .contain-nav-bar {
-    height: 100vh;
-    width: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    background: var(--colorRoot);
-    overflow: hidden;
-    transition: width 0.3s ease;
+  height: 100vh;
+  width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background: var(--colorRoot);
+  overflow: hidden;
+  transition: width 0.3s ease;
 }
 
 #bt-nav-bar {
-    border: none;
-    background: none;
-    margin: 0;
-    color: rgb(161, 0, 0);
+  border: none;
+  background: none;
+  margin: 0;
+  color: rgb(161, 0, 0);
 }
 
 .links-nav-bar {
-    display: flex;
-    justify-content: center;
-    margin: 0;
-    height: 50px;
-    width: max-content;
-    line-height: 50px;
-    transition: opacity 0.5s;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  height: 50px;
+  width: max-content;
+  line-height: 50px;
+  transition: opacity 0.5s;
 }
 
 .stuffed-drawer {
-    flex: 1;
-    transition: background-color 0.5s ease;
+  flex: 1;
+  transition: background-color 0.5s ease;
 }

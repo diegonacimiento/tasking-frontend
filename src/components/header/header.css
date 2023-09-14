@@ -1,68 +1,85 @@
 header {
-    height: 60px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 10px;
+  height: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
 }
 
 .contain-desktop {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
 }
 
 .logo-contain {
-    display: flex;
-    padding-top: 5px;
-    transition: opacity 0.5s;
+  display: flex;
+  padding-top: 5px;
+  transition: opacity 0.5s;
 }
 
 .logo-contain:hover {
-    opacity: 0.5;
+  opacity: 0.5;
 }
 
 .logo-contain .image {
-    display: inline-block;
-    height: 50px;
-    width: 50px;
-    background-image: var(--image);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  background-image: var(--image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .logo-contain .letra {
-    color: var(--colorBotton);
-    line-height: 50px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    user-select: none;
+  color: var(--colorBotton);
+  line-height: 50px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  user-select: none;
 }
 
 header .mode {
-    background: none;
-    border: none;
-    color: var(--colorBotton);
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  border-radius: 100%;
+  height: 40px;
+  width: 40px;
+  color: var(--colorBotton);
 }
 
 header .mode svg {
-    transition: opacity 0.5s;
+  transition: opacity 0.5s;
 }
 
 header .mode svg:hover {
-    opacity: 0.5;
+  opacity: 0.5;
 }
 
-header .mode svg, 
+header .mode svg,
 header .drawer svg {
-    font-size: 20rem;
+  font-size: 20rem;
 }
 
 header .drawer {
-    padding-top: 10px;
-    background: none;
-    border: none;
-    color: var(--colorBotton);
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  border-radius: 100%;
+  height: 40px;
+  width: 40px;
+  color: var(--colorBotton);
+}
+
+header .drawer:active, header .mode:active {
+  background-color: rgba(0, 59, 123, 0.415);
 }
