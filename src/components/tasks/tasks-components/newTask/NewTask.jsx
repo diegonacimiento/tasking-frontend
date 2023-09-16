@@ -1,15 +1,15 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext } from "react";
 import { Context } from "../../../../context/Context";
 import tasksService from "../../../../services/tasks.service";
 import "./newTask.css";
 
 const modal = document.getElementById("modal");
+const root = document.getElementById("root");
 const service = new tasksService();
 
-export default function NewTask({ tasks, setTasks, showError }) {
+export default function NewTask({ tasks, setTasks, showError, newTaskInput }) {
   const { token } = useContext(Context);
 
-  const newTaskInput = useRef(null);
 
   const copyTasks = tasks;
 
@@ -26,6 +26,17 @@ export default function NewTask({ tasks, setTasks, showError }) {
   const modalNone = () => {
     newTaskInput.current.value = "";
     modal.setAttribute("style", "display:none");
+    root.removeAttribute("style");
+    updateScrollFocus();
+  };
+
+  const updateScrollFocus = () => {
+    setTimeout(() => {
+      const btAddTask = document.querySelector(".button-add-task");
+      if (btAddTask) {
+        btAddTask.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 150);
   };
 
   async function postTask(task) {

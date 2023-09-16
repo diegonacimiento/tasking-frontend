@@ -49,6 +49,7 @@
   border: none;
   background: none;
   margin: 0;
+  width: max-content;
   color: rgb(161, 0, 0);
 }
 

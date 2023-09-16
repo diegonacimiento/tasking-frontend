@@ -1,23 +1,30 @@
 footer {
   height: 20px;
   width: 100%;
+  overflow: hidden;
 }
 
-footer .link-ig {
+footer a {
   display: flex;
-  padding: 0 0 7px 3px;
-  height: 20px;
-  width: max-content;
   align-items: center;
+  width: 100%;
 }
 
-footer .link-ig .logo {
-  margin-left: 10px;
-  font-size: 10px;
+footer a p, footer a div svg {
+  font-size: 12rem;
 }
 
-footer .link-ig .texto {
-  margin-left: 2px;
-  font-size: 10px;
-  line-height: 15px;
+footer a div {
+  display: flex;
+  margin: 0 1.5px 0 10px;
+}
+
+footer a p {
+  margin: 0 1.5px;
+}
+
+@media only screen and (max-width: 767px) {
+  footer a div {
+    display: inline;
+  }
 }

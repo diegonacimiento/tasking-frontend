@@ -12,11 +12,13 @@ import "./tasks.css";
 const service = new tasksService();
 
 const modal = document.getElementById("modal");
+const root = document.getElementById("root");
 
 export default function Tasks() {
   const navigate = useNavigate();
 
   const error = useRef(null);
+  const newTaskInput = useRef(null);
 
   const { token } = useContext(Context);
 
@@ -41,12 +43,29 @@ export default function Tasks() {
 
   function modalOn() {
     modal.setAttribute("style", "display:flex");
+    root.setAttribute("style", "position: fixed");
+    newTaskInput.current.focus();
+    updateScrollFocus();
   }
+
+  const updateScrollFocus = () => {
+    const newTaskForm = document.querySelector(".new-task");
+    setTimeout(() => {
+      if (newTaskForm) {
+        newTaskForm.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 150);
+  };
 
   return (
     <main className="main-tasks">
       <Modal>
-        <NewTask tasks={tasks} setTasks={setTasks} showError={showError} />
+        <NewTask
+          tasks={tasks}
+          setTasks={setTasks}
+          showError={showError}
+          newTaskInput={newTaskInput}
+        />
       </Modal>
 
       <SearchTasks tasks={tasks} setResultSearch={setResultSearch} />
