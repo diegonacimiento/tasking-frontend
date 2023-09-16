@@ -60,7 +60,7 @@
   height: 50px;
   width: max-content;
   line-height: 50px;
-  transition: opacity 0.5s;
+  transition: opacity 0.5s, color 0.35s;
 }
 
 .stuffed-drawer {

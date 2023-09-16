@@ -31,6 +31,7 @@ header {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  transition: background-image 0.35s;
 }
 
 .logo-contain .letra {
@@ -39,6 +40,7 @@ header {
   font-weight: 700;
   letter-spacing: 2px;
   user-select: none;
+  transition: color 0.35s;
 }
 
 header .mode {
