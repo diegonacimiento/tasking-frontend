@@ -1,4 +1,5 @@
 footer {
+  padding: 0 10px;
   height: 20px;
   width: 100%;
   overflow: hidden;
@@ -16,7 +17,7 @@ footer a p, footer a div svg {
 
 footer a div {
   display: flex;
-  margin: 0 1.5px 0 10px;
+  margin: 0 1.5px 0 5px;
 }
 
 footer a p {

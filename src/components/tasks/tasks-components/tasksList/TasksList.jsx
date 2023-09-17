@@ -7,6 +7,7 @@ export default function TasksList({
   tasks,
   setTasks,
   resultSearch,
+  filteredTasks,
   showError,
 }) {
   const sortTasks = (a, b) => a.id - b.id;
@@ -22,8 +23,11 @@ export default function TasksList({
     );
 
   if (tasks.length === 0) return <h2>No hay tareas</h2>;
+  
+  if (filteredTasks && filteredTasks.includes("Pendientes")) return <h2>No hay tareas pendientes</h2>;
+  else if (filteredTasks && filteredTasks.includes("Completadas")) return <h2>No hay tareas completadas</h2>
 
-  const render = resultSearch || tasks;
+  const render = resultSearch || filteredTasks || tasks;
 
   return [...render].sort(sortTasks).map((task, i) => (
     <div className="task-list-div" key={i}>

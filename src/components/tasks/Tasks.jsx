@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import TasksList from "../tasks/tasks-components/tasksList/TasksList";
 import { TiPlus } from "react-icons/ti";
+import CheckboxTasks from "./tasks-components/checkboxTasks/CheckboxTasks";
+import TasksList from "../tasks/tasks-components/tasksList/TasksList";
 import { Context } from "../../context/Context";
 import Modal from "../../../Modal";
 import NewTask from "./tasks-components/newTask/NewTask";
@@ -14,7 +15,7 @@ const service = new tasksService();
 const modal = document.getElementById("modal");
 const root = document.getElementById("root");
 
-export default function Tasks() {
+function Tasks() {
   const navigate = useNavigate();
 
   const error = useRef(null);
@@ -22,7 +23,8 @@ export default function Tasks() {
 
   const { token } = useContext(Context);
 
-  const [tasks, setTasks] = useState(undefined);
+  const [tasks, setTasks] = useState(null);
+  const [filteredTasks, setFilteredTasks] = useState(null);
   const [resultSearch, setResultSearch] = useState(null);
 
   useEffect(() => {
@@ -68,13 +70,19 @@ export default function Tasks() {
         />
       </Modal>
 
-      <SearchTasks tasks={tasks} setResultSearch={setResultSearch} />
+      <SearchTasks
+        tasks={filteredTasks ? filteredTasks : tasks}
+        setResultSearch={setResultSearch}
+      />
+
+      <CheckboxTasks tasks={tasks} setFilteredTasks={setFilteredTasks} />
 
       <div className="task-list-container">
         <TasksList
           tasks={tasks}
           setTasks={setTasks}
           resultSearch={resultSearch}
+          filteredTasks={filteredTasks}
           showError={showError}
         />
       </div>
@@ -88,3 +96,5 @@ export default function Tasks() {
     </main>
   );
 }
+
+export default Tasks;

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { VscClose, VscCheck } from "react-icons/vsc";
 import { capitalizeString } from "../../../../utils/dataUtils";
 import { Context } from "../../../../context/Context";
@@ -11,6 +11,10 @@ const service = new tasksService();
 export default function TasksCard({ task, tasks, setTasks, showError }) {
   const { token } = useContext(Context);
   const [isComplete, setIsComplete] = useState(task.isComplete);
+
+  useEffect(() => {
+    setIsComplete(task.isComplete);
+  }, [task])
 
   async function handleComplete() {
     try {
@@ -42,7 +46,7 @@ export default function TasksCard({ task, tasks, setTasks, showError }) {
         <VscClose />
       </button>
 
-      <p className={`task-p ${status}`}>{capitalizeString(task.description)}</p>
+      <p className={`task-p`}>{capitalizeString(task.description)}</p>
 
       <button onClick={handleComplete}>
         <VscCheck />

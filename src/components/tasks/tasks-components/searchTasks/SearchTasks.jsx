@@ -1,10 +1,14 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { VscClose } from "react-icons/vsc";
 import "./searchTasks.css";
 
 export default function SearchTasks({ tasks, setResultSearch }) {
   const buttonDelete = useRef(null);
   const [valueInput, setValueInput] = useState("");
+
+  useEffect(() => {
+    searchTask(valueInput)
+  }, [tasks])
 
   function searchTask(text) {
     buttonDelete.current.style.display = "inline-block";
