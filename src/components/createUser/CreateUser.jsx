@@ -5,7 +5,7 @@ import "./createUser.css";
 
 export default function CreateUser() {
   return (
-    <main className="main-create-user">
+    <main className="main-create-user" data-aos="fade-up-right">
       <h3>Completa el registro</h3>
 
       <FormCreateUser />

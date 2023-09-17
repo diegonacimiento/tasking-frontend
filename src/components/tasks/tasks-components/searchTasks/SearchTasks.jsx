@@ -7,13 +7,13 @@ export default function SearchTasks({ tasks, setResultSearch }) {
   const [valueInput, setValueInput] = useState("");
 
   useEffect(() => {
-    searchTask(valueInput)
+    if(tasks) searchTask(valueInput);
   }, [tasks])
 
   function searchTask(text) {
     buttonDelete.current.style.display = "inline-block";
     const result = tasks.filter((task) => {
-      return task.description.includes(text.toLowerCase());
+      return task.description?.includes(text.toLowerCase());
     });
     result.length > 0
       ? setResultSearch([...result])

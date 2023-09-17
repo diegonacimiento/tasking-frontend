@@ -125,11 +125,11 @@ a:hover {
   border: 2px dashed var(--colorBotton);
   border-radius: 100%;
   background: none;
-  transition: opacity 0.5s, border 0.35s;
+  transition: opacity 0.5s, border 0.35s, transform 0.5s;
 }
 
 .button-add-task:hover {
-  opacity: 0.5;
+  transform: rotate(180deg);
 }
 
 .button-add-task:active {

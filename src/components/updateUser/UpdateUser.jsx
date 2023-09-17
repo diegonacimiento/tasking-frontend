@@ -141,7 +141,7 @@ export default function UpdateUser() {
   }
 
   return (
-    <main className="main-update">
+    <main className="main-update" data-aos="fade-right">
       <h2>{"Hola " + localStorage.getItem("user")}</h2>
 
       <h3>Actualiza tus datos</h3>

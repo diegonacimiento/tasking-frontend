@@ -38,3 +38,8 @@
   background-color: rgba(0, 59, 123, 0.415);
   opacity: 0.5;
 }
+
+#bt-filter:hover svg {
+  transform: rotate(180deg);
+  transition: transform 0.5s;
+}

@@ -100,7 +100,7 @@ export default function ChangePassword() {
   }
 
   return (
-    <main className="main-change-password">
+    <main className="main-change-password" data-aos="flip-up">
       <form onSubmit={handleSubmit} ref={formRef}>
         <label>
           <span>Nueva contraseña</span>

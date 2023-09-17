@@ -3,7 +3,7 @@ import "./serverError.css";
 
 export default function ServerError() {
   return (
-    <main className="main-server-error">
+    <main className="main-server-error" data-aos="zoom-in-up">
       <div>
         <div className="contain-image"></div>
         <h2>

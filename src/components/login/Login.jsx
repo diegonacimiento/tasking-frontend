@@ -11,7 +11,7 @@ export default function Login() {
   }
 
   return (
-    <main className="main-login">
+    <main className="main-login" data-aos="fade-up">
       <FormLogin navigate={navigate} />
 
       <Link className="main-login__link-rp" to="/recovery-password">

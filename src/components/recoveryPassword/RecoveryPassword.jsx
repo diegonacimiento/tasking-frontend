@@ -11,7 +11,7 @@ export default function RecoveryPassword() {
   }
 
   return (
-    <main className="main-rp">
+    <main className="main-rp" data-aos="flip-up">
       <h2>Revisa tu correo y sigue las instrucciones</h2>
       <p>
         Te enviaremos un enlace a tu correo para que puedas cambiar la
