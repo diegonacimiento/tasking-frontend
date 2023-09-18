@@ -21,7 +21,7 @@ const CheckboxTasks = ({ tasks, setFilteredTasks }) => {
     setIsOpenFilter((prev) => !prev);
     isOpenFilter
       ? containerCheckbox.current.removeAttribute("style")
-      : containerCheckbox.current.setAttribute("style", "height: 150px;");
+      : containerCheckbox.current.setAttribute("style", "max-height: 150px;");
   };
 
   const handleChangeOption = (event) => {

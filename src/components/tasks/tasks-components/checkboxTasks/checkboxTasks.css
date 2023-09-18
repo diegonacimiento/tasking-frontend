@@ -1,13 +1,12 @@
 .container-checkbox {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   column-gap: 15px;
-  height: 0;
+  max-height: 0;
   width: 90%;
   max-width: 400px;
   overflow: hidden;
-  transition: height 0.5s ease;
+  transition: max-height 0.2s ease;
 }
 
 .container-checkbox span {
@@ -42,4 +41,10 @@
 #bt-filter:active svg {
   transform: rotate(180deg);
   transition: transform 0.5s;
+}
+
+@media only screen and (max-width: 712px) {
+  .container-checkbox {
+    flex-direction: column;
+  }
 }
