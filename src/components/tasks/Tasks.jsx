@@ -60,7 +60,7 @@ function Tasks() {
   };
 
   return (
-    <main className="main-tasks" data-aos="fade-up">
+    <main className="main-tasks" data-aos="fade-down">
       <Modal>
         <NewTask
           tasks={tasks}

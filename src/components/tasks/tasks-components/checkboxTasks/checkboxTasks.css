@@ -16,6 +16,11 @@
   padding-left: 3.5px;
 }
 
+.container-checkbox span > * {
+  height: max-content;
+  line-height: 50px;
+}
+
 .container-button-filter {
   width: 90%;
   max-width: 400px;
