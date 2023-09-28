@@ -1,27 +1,28 @@
 # tasking-frontend
-Single page application desarrollada con Vite.js y React.js, cuenta con un sistema de enrutamiento mediante React Router Dom V6. Consume la API [tasking-backend](https://github.com/diegonacimiento/tasking-backend)
+Single page application developed with Vite.js and React.js, featuring a routing system using React Router Dom V6. It consumes the  [tasking-backend](https://github.com/diegonacimiento/tasking-backend) API.
 
-Este proyecto funciona en combinación con la API de tasking, para lograr su funcionamiento completo se debe correr el proyecto de la API
+This project works in conjunction with the tasking API. To achieve full functionality, you must run the API project first.
 
-## Clonación del proyecto
-En primer lugar hay que clonar el proyecto en el directorio que desees
+[Documentación en español](README-es.md)
+
+## Project Cloning
+First, you need to clone the project into the directory of your choice:
 
 ```git clone https://github.com/diegonacimiento/tasking-frontend.git```
 
-## Instalación de dependencias
+## Dependency Installation
 ``` npm install ```
 
-## Variables de entorno:
-Se debe crear un archivo ".env" en el directorio raíz y crear la siguiente variable:
+## Environment Variables:
+You must create a ".env" file in the root directory and define the following variable:
 ```
 VITE_URL="http://localhost:3000"
 ```
 
-## Iniciar tasking-backend
-Primero debemos correr [tasking-backend](https://github.com/diegonacimiento/tasking-backend)
+## Start tasking-backend
+First, you should run [tasking-backend](https://github.com/diegonacimiento/tasking-backend)
 
-Una vez que el proyecto esté corriendo seguimos...
+Once the project is up and running, continue...
 
-## Iniciar tasking-frontend
+## Start tasking-frontend
 ```npm run dev```
-
