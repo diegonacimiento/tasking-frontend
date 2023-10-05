@@ -141,3 +141,22 @@ a:hover {
   font-size: 25px;
   transition: color 0.35s;
 }
+
+::-webkit-scrollbar {
+  height: 16px;
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  opacity: 1;
+  background-color: #ced4da;
+  border-color: rgba(255,255,255);
+  border-radius: 9999px;
+  border-width: 1px;
+}
+
+::-webkit-scrollbar-track {
+  position: absolute;
+  background-color: transparent;
+  border-radius: 9999px;
+}
